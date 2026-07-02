@@ -11,9 +11,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
-
-// Mocking the external constant
-const whatsappLink = "#";
+import { whatsappLink } from "@/components/global/whatsapp";
 
 interface JourneyItem {
   number: number;

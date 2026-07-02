@@ -1,8 +1,10 @@
 import React from "react";
+import Link from "next/link";
 import { Calendar, User, Folder, Clock, ArrowRight } from "lucide-react";
 import { Post } from "@/types";
 import { getReadTime } from "@/lib/readTime";
 import { slugify } from "@/lib/getBlogPosts";
+import { whatsappLink } from "@/components/global/whatsapp";
 
 
 interface BlogPostCardProps {
@@ -13,8 +15,11 @@ interface BlogPostCardProps {
 export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => {
   return (
     <article onClick={onClick} className="bg-white mb-12 flex flex-col group">
-      {/* Image Container */}
-      <div className="relative overflow-hidden rounded-lg mb-6">
+      {/* Image Container — linked for crawlability + larger click target */}
+      <Link
+        href={`/blogs/${slugify(post.title)}`}
+        className="relative overflow-hidden rounded-lg mb-6 block"
+      >
         <img
           src={post.photo}
           alt={post.title}
@@ -22,7 +27,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => 
           height={630}
           className="w-full h-64 md:h-96 object-cover transform transition-transform duration-500 group-hover:scale-105"
         />
-      </div>
+      </Link>
 
       {/* Meta Data */}
       <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-gray-700 mb-4">
@@ -46,29 +51,34 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => 
         </div>
       </div>
 
-      {/* Title — real link so search engines can crawl to the post */}
+      {/* Title — real crawlable link; native nav also enables open-in-new-tab */}
       <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
-        <a
+        <Link
           href={`/blogs/${slugify(post.title)}`}
-          onClick={(e) => e.preventDefault()}
           className="hover:text-red-600 transition-colors cursor-pointer"
         >
           {post.title}
-        </a>
+        </Link>
       </h2>
 
       {/* Excerpt */}
       <p className="text-gray-600 leading-relaxed mb-6">{post.description}</p>
 
-      {/* Enroll Button */}
+      {/* Enroll Now — drives blog readers to the course sales chat (WhatsApp) */}
       <div>
-        <button className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-gray-200 text-gray-800 font-medium hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300 group">
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-gray-200 text-gray-800 font-medium hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300 group"
+        >
           Enroll Now
           <ArrowRight
             size={18}
             className="text-red-600 group-hover:text-white transition-colors"
           />
-        </button>
+        </a>
       </div>
     </article>
   );

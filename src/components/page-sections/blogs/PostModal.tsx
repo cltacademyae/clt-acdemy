@@ -1,72 +1,20 @@
 "use client"
-import React, { useEffect } from "react";
+import React from "react";
 import { Post } from "@/types";
 import "react-quill-new/dist/quill.snow.css";
 import { IoClose } from "react-icons/io5";
 import { FaUserShield } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 
 interface PostModalProps {
   post: Post | null;
   onClose: () => void;
 }
 
+// SEO note: title/description/OG/Twitter meta are set server-side in
+// app/blogs/[slug]/page.tsx via generateMetadata. Do NOT re-write them here
+// on the client — it duplicates/races the server tags that crawlers read.
 const PostModal: React.FC<PostModalProps> = ({ post, onClose }) => {
   if (!post) return null;
-  const router = useRouter();
-  useEffect(() => {
-    // Update document title
-    const originalTitle = document.title;
-    document.title = post.title;
-    // Update meta tags
-    const updateMetaTag = (name: string, content: string) => {
-      let element = document.querySelector(`meta[name="${name}"]`);
-      console.log(element);
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute('name', name);
-        document.head.appendChild(element);
-      }
-      element.setAttribute('content', content);
-    };
-
-    const updatePropertyTag = (property: string, content: string) => {
-      let element = document.querySelector(`meta[property="${property}"]`);
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute('property', property);
-        document.head.appendChild(element);
-      }
-      element.setAttribute('content', content);
-    };
-
-    // Set all meta tags
-    updateMetaTag('description', post.description);
-    updateMetaTag('keywords', post.tags.join(", "));
-
-    // Open Graph
-    updatePropertyTag('og:title', post.title);
-    updatePropertyTag('og:description', post.description);
-    updatePropertyTag('og:image', post.photo);
-    updatePropertyTag('og:type', 'article');
-
-    // Twitter
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', post.title);
-    updateMetaTag('twitter:description', post.description);
-    updateMetaTag('twitter:image', post.photo);
-
-    // Canonical is handled server-side by the route's layout metadata.
-
-    // Lock body scroll
-    // document.body.style.overflow = 'hidden';
-
-    // Cleanup function
-    return () => {
-      document.title = originalTitle;
-      // document.body.style.overflow = 'unset';
-    };
-  }, [post]);
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 md:p-8 overflow-hidden">
       {/* Backdrop */}

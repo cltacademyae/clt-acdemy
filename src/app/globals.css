@@ -688,3 +688,31 @@ h1,h2,h3,h4,h5,h6{
   color: #8b5cf6;
   text-decoration: underline;
 }
+
+/* Tables authored in the blog editor (Quill outputs plain <table> markup). */
+.ql-editor table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+}
+
+.ql-editor table th,
+.ql-editor table td {
+  border: 1px solid #3f3f46;
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.ql-editor table th {
+  background-color: #27272a;
+  color: #f4f4f5;
+  font-weight: 700;
+}
+
+.ql-editor table tr:nth-child(even) td {
+  background-color: rgba(63, 63, 70, 0.25);
+}
