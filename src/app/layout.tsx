@@ -113,13 +113,21 @@ export default function RootLayout({
             `,
           }}
         />
-
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K82ZGDD3"
-          height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
       </head>
       <body
         className={`${geistSans.variable} ${poppins.variable} ${outfit.variable} relative ${geistMono.variable} antialiased overflow-x-hidden w-screen `}
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-K82ZGDD3"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
+
         <JsonLd />
         <IndexLayout>{children}</IndexLayout>
       </body>
