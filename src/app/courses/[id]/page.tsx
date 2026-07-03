@@ -13,6 +13,7 @@ import Faq from "@/components/page-sections/home/faq";
 import Testimonials from "@/components/page-sections/home/testimonials";
 import { Button } from "@/components/ui/button";
 import { courseData, courseDetails } from "@/const/data";
+import { SITE } from "@/const/seo";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -21,8 +22,51 @@ const page = () => {
   const router = useRouter();
   const { id } = useParams();
   const course = courseDetails[id as keyof typeof courseDetails];
+
+  const courseSchema = course
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "@id": `${SITE.url}/courses/${id}#course`,
+        name: course.name,
+        description: course.description,
+        url: `${SITE.url}/courses/${id}`,
+        provider: {
+          "@type": "EducationalOrganization",
+          "@id": `${SITE.url}/#organization`,
+          name: SITE.name,
+          url: SITE.url,
+        },
+        ...(course.duration?.match(/\d+/)?.[0]
+          ? {
+              hasCourseInstance: {
+                "@type": "CourseInstance",
+                courseMode: ["Onsite", "Online"],
+                courseWorkload: `P${course.duration.match(/\d+/)?.[0]}W`,
+                location: {
+                  "@type": "Place",
+                  name: SITE.name,
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: SITE.address.streetAddress,
+                    addressLocality: SITE.address.addressLocality,
+                    addressCountry: SITE.address.addressCountry,
+                  },
+                },
+              },
+            }
+          : {}),
+      }
+    : null;
+
   return (
     <>
+      {courseSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+        />
+      )}
       <CourseTitleCotainer
         title={course?.name || "Our Courses"}
         description={

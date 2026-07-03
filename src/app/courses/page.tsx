@@ -7,10 +7,12 @@ import Faq from "@/components/page-sections/home/faq";
 import Testimonials from "@/components/page-sections/home/testimonials";
 import React from "react";
 import tTitle from "@/../public/title/1.jpeg"
+import CourseSchema from "@/components/seo/CourseSchema";
 
 const page = () => {
   return (
     <>
+      <CourseSchema />
       <PageTitleContainer
         title="Our Courses"
         imgSrc={tTitle}

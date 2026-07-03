@@ -2,6 +2,7 @@
 import CourseCard from "@/components/global/corseCard";
 import TeamCard from "@/components/global/teamCard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SITE } from "@/const/seo";
 import React, { useState } from "react";
 import t1 from "@/../public/team/t1.jpeg";
 import t2 from "@/../public/team/t2.png";
@@ -497,8 +498,37 @@ const TeamListing = () => {
     "Operations"
     ];
   const [currentTab, setCurrentTab] = useState("All");
+
+  // Person structured data (JSON-LD) for every team member / mentor shown
+  // below. Invisible to users — powers Google's people/knowledge results.
+  const peopleSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${SITE.url}/team/#members`,
+    itemListElement: [...mansgementData, ...teamData].map((member, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Person",
+        name: member.name.trim(),
+        jobTitle: member.role,
+        image: `${SITE.url}${(member.imageUrl as { src: string }).src}`,
+        worksFor: {
+          "@type": "EducationalOrganization",
+          "@id": `${SITE.url}/#organization`,
+          name: SITE.name,
+          url: SITE.url,
+        },
+      },
+    })),
+  };
+
   return (
     <div className="w-screen px-1 md:px-10 md:py-10 py-4 flex flex-col gap-4 ">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(peopleSchema) }}
+      />
       <div className="flex w-full justify-between">
         <div className="flex flex-col mb-5 w-full  gap-2  items-center">
           <div className="px-5 md:mb-4 rounded-full w-fit font-semibold border border-primary text-primary text-center py-2">
