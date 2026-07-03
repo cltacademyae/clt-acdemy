@@ -3,9 +3,9 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Trading Blog — Forex, Stocks & Market Insights",
+  title: "Trading Blog — Daily Forex, Stock & Market Insights",
   description:
-    "Read the CLT Academy blog for forex, stock and crypto trading insights, strategies and market updates from our UAE-based mentors.",
+    "Read the CLT Academy blog for daily forex, stock and crypto trading insights, strategies and market updates from our expert UAE-based mentors.",
   path: "/blogs",
 });
 
