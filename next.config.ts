@@ -32,6 +32,12 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Force blocking metadata for every request so <title>, description,
+  // canonical and robots always render inside <head> in the initial HTML.
+  // Without this, Next 15+ streams async generateMetadata (blog posts) into
+  // <body> for non-JS crawlers (Screaming Frog etc.), which flags them as
+  // "outside <head>". /.*/ disables streaming metadata for all user agents.
+  htmlLimitedBots: /.*/,
   async headers() {
     return [
       {
