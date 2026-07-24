@@ -1,5 +1,13 @@
 import { BLOG_POSTS } from "@/const/data";
 import { Post } from "@/types";
+import { sanitizeContent } from "@/lib/sanitizeContent";
+
+/** Clean editor-authored HTML (broken/whitespace hrefs) before it reaches the DOM. */
+function sanitizePosts(posts: Post[]): Post[] {
+  return posts.map((p) =>
+    p.content ? { ...p, content: sanitizeContent(p.content) } : p
+  );
+}
 
 /**
  * Turn a post title into a clean, URL-safe slug.
@@ -21,17 +29,17 @@ export function slugify(title: string): string {
  */
 export async function getBlogPosts(): Promise<Post[]> {
   const base = process.env.NEXT_PUBLIC_BACKEND_URL;
-  if (!base) return BLOG_POSTS;
+  if (!base) return sanitizePosts(BLOG_POSTS);
   try {
     const res = await fetch(`${base}/api/blogs`, { next: { revalidate: 300 } });
     if (res.ok) {
       const data = await res.json();
-      if (Array.isArray(data) && data.length) return data;
+      if (Array.isArray(data) && data.length) return sanitizePosts(data);
     }
   } catch (e) {
     console.error("getBlogPosts failed:", e);
   }
-  return BLOG_POSTS;
+  return sanitizePosts(BLOG_POSTS);
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<Post | undefined> {
