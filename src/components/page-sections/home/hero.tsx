@@ -170,18 +170,17 @@ const Hero = () => {
     >
       <div className="flex relative z-10 h-[90vh] pt-25 md:px-6 px-2 flex-col md:w-1/2 w-full md:items-start items-center justify-center gap-4">
         <div className="px-5   hero-pill rounded-full border border-white text-white text-center py-2">
-          <p className="md:text-sm text-xs uppercase text-nowrap">
-            Learn Trading from Elite Mentors
+          <p className="md:text-sm text-xs uppercase">
+            Claim Yours Free Educational Account
           </p>
         </div>
-        <h1 className="md:text-8xl text-nowrap  overflow-hidden  hero-title-line text-5xl md:text-start text-center  text-white font-bold">
-          {splitText("Learn Freely")} <br />
-          {splitText("Lead Fully")}
+        <h1 className="md:text-6xl lg:text-7xl  overflow-hidden  hero-title-line text-4xl md:text-start text-center  text-white font-bold">
+          {splitText("KHDA Approved")} <br />
+          {splitText("Forex Trading Academy")} <br />
+          {splitText("IN Dubai.")}
         </h1>
         <p className="text-white/90 overflow-hidden hero-desc md:text-base text-sm md:text-start text-center">
-          {splitWords(
-            "Join a global community of traders learning directly from professionals. No fluff, no shortcuts just real world financial education that works."
-          )}
+          {splitWords("Last Few Days Remaining")}
         </p>
         <Button
           onClick={() => {
@@ -190,7 +189,7 @@ const Hero = () => {
           size={"lg"}
           className="md:text-[.8rem] hero-button font-bold group rounded-2xl"
         >
-          Invest Your Self{" "}
+          Talk to Our Mentor{" "}
           <FaArrowRight className="group-hover:translate-x-1 duration-900" />
         </Button>
       </div>
