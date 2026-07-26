@@ -89,22 +89,14 @@ const HeroVideoMobile = dynamic(() => import("@/components/global/heroVideo").th
   ),
 });
 
-// Headline lines are justified: each one is sized so it spans the full column
-// width, so all three sit flush on both edges. The cqw values are 100 / the
-// line's width in ems (measured in Poppins 700), which is why they differ per
-// line — the shorter the text, the larger it has to be set to fill the column.
-const titleLines = [
-  { text: "KHDA Approved", size: "text-[12.16cqw]" },
-  { text: "Forex Trading Academy", size: "text-[8.11cqw]" },
-  { text: "IN Dubai.", size: "text-[21.65cqw]" },
-];
+const titleLines = ["KHDA Approved", "Forex Trading Academy", "IN Dubai."];
 
-// Words are kept whole so any leftover slack lands in the word gaps rather than
-// between letters, while chars stay individually animatable for the GSAP stagger.
-const splitTitleLine = (text: string, size: string) => (
+// Words are kept whole so lines never break mid-word, while chars stay
+// individually animatable for the GSAP stagger.
+const splitTitleLine = (text: string) => (
   <span
     key={text}
-    className={`flex w-full justify-between whitespace-nowrap ${size}`}
+    className="flex w-full justify-center md:justify-start whitespace-nowrap"
   >
     {text.split(" ").map((word, wordIndex) => (
       <span key={wordIndex} className="inline-block whitespace-nowrap">
@@ -113,6 +105,9 @@ const splitTitleLine = (text: string, size: string) => (
             {char}
           </span>
         ))}
+        {wordIndex < text.split(" ").length - 1 && (
+          <span className="inline-block">&nbsp;</span>
+        )}
       </span>
     ))}
   </span>
@@ -196,8 +191,8 @@ const Hero = () => {
             Claim Yours Free Educational Account
           </p>
         </div>
-        <h1 className="overflow-hidden hero-title-line w-full flex flex-col text-white font-bold leading-[1.05]">
-          {titleLines.map((line) => splitTitleLine(line.text, line.size))}
+        <h1 className="overflow-hidden hero-title-line w-full flex flex-col text-white font-bold leading-[1.08] text-[clamp(1.5rem,7.9cqw,4.5rem)]">
+          {titleLines.map((line) => splitTitleLine(line))}
         </h1>
         <p className="text-white/90 overflow-hidden hero-desc md:text-base text-sm md:text-start text-center">
           {splitWords("Last Few Days Remaining")}
