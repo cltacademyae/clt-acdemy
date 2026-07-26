@@ -89,12 +89,34 @@ const HeroVideoMobile = dynamic(() => import("@/components/global/heroVideo").th
   ),
 });
 
-const splitText = (text: string) =>
-  text.split("").map((char, index) => (
-    <span key={index} className="char text-nowrap inline-block whitespace-pre">
-      {char}
-    </span>
-  ));
+// Headline lines are justified: each one is sized so it spans the full column
+// width, so all three sit flush on both edges. The cqw values are 100 / the
+// line's width in ems (measured in Poppins 700), which is why they differ per
+// line — the shorter the text, the larger it has to be set to fill the column.
+const titleLines = [
+  { text: "KHDA Approved", size: "text-[12.16cqw]" },
+  { text: "Forex Trading Academy", size: "text-[8.11cqw]" },
+  { text: "IN Dubai.", size: "text-[21.65cqw]" },
+];
+
+// Words are kept whole so any leftover slack lands in the word gaps rather than
+// between letters, while chars stay individually animatable for the GSAP stagger.
+const splitTitleLine = (text: string, size: string) => (
+  <span
+    key={text}
+    className={`flex w-full justify-between whitespace-nowrap ${size}`}
+  >
+    {text.split(" ").map((word, wordIndex) => (
+      <span key={wordIndex} className="inline-block whitespace-nowrap">
+        {word.split("").map((char, charIndex) => (
+          <span key={charIndex} className="char inline-block">
+            {char}
+          </span>
+        ))}
+      </span>
+    ))}
+  </span>
+);
 
 const splitWords = (text: string, className?: string) =>
   text.split(" ").map((word, index) => (
@@ -168,16 +190,14 @@ const Hero = () => {
       ref={containerRef}
       className="w-screen relative flex  flex-col pb-18 justify-center  md:px-20 px-5 md:gap-14 gap-4 min-h-screen "
     >
-      <div className="flex relative z-10 h-[90vh] pt-25 md:px-6 px-2 flex-col md:w-1/2 w-full md:items-start items-center justify-center gap-4">
+      <div className="@container flex relative z-10 h-[90vh] pt-25 md:px-6 px-2 flex-col md:w-1/2 w-full md:items-start items-center justify-center gap-4">
         <div className="px-5   hero-pill rounded-full border border-white text-white text-center py-2">
           <p className="md:text-sm text-xs uppercase">
             Claim Yours Free Educational Account
           </p>
         </div>
-        <h1 className="md:text-6xl lg:text-7xl  overflow-hidden  hero-title-line text-4xl md:text-start text-center  text-white font-bold">
-          {splitText("KHDA Approved")} <br />
-          {splitText("Forex Trading Academy")} <br />
-          {splitText("IN Dubai.")}
+        <h1 className="overflow-hidden hero-title-line w-full flex flex-col text-white font-bold leading-[1.05]">
+          {titleLines.map((line) => splitTitleLine(line.text, line.size))}
         </h1>
         <p className="text-white/90 overflow-hidden hero-desc md:text-base text-sm md:text-start text-center">
           {splitWords("Last Few Days Remaining")}
