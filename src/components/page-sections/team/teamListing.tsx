@@ -125,8 +125,8 @@ const TeamListing = () => {
       id: 30,
       name: "Nandana Jayakrishnan",
       type: "Operations",
-      role: "HR Executive",
-      bio: "HR Executive",
+      role: "HR Manager",
+      bio: "HR Manager",
       imageUrl: t31,
     },
         {
