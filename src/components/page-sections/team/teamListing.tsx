@@ -162,12 +162,12 @@ const TeamListing = () => {
       imageUrl: t23,
     },
     {
-      id: 3,
-      name: "Rashida Pudhuveettil",
+      id: 6,
+      name: "Alwin Bose",
       type: "Advisors",
-      role: "Business Development Manager",
-      bio: "Business Development Manager",
-      imageUrl: t3,
+      role: "Sales Team Leader",
+      bio: "Sales Team Leader",
+      imageUrl: t6,
     },
     {
       id: 5,
@@ -212,6 +212,14 @@ const TeamListing = () => {
       imageUrl: t20_1,
     },
     {
+      id: 3,
+      name: "Rashida Pudhuveettil",
+      type: "Mentors",
+      role: "Trading mentor",
+      bio: "Trading mentor",
+      imageUrl: t3,
+    },
+    {
       id: 45,
       name: "Mathson Mathew ",
       type: "Mentors",
@@ -244,14 +252,6 @@ const TeamListing = () => {
       imageUrl: adhil,
     },
 
-    {
-      id: 6,
-      name: "Alwin Bose",
-      type: "Advisors",
-      role: "Academic counsellor",
-      bio: "Academic counsellor",
-      imageUrl: t6,
-    },
     {
       id: 14,
       name: "Bindhyasree",

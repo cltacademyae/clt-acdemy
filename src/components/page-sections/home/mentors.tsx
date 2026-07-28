@@ -16,6 +16,7 @@ import t50 from "@/../public/team/t50.jpeg";
 import kiran from "@/../public/team/Kiran-V-R.jpeg";
 import amal from "@/../public/team/Amal.jpeg";
 import adhil from "@/../public/team/Adhil.jpeg";
+import t3 from "@/../public/team/t3.png";
 import {
   Sheet,
   SheetContent,
@@ -149,6 +150,13 @@ export default function OurTeam() {
           achievements: "Practical market execution, beginner-to-intermediate trader development, disciplined trading habits, confidence building",
           imageUrl: t20_1,
         },
+    {
+      id: 3,
+      name: "Rashida Pudhuveettil",
+      type: "Mentors",
+      role: "Trading Mentor",
+      imageUrl: t3,
+    },
     {
       id: 59,
       name: "Kiran V R",
