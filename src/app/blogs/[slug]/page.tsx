@@ -17,15 +17,21 @@ export async function generateMetadata({
   const post = await getBlogPostBySlug(slug);
   const url = `${SITE.url}/blogs/${slug}`;
   if (!post) return { title: "Blog Post", alternates: { canonical: url } };
-  const images = post.photo ? [{ url: post.photo }] : undefined;
-  const title = withBrand(post.title);
+  // CMS overrides win so marketing can retune a page without a deploy.
+  const seo = post.seo || {};
+  const title = seo.metaTitle?.trim() || withBrand(post.title);
+  const description = seo.metaDescription?.trim() || post.description;
+  const image = seo.ogImage?.trim() || post.photo;
+  const images = image ? [{ url: image }] : undefined;
+
   return {
     title,
-    description: post.description,
-    alternates: { canonical: url },
+    description,
+    alternates: { canonical: seo.canonicalOverride?.trim() || url },
+    ...(seo.noindex ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title,
-      description: post.description,
+      description,
       url,
       type: "article",
       images,
@@ -33,8 +39,8 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title,
-      description: post.description,
-      images: post.photo ? [post.photo] : undefined,
+      description,
+      images: image ? [image] : undefined,
     },
   };
 }
@@ -66,9 +72,19 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     mainEntityOfPage: `${SITE.url}/blogs/${slug}`,
   };
 
+  // A hand-written schema override replaces the generated block entirely.
+  let schema: object = jsonLd;
+  if (post.seo?.schemaOverride?.trim()) {
+    try {
+      schema = JSON.parse(post.seo.schemaOverride);
+    } catch {
+      // Editor validates on save; a bad value here just keeps the generated one.
+    }
+  }
+
   return (
     <>
-      <Schema data={jsonLd} />
+      <Schema data={schema} />
       {/* Overlay covers the viewport, so the trail renders inside it. */}
       <BlogPostView
         post={post}

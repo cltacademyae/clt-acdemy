@@ -80,8 +80,11 @@ const RULES: [RegExp, string][] = [
   ],
 ];
 
-/** Resolve a post to exactly one category. Everything unmatched is Forex Basics. */
-export function categoryOf(post: Pick<Post, "tags" | "title">): Category {
+/** CMS value wins; keyword rules are the fallback for posts predating the field. */
+export function categoryOf(post: Pick<Post, "tags" | "title" | "category">): Category {
+  const stored = post.category ? categoryBySlug(post.category) : undefined;
+  if (stored) return stored;
+
   const haystack = [...(post.tags || []), post.title || ""].join(" ");
   for (const [pattern, slug] of RULES) {
     if (pattern.test(haystack)) return categoryBySlug(slug)!;

@@ -43,7 +43,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: r.priority,
   }));
 
-  const posts = await getBlogPosts();
+  // Never advertise a URL we have told Google to ignore.
+  const posts = (await getBlogPosts()).filter((p) => !p.seo?.noindex);
 
   const categoryEntries: MetadataRoute.Sitemap = activeCategories(posts).map((c) => ({
     url: `${SITE.url}/blogs/category/${c.slug}`,
