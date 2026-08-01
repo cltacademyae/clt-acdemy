@@ -10,6 +10,18 @@ import { COURSE_SLUGS } from "@/lib/catalog.slugs";
  *
  * This is a dev deliverable pending a marketing rewrite. Routes stay out of the
  * sitemap until the copy is signed off — see `indexable` below.
+ *
+ * Four routes from the handover are deliberately absent:
+ *
+ * - /trading-course-fees-dubai      no prices are confirmed (DEV-020). A fees
+ *                                   page without fees is a bounce.
+ * - /clt-academy-reviews            no verifiable review source (DEV-016).
+ * - /trading-academy-abu-dhabi      no premises in either emirate. Location
+ * - /trading-academy-sharjah        pages for cities where the business does
+ *                                   not operate are doorway pages, which
+ *                                   Google penalises. Viable only if written
+ *                                   as "serving students from X", which is a
+ *                                   marketing call, not a dev one.
  */
 export type CommercialPage = {
   slug: string;
@@ -161,6 +173,174 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
         question: "Is trading education regulated in the UAE?",
         answer:
           "Training providers in Dubai are regulated by the KHDA. Financial services themselves are regulated separately by the Securities and Commodities Authority. CLT Academy is an education provider and does not offer financial services.",
+      },
+      RISK_FAQ,
+    ],
+    indexable: false,
+  },
+  {
+    slug: "forex-trading-course-for-beginners-dubai",
+    h1: "Forex Trading Course for Beginners in Dubai",
+    metaTitle: "Forex Trading Course for Beginners in Dubai | CLT Academy",
+    metaDescription:
+      "A four-week beginner forex course in Dubai covering platform basics, price action, risk control and trading mindset. No prior experience needed. KHDA-approved.",
+    quickAnswer:
+      "Trade Craft is CLT Academy's beginner forex course in Dubai. It runs four weeks, assumes no prior trading experience, and covers platform basics, price patterns, support and resistance, risk control and trading mindset. Available in-person in Hor Al Anz East or online.",
+    sections: [
+      {
+        h2: "Do you need any experience to start?",
+        body: "No. Trade Craft starts from how a trading platform works and what a candle represents. If you have never opened a chart, this is the correct entry point.",
+      },
+      {
+        h2: "What will you be able to do afterwards?",
+        body: "Read a chart, identify market structure, size a position against a defined risk, and place and manage a trade to a plan. It is a foundation, not a finished skill — most traders continue into Profit Matrix.",
+      },
+      {
+        h2: "How much time does it take each week?",
+        body: "Four weeks of structured sessions, with live mentor time rather than recordings alone. Sessions run in-person in Dubai or online for students elsewhere.",
+      },
+      {
+        h2: "What it deliberately does not teach",
+        body: "No signals, no copy-trading, no promised returns. The course teaches you to make your own decisions, which is the only version of this skill that lasts.",
+      },
+    ],
+    comparison: COURSE_TABLE,
+    faq: [
+      {
+        question: "How long is the beginner course?",
+        answer: "Trade Craft runs for four weeks.",
+      },
+      {
+        question: "Do I need my own trading capital to take the course?",
+        answer:
+          "No. The course teaches on charts and demo execution. Whether and when to trade live capital is your decision, made after you understand risk.",
+      },
+      RISK_FAQ,
+    ],
+    indexable: false,
+  },
+  {
+    slug: "crypto-trading-course-dubai",
+    h1: "Crypto Trading Course in Dubai",
+    metaTitle: "Crypto Trading Course in Dubai | CLT Academy",
+    metaDescription:
+      "Learn crypto trading in Dubai with a KHDA-approved academy. Structured market education covering volatility, risk and execution — in-person or online.",
+    quickAnswer:
+      "CLT Academy teaches crypto within its structured trading programmes rather than as a standalone speculation course. The same market structure, risk management and execution framework applies to crypto as to forex, with volatility and market hours as the main differences.",
+    sections: [
+      {
+        h2: "How is crypto different from forex?",
+        body: "Crypto trades continuously rather than in sessions, and moves further and faster than most currency pairs. That changes position sizing and stop placement, not the underlying method.",
+      },
+      {
+        h2: "Where does crypto sit in the programmes?",
+        body: "Market structure, liquidity and risk are taught as transferable skills across forex, stocks and crypto. Trade Craft builds the foundation; the later programmes apply it across instruments.",
+      },
+      {
+        h2: "A note on risk",
+        body: "Crypto volatility is frequently mistaken for opportunity. The larger the range, the smaller the position that survives it — which is exactly what the risk module exists to teach.",
+      },
+    ],
+    comparison: COURSE_TABLE,
+    faq: [
+      {
+        question: "Is there a crypto-only course?",
+        answer:
+          "Crypto is taught inside the structured programmes rather than as a separate course, because the method transfers across instruments.",
+      },
+      RISK_FAQ,
+    ],
+    indexable: false,
+  },
+  {
+    slug: "stock-market-course-dubai",
+    h1: "Stock Market Course in Dubai",
+    metaTitle: "Stock Market Course in Dubai | CLT Academy",
+    metaDescription:
+      "Structured stock market education in Dubai from a KHDA-approved academy — market structure, risk and execution, taught in-person or online.",
+    quickAnswer:
+      "CLT Academy teaches stock market trading within its structured programmes. Equities behave differently from leveraged instruments — slower moves, different risk profile — but the market structure and risk framework taught in the courses applies directly.",
+    sections: [
+      {
+        h2: "How do equities differ from forex?",
+        body: "Stocks trade in defined sessions, respond to company-specific news, and are usually held longer. Leverage is lower, which changes the risk calculation but not the need for one.",
+      },
+      {
+        h2: "What the programme covers",
+        body: "Market structure, support and resistance, volume behaviour, position sizing and execution — taught so the same framework works whether you are looking at an index, a stock or a currency pair.",
+      },
+    ],
+    comparison: COURSE_TABLE,
+    faq: [
+      {
+        question: "Do you cover UAE and international markets?",
+        answer:
+          "The method taught is market-agnostic. Mentors work through examples across the instruments students actually trade.",
+      },
+      RISK_FAQ,
+    ],
+    indexable: false,
+  },
+  {
+    slug: "indian-stock-market-course-dubai",
+    h1: "Indian Stock Market Course in Dubai",
+    metaTitle: "Indian Stock Market Course in Dubai | CLT Academy",
+    metaDescription:
+      "Indian markets education for traders based in Dubai and the UAE. Structured, KHDA-approved trading programmes delivered in-person or online.",
+    quickAnswer:
+      "CLT Academy runs an Indian markets programme for traders based in the UAE. It applies the same market structure and risk framework as the forex programmes to Indian equities and indices, delivered in-person in Dubai or online.",
+    sections: [
+      {
+        h2: "Who is this for?",
+        body: "Traders in the UAE with an interest in Indian equities and indices — commonly members of the Indian diaspora trading their home market from Dubai.",
+      },
+      {
+        h2: "What is different about Indian markets?",
+        body: "Different session hours, different regulatory environment and different liquidity behaviour. The analytical method carries across; the execution details do not.",
+      },
+      {
+        h2: "How it is delivered",
+        body: "In-person at the Hor Al Anz East premises or online, with live mentor sessions rather than recordings alone.",
+      },
+    ],
+    comparison: COURSE_TABLE,
+    faq: [
+      {
+        question: "Can I attend from outside the UAE?",
+        answer: "Yes. Every programme runs online as well as in-person.",
+      },
+      RISK_FAQ,
+    ],
+    indexable: false,
+  },
+  {
+    slug: "online-trading-course-uae",
+    h1: "Online Trading Courses in the UAE",
+    metaTitle: "Online Trading Course in the UAE | CLT Academy",
+    metaDescription:
+      "Every CLT Academy programme runs online as well as in-person in Dubai — live mentor sessions, structured syllabus, KHDA-approved.",
+    quickAnswer:
+      "All four CLT Academy programmes run online as well as in-person: Trade Craft (4 weeks), Profit Matrix (8 weeks), Market Code (14 weeks) and CLT Vantage (28 weeks). Online students attend the same live mentor sessions as in-person students rather than watching recordings.",
+    sections: [
+      {
+        h2: "Is the online course the same as in-person?",
+        body: "Same syllabus, same mentors, same live sessions. The difference is the room, not the content.",
+      },
+      {
+        h2: "Who does online suit?",
+        body: "Traders outside Dubai, and anyone fitting study around a job. Students who want direct desk time and accountability usually prefer in-person.",
+      },
+      {
+        h2: "What you need",
+        body: "A reliable connection and a machine that can run a charting platform. No paid tools are required to complete the syllabus.",
+      },
+    ],
+    comparison: COURSE_TABLE,
+    faq: [
+      {
+        question: "Are sessions live or recorded?",
+        answer:
+          "Live. Recordings support the live sessions rather than replacing them, because trade review has to be interactive to be useful.",
       },
       RISK_FAQ,
     ],
