@@ -1,4 +1,5 @@
 import PageTitleContainer from "@/components/global/pageTitleContainer";
+import Breadcrumbs from "@/components/global/breadcrumbs";
 import About from "@/components/page-sections/about/about";
 import { VisionMissionSection } from "@/components/page-sections/about/missionAndVision";
 import Qulites from "@/components/page-sections/about/qulites";
@@ -16,6 +17,7 @@ const page = () => {
         title="About Us"
         description="We are a team of traders and investors who are dedicated to helping you learn trading and investing."
       />
+      <Breadcrumbs trail={[{ name: "About", href: "/about" }]} />
       <About />
       <Qulites />
       <AwardsSection />

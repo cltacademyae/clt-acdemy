@@ -1,4 +1,5 @@
 import PageTitleContainer from "@/components/global/pageTitleContainer";
+import Breadcrumbs from "@/components/global/breadcrumbs";
 import About from "@/components/page-sections/about/about";
 import Qulites from "@/components/page-sections/about/qulites";
 import Skills from "@/components/page-sections/about/Skills ";
@@ -18,6 +19,7 @@ const page = () => {
         title="Gallery"
         description="Gallery of our events and activities."
       />
+      <Breadcrumbs trail={[{ name: "Gallery", href: "/gallery" }]} />
 
       <Gallery />
       <div className="mb-20"></div>

@@ -12,7 +12,8 @@ import poster from "@/../public/poster.png";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useUIStore } from "@/store/uiStore";
-import { whatsappLink } from "@/components/global/whatsapp";
+import { useWhatsapp } from "@/hooks/useWhatsapp";
+import { trackEvent } from "@/lib/analytics";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const heroCta = [
@@ -58,7 +59,8 @@ const HeroVideo = dynamic(() => import("@/components/global/heroVideo"), {
         }}
         fill
         src={poster}
-        alt="Logo"
+        alt=""
+        aria-hidden="true"
       />
     </div>
   ),
@@ -83,17 +85,20 @@ const HeroVideoMobile = dynamic(() => import("@/components/global/heroVideo").th
         }}
         fill
         src={poster}
-        alt="Logo"
+        alt=""
+        aria-hidden="true"
       />
     </div>
   ),
 });
 
-const titleLines = ["KHDA Approved", "Forex Trading Academy", "IN Dubai."];
+const titleLines = ["KHDA-Approved", "Forex Trading Academy", "in Dubai"];
 
-// Words are kept whole so lines never break mid-word, while chars stay
-// individually animatable for the GSAP stagger.
-const splitTitleLine = (text: string) => (
+// Words stay whole so lines never break mid-word; chars stay individually
+// animatable for the GSAP stagger. The trailing space keeps the three visual
+// lines extracting as one sentence — without it the H1 reads
+// "KHDA-ApprovedForex Trading Academyin Dubai".
+const splitTitleLine = (text: string, isLastLine: boolean) => (
   <span
     key={text}
     className="flex w-full justify-center md:justify-start whitespace-nowrap"
@@ -110,6 +115,7 @@ const splitTitleLine = (text: string) => (
         )}
       </span>
     ))}
+    {!isLastLine && <span className="sr-only"> </span>}
   </span>
 );
 
@@ -180,6 +186,7 @@ const Hero = () => {
     );
   }, [isLoading]);
   const isMobile = useIsMobile();
+  const whatsapp = useWhatsapp("hero");
   return (
     <div
       ref={containerRef}
@@ -192,15 +199,15 @@ const Hero = () => {
           </p>
         </div>
         <h1 className="overflow-hidden hero-title-line w-full flex flex-col text-white font-bold leading-[1.08] text-[clamp(1.5rem,7.9cqw,4.5rem)]">
-          {titleLines.map((line) => splitTitleLine(line))}
+          {titleLines.map((line, i) =>
+            splitTitleLine(line, i === titleLines.length - 1)
+          )}
         </h1>
         <p className="text-white/90 overflow-hidden hero-desc md:text-base text-sm md:text-start text-center">
           {splitWords("Last Few Days Remaining")}
         </p>
         <Button
-          onClick={() => {
-            window.location.href = whatsappLink;
-          }}
+          onClick={() => whatsapp.open()}
           size={"lg"}
           className="md:text-[.8rem] hero-button font-bold group rounded-2xl"
         >
@@ -240,16 +247,15 @@ const Hero = () => {
               <h3 className="md:text-md text-xs uppercase">
                 CLARITY STARTS HERE
               </h3>
-              <h2
-                onClick={() => {
-                  window.location.href = `tel:${phoneNumber
-                    .replace("+", "")
-                    .replace(" ", "")}`;
-                }}
+              <a
+                href={`tel:${phoneNumber.replace(/[\s+]/g, "")}`}
+                onClick={() =>
+                  trackEvent("phone_click", { link_position: "hero" })
+                }
                 className="md:text-2xl cursor-pointer text-xl text-nowrap font-bold"
               >
                 {phoneNumber}
-              </h2>
+              </a>
             </div>
           </div>
           <div className="bg-primary z-0 w-[30rem] h-[20rem] absolute md:right-[-10%] right-[-5%] md:top-[-20%] top-[70%] rounded-full px-4 py-2"></div>

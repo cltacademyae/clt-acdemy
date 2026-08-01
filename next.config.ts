@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { COURSE_SLUGS, SERVICE_SLUGS } from "./src/lib/catalog.slugs";
 
 // Security response headers applied to every route.
 // CSP is intentionally permissive (allows the external scripts/iframes the
@@ -11,6 +12,10 @@ const securityHeaders = [
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
+    key: "Permissions-Policy",
+    value: "geolocation=(), microphone=(), camera=()",
   },
   {
     key: "Content-Security-Policy",
@@ -43,6 +48,39 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: securityHeaders,
+      },
+    ];
+  },
+  async redirects() {
+    const slugRedirects = [
+      // 301, not Next's default 308 — the SEO acceptance criteria check for a
+      // literal 301.
+      ...Object.entries(COURSE_SLUGS).map(([id, slug]) => ({
+        source: `/courses/${id}`,
+        destination: `/courses/${slug}`,
+        statusCode: 301 as const,
+      })),
+      ...Object.entries(SERVICE_SLUGS).map(([id, slug]) => ({
+        source: `/services/${id}`,
+        destination: `/services/${slug}`,
+        statusCode: 301 as const,
+      })),
+    ];
+
+    return [
+      // Numeric paths are linked from live blog content and the press release.
+      ...slugRedirects,
+      {
+        source: "/termsandcondition",
+        destination: "/terms-and-conditions",
+        statusCode: 301,
+      },
+      // www served a duplicate 200 of every page.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.clt-academy.com" }],
+        destination: "https://clt-academy.com/:path*",
+        statusCode: 301,
       },
     ];
   },

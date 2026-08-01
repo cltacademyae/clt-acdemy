@@ -10,8 +10,8 @@ import {
 import { Users, Calendar, BookOpen, Globe } from "lucide-react";
 
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { COURSE_SLUGS } from "@/lib/catalog";
 
 interface CourseCardProps {
   course: {
@@ -25,10 +25,8 @@ interface CourseCardProps {
 }
 
 const CourseCard = ({ course, index }: CourseCardProps) => {
-  const router = useRouter();
-  const handleEnroll = () => {
-    router.push(`/courses/${course.id ?? 0}`);
-  }
+  // Slug, not the legacy id — no internal link should point at a redirect.
+  const href = `/courses/${COURSE_SLUGS[String(course.id)] ?? course.id}`;
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -69,11 +67,13 @@ const CourseCard = ({ course, index }: CourseCardProps) => {
         
           <motion.div whileHover={{ scale: 1.02 }} >
             <Button
-              onClick={handleEnroll}
+              asChild
               className="w-full mt-4 bg-primary hover:bg-primary/90 transition-all font-semibold md:text-md duration-200"
             >
-              <BookOpen className="h-4 w-4 mr-2" />
-              View Details
+              <Link href={href}>
+                <BookOpen className="h-4 w-4 mr-2" />
+                View Details
+              </Link>
             </Button>
           </motion.div>
         </CardContent>

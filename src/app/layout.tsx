@@ -100,6 +100,9 @@ export default function RootLayout({
           name="google-site-verification"
           content="DaVM4iUS9uUd1fAHt13kalio5mwEJB73Q4ZieWKJavQ"
         />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.tradingview-widget.com" />
+        <link rel="preconnect" href="https://unpkg.com" />
         <link
           rel="stylesheet"
           href="https://unpkg.com/react-quill-new@1.0.2/dist/quill.snow.css"

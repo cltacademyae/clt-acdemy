@@ -222,9 +222,11 @@ export default function OurTeam() {
 
                       <Image
                         src={member.imageUrl}
-                        alt={member.name}
+                        alt={`${member.name}, ${member.role} at CLT Academy`}
                         width={500}
-                        height={500}
+                        height={675}
+                        loading="lazy"
+                        sizes="(max-width: 768px) 90vw, (max-width: 1280px) 33vw, 400px"
                         className="w-full aspect-[1/1.35] object-cover rounded-2xl transform transition duration-500 group-hover:scale-110"
                       />
                     </div>
@@ -255,9 +257,11 @@ export default function OurTeam() {
 
                           <Image
                             src={member.imageUrl}
-                            alt={member.name}
+                            alt={`${member.name}, ${member.role} at CLT Academy`}
                             width={500}
                             height={500}
+                            loading="lazy"
+                            sizes="(max-width: 768px) 90vw, 480px"
                             className="w-full aspect-[1/1] object-cover rounded-2xl transform transition duration-500 group-hover:scale-110"
                           />
                         </div>

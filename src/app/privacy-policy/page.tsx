@@ -1,5 +1,6 @@
 "use client";
 import PageTitleContainer from '@/components/global/pageTitleContainer';
+import Breadcrumbs from "@/components/global/breadcrumbs";
 import Disclaimer from '@/components/page-sections/terms/disclaimer';
 import Privacypolicy from '@/components/page-sections/terms/privacypolicy';
 
@@ -15,6 +16,7 @@ const page = () => {
         title="Privacy Policy"
         description="This is the privacy policy page for the website."
       />
+      <Breadcrumbs trail={[{ name: "Privacy Policy", href: "/privacy-policy" }]} />
       <Privacypolicy/>
     </>
   )

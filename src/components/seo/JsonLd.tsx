@@ -18,11 +18,23 @@ export default function JsonLd() {
     description: SITE.description,
     email: SITE.email,
     telephone: SITE.phone,
+    foundingDate: SITE.foundingDate,
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.address.streetAddress,
       addressLocality: SITE.address.addressLocality,
       addressCountry: SITE.address.addressCountry,
+    },
+    // KHDA accreditation as machine-readable data rather than a marketing
+    // phrase. `identifier` stays out until stakeholders supply the permit
+    // number (DEV-008) — an empty or invented identifier is worse than none.
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Accreditation",
+      recognizedBy: {
+        "@type": "Organization",
+        name: "Knowledge and Human Development Authority (KHDA)",
+      },
     },
     areaServed: [
       { "@type": "Country", name: "United Arab Emirates" },

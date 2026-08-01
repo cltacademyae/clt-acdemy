@@ -4,16 +4,23 @@ import { Post } from "@/types";
 import "react-quill-new/dist/quill.snow.css";
 import { IoClose } from "react-icons/io5";
 import { FaUserShield } from "react-icons/fa";
+import { formatDate } from "@/lib/formatDate";
+import { getReadTime } from "@/lib/readTime";
 
 interface PostModalProps {
   post: Post | null;
   onClose: () => void;
+  breadcrumbs?: React.ReactNode;
 }
 
 // SEO note: title/description/OG/Twitter meta are set server-side in
 // app/blogs/[slug]/page.tsx via generateMetadata. Do NOT re-write them here
 // on the client — it duplicates/races the server tags that crawlers read.
-const PostModal: React.FC<PostModalProps> = ({ post, onClose }) => {
+const PostModal: React.FC<PostModalProps> = ({
+  post,
+  onClose,
+  breadcrumbs,
+}) => {
   if (!post) return null;
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 md:p-8 overflow-hidden">
@@ -93,6 +100,12 @@ const PostModal: React.FC<PostModalProps> = ({ post, onClose }) => {
           </div>
         </div>
 
+        {breadcrumbs && (
+          <div className="[&_nav]:px-4 [&_nav]:sm:px-8 [&_nav]:md:px-20 [&_nav]:text-zinc-400 [&_a]:text-zinc-400 [&_span]:text-zinc-200">
+            {breadcrumbs}
+          </div>
+        )}
+
         {/* Content */}
         <div className="px-4 sm:px-8 md:px-20 py-10 sm:py-16">
           {/* Author */}
@@ -116,15 +129,16 @@ const PostModal: React.FC<PostModalProps> = ({ post, onClose }) => {
               </p>
               <p className="text-zinc-500 text-[10px] sm:text-xs font-black uppercase tracking-widest mt-1">
                 <span className="text-primary">
-                  {post.authorDetails?.profession || "Admin"}
+                  {post.authorDetails?.profession || "Trading Mentor"}
                 </span>{" "}
-                • Node Synced:{" "}
-                {new Date(post.createdAt).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
+                • Published: {formatDate(post.createdAt)} •{" "}
+                {getReadTime(post.content)}
               </p>
+              {post.updatedAt && post.updatedAt !== post.createdAt && (
+                <p className="text-zinc-500 text-[10px] sm:text-xs font-black uppercase tracking-widest mt-1">
+                  Last updated: {formatDate(post.updatedAt)}
+                </p>
+              )}
               {post.authorDetails?.link && (
                 <a
                   href={post.authorDetails.link}

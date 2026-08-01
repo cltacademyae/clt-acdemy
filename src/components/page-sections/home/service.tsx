@@ -7,31 +7,36 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { whatsappLink } from "@/components/global/whatsapp";
+import Link from "next/link";
 
 const Service = () => {
+  // Canonical product names — these previously used a second, generic naming
+  // system that split the brand entity across the site and the press release.
   const cards = [
     {
-      title: "Beginner Trading Program",
+      title: "Trade Craft — Beginner Forex Trading Program",
       desc: "Perfect for new traders who want a strong foundation.",
       bgImage: "/s1.png",
+      href: "/courses/trade-craft-beginner-forex",
     },
     {
-      title: "Advanced Strategy Mastery",
-      desc: "For traders who want to upgrade their skills.",
+      title: "Profit Matrix — Intermediate Trading",
+      desc: "For traders who know the basics but lack execution clarity.",
       bgImage: "/s2.png",
+      href: "/courses/profit-matrix-intermediate-trading",
     },
     {
-      title: "Pro-Level Mentorship",
-      desc: "1-on-1 expert guidance for consistent growth.",
+      title: "Market Code — Advanced Trading",
+      desc: "High-level chart analysis and real-time strategy execution.",
       bgImage: "/s3.png",
+      href: "/courses/market-code-advanced-trading",
     },
     {
-      title: "Price Action Course",
-      desc: "Master the art of chart reading and real-time analysis.",
+      title: "CLT Vantage — Pro-Level Mentorship",
+      desc: "Six months of mentorship for traders thinking long term.",
       bgImage: "/s4.png",
+      href: "/courses/clt-vantage-pro-mentorship",
     },
-    
   ];
 
   return (
@@ -89,10 +94,12 @@ const Service = () => {
                   <p className="text-white w-[80%] text-md text-center">
                     {card.desc}
                   </p>
-                  <Button onClick={() => {
-                    window.location.href = whatsappLink;
-                  }} className="bg-white mt-3 md:px-6 md:py-1 rounded-full text-primary hover:bg-white/80">
-                    Learn More
+                  {/* Only link path from the homepage into the course pages. */}
+                  <Button
+                    asChild
+                    className="bg-white mt-3 md:px-6 md:py-1 rounded-full text-primary hover:bg-white/80"
+                  >
+                    <Link href={card.href}>Learn More</Link>
                   </Button>
                 </div>
               </SwiperSlide>

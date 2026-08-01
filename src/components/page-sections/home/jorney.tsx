@@ -11,7 +11,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
-import { whatsappLink } from "@/components/global/whatsapp";
+import { useWhatsapp } from "@/hooks/useWhatsapp";
 
 interface JourneyItem {
   number: number;
@@ -31,8 +31,9 @@ const jorneyData: JourneyItem[] = [
     class: "",
   },
   {
-    number: 10,
-    description: "Millions in profits booked",
+    // Non-monetary by design: profit claims are unsubstantiated and a YMYL risk.
+    number: 120,
+    description: "Mentorship hours delivered weekly",
     class: "",
   },
   {
@@ -97,6 +98,7 @@ const AnimatedCounter = ({ value }: { value: number }) => {
 };
 
 const Journey = () => {
+  const whatsapp = useWhatsapp("journey");
   // Ref for the container animation
   const containerRef = useRef(null);
   const isContainerInView = useInView(containerRef, {
@@ -155,9 +157,7 @@ const Journey = () => {
             className="mb-10 md:mb-0"
           >
             <Button
-              onClick={() => {
-                window.location.href = whatsappLink;
-              }}
+              onClick={() => whatsapp.open()}
               size={"lg"}
               className="md:text-[.8rem] font-bold group rounded-2xl"
             >

@@ -1,15 +1,27 @@
 "use client";
 import { phoneNumber } from "@/const/data";
+import { trackEvent } from "@/lib/analytics";
 import React from "react";
 
 
 
 export const whatsappLink = `https://wa.me/${phoneNumber.replace("+", "").replace(" ", "")}?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20this.%20Could%20you%20please%20provide%20details?`;
+
+/** Page reference travels in the message body; outbound clicks are untrackable. */
+export function whatsappLinkFor(pathname?: string) {
+  const ref = pathname && pathname !== "/" ? pathname.replace(/^\//, "") : "home";
+  const text = `Hello, I would like to know more about this. Could you please provide details? (ref: ${ref})`;
+  return `https://wa.me/${phoneNumber
+    .replace("+", "")
+    .replace(" ", "")}?text=${encodeURIComponent(text)}`;
+}
+
 const WhatsappButton = () => {
   return (
     <>
       <a
         href={whatsappLink}
+        onClick={() => trackEvent("whatsapp_click", { link_position: "floating" })}
         className="align-items-center"
         style={{
           display: "flex",

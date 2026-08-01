@@ -36,9 +36,11 @@ const CourseTitleCotainer = ({
       <div className="absolute z-0 top-0 left-0 fit-image w-full h-full bg-black">
         <Image
           src={awward}
-          alt={title}
-          width={500}
-          height={500}
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
           className="object-cover w-full h-full opacity-10"
         />
       </div>

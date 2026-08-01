@@ -7,14 +7,13 @@ import type { Metadata } from "next";
 export const SITE = {
   name: "CLT Academy",
   url: "https://clt-academy.com",
-  // Keyword-rich default title (homepage + template base)
-  defaultTitle: "CLT Academy | No.1 Trading Academy in UAE & Dubai",
+  // No superlatives ("No.1", "leading"): YMYL category, unverifiable claims
+  // are a quality and advertising-compliance risk.
+  defaultTitle: "KHDA-Approved Trading Academy in Dubai | CLT Academy",
   titleTemplate: "%s | CLT Academy",
   description:
-    "CLT Academy is the leading trading academy in the UAE — expert-led forex, stock & crypto trading courses in Dubai with mentorship, live sessions and certification.",
-  // Share-preview image: use the dark logo (white background) so it stays
-  // visible on light/dark chat backgrounds. The transparent white logo
-  // disappears on light backgrounds.
+    "CLT Academy is a KHDA-approved trading academy in Dubai — structured forex, stock & crypto trading courses with mentorship, live sessions and certification.",
+  // Fallback only; routes generate their own card via opengraph-image.
   ogImage: "/logo-black.png",
   locale: "en_AE",
   phone: "+971557454939",
@@ -24,12 +23,43 @@ export const SITE = {
     addressLocality: "Dubai",
     addressCountry: "AE",
   },
+  foundingDate: "2020",
+  // Must match the Google Business Profile exactly.
+  openingHours: {
+    days: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
+    opens: "10:00",
+    closes: "19:00",
+  },
+  // TODO(DEV-040): LinkedIn is a personal-profile URL. Personal profiles do
+  // not accumulate organisational authority and are unreliable in `sameAs`.
   socials: [
     "https://www.linkedin.com/in/clt-academy/",
     "https://www.youtube.com/@CLTACADEMY-p8s",
     "https://www.instagram.com/clt_academy.ae/",
   ],
 } as const;
+
+/** Fallback `instructor` on CourseInstance and `author` on blog posts. */
+export const PRIMARY_INSTRUCTOR = {
+  name: "Mathson Mathew",
+  jobTitle: "Forex Trading Mentor",
+  sameAs: "https://www.linkedin.com/in/mathson-mathew-30474226a/",
+} as const;
+
+/**
+ * The root `title.template` only reaches one segment down. Use this on nested
+ * routes whose parent layout sets its own title.
+ */
+export function withBrand(title: string) {
+  return title.endsWith(SITE.name) ? title : `${title} | ${SITE.name}`;
+}
 
 type PageMetaInput = {
   title?: string;

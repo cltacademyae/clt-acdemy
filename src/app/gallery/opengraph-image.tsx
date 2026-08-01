@@ -1,0 +1,13 @@
+import { ImageResponse } from "next/og";
+import { ogImage, OG_SIZE } from "@/lib/ogImage";
+
+export const alt = "Events, Workshops & Student Wins";
+export const size = OG_SIZE;
+export const contentType = "image/png";
+
+export default function Image() {
+  return new ImageResponse(
+    ogImage({ title: "Events, Workshops & Student Wins", eyebrow: "Gallery" }),
+    size
+  );
+}

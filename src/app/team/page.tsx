@@ -1,4 +1,5 @@
 import PageTitleContainer from "@/components/global/pageTitleContainer";
+import Breadcrumbs from "@/components/global/breadcrumbs";
 import About from "@/components/page-sections/about/about";
 import Qulites from "@/components/page-sections/about/qulites";
 import Skills from "@/components/page-sections/about/Skills ";
@@ -17,6 +18,7 @@ const page = () => {
         title="Our Team"
         description="Our team is a group of experts who are dedicated to helping you learn trading and investing."
       />
+      <Breadcrumbs trail={[{ name: "Our Team", href: "/team" }]} />
 
       <TeamListing />
     </>

@@ -1,116 +1,124 @@
-"use client";
+import Breadcrumbs from "@/components/global/breadcrumbs";
 import CourseTitleCotainer from "@/components/global/courseTitleCotainer";
-import PageTitleContainer from "@/components/global/pageTitleContainer";
-import { whatsappLink } from "@/components/global/whatsapp";
-import About from "@/components/page-sections/about/about";
-import Qulites from "@/components/page-sections/about/qulites";
-import Skills from "@/components/page-sections/about/Skills ";
 import CourseFaq from "@/components/page-sections/course/CourseFaq";
-import CourseListing from "@/components/page-sections/course/courseListing";
 import TabListing from "@/components/page-sections/course/tabListing";
+import CourseNav from "@/components/page-sections/course/courseNav";
 import Cta from "@/components/page-sections/home/cta";
-import Faq from "@/components/page-sections/home/faq";
-import Testimonials from "@/components/page-sections/home/testimonials";
-import { Button } from "@/components/ui/button";
-import { courseData, courseDetails } from "@/const/data";
-import { SITE } from "@/const/seo";
-import { useParams, useRouter } from "next/navigation";
+import Schema from "@/components/seo/Schema";
+import { SITE, PRIMARY_INSTRUCTOR } from "@/const/seo";
+import {
+  COURSE_LEVELS,
+  cleanCourseName,
+  getCourseBySlug,
+  orderedCourseSlugs,
+} from "@/lib/catalog";
+import { notFound } from "next/navigation";
 import React from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const page = () => {
-  const router = useRouter();
-  const { id } = useParams();
-  const course = courseDetails[id as keyof typeof courseDetails];
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id: slug } = await params;
+  const resolved = getCourseBySlug(slug);
+  if (!resolved) notFound();
 
-  const courseSchema = course
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "@id": `${SITE.url}/courses/${id}#course`,
-        name: course.name,
-        description: course.description,
-        url: `${SITE.url}/courses/${id}`,
-        provider: {
-          "@type": "EducationalOrganization",
-          "@id": `${SITE.url}/#organization`,
-          name: SITE.name,
-          url: SITE.url,
-        },
-        ...(course.duration?.match(/\d+/)?.[0]
-          ? {
-              hasCourseInstance: {
-                "@type": "CourseInstance",
-                courseMode: ["Onsite", "Online"],
-                courseWorkload: `P${course.duration.match(/\d+/)?.[0]}W`,
-                location: {
-                  "@type": "Place",
-                  name: SITE.name,
-                  address: {
-                    "@type": "PostalAddress",
-                    streetAddress: SITE.address.streetAddress,
-                    addressLocality: SITE.address.addressLocality,
-                    addressCountry: SITE.address.addressCountry,
-                  },
-                },
+  const { id, detail: course } = resolved;
+  const url = `${SITE.url}/courses/${slug}`;
+  const weeks = course.duration?.match(/\d+/)?.[0];
+  const name = cleanCourseName(course.name);
+
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "@id": `${url}#course`,
+    name,
+    description: course.description,
+    url,
+    inLanguage: "en",
+    educationalLevel: COURSE_LEVELS[id],
+    provider: {
+      "@type": "EducationalOrganization",
+      "@id": `${SITE.url}/#organization`,
+      name: SITE.name,
+      url: SITE.url,
+    },
+    // TODO(DEV-020): no `offers` until prices are confirmed.
+    ...(weeks
+      ? {
+          hasCourseInstance: {
+            "@type": "CourseInstance",
+            courseMode: ["Onsite", "Online"],
+            courseWorkload: `P${weeks}W`,
+            location: {
+              "@type": "Place",
+              name: SITE.name,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: SITE.address.streetAddress,
+                addressLocality: SITE.address.addressLocality,
+                addressCountry: SITE.address.addressCountry,
               },
-            }
-          : {}),
-      }
-    : null;
+            },
+            instructor: {
+              "@type": "Person",
+              name: PRIMARY_INSTRUCTOR.name,
+              jobTitle: PRIMARY_INSTRUCTOR.jobTitle,
+              sameAs: PRIMARY_INSTRUCTOR.sameAs,
+            },
+          },
+        }
+      : {}),
+  };
+
+  // Same array the accordion renders — schema cannot disagree with the page.
+  const faqSchema =
+    course.faq && course.faq.length
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${url}#faq`,
+          mainEntity: course.faq.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }
+      : null;
+
+  const index = orderedCourseSlugs.indexOf(slug);
 
   return (
     <>
-      {courseSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
-        />
-      )}
-      <CourseTitleCotainer
-        title={course?.name || "Our Courses"}
-        description={
-          course?.description ||
-          "We offer a range of courses to help you learn trading and investing."
-        }
+      <Schema data={faqSchema ? [courseSchema, faqSchema] : courseSchema} />
+      <CourseTitleCotainer title={name} description={course.description} />
+      <Breadcrumbs
+        trail={[
+          { name: "Courses", href: "/courses" },
+          { name, href: `/courses/${slug}` },
+        ]}
       />
       <CourseFaq
-        faqItems={course?.faq || []}
-        subtitle={course?.detSubtitle || ""}
-        title={course?.detTitle || ""}
-        description={course?.detDesc || ""}
+        faqItems={course.faq || []}
+        subtitle={course.detSubtitle || ""}
+        title={course.detTitle || ""}
+        description={course.detDesc || ""}
       />
       <TabListing
-        duration={course?.duration || ""}
-        title={course?.name || ""}
-        tabs={(course?.tabs as any) || []}
+        duration={course.duration || ""}
+        title={name}
+        tabs={(course.tabs as never) || []}
       />
-      <div className="flex w-full mb-10 md:px-10 px-1 justify-between items-center">
-        <Button
-          onClick={() => router.push(`/courses/${Number(id) - 1}`)}
-          className="bg-gray-200 hover:text-white text-black"
-          disabled={Number(id) === 1}
-        >
-          <FaArrowLeft />
-          {"Previous Course"}
-        </Button>
-        <Button onClick={() => window.open(whatsappLink, "_blank")}>
-          Enroll Now
-        </Button>
-        <Button
-          className="bg-gray-200 hover:text-white text-black"
-          disabled={Number(id) === course?.tabs.length}
-          onClick={() => router.push(`/courses/${Number(id) + 1}`)}
-        >
-          {"Next Course"}
-          <FaArrowRight />
-        </Button>
-      </div>
+      <CourseNav
+        courseName={name}
+        previous={index > 0 ? orderedCourseSlugs[index - 1] : null}
+        next={
+          index < orderedCourseSlugs.length - 1
+            ? orderedCourseSlugs[index + 1]
+            : null
+        }
+      />
       <Cta />
-
       <div className="mb-20"></div>
     </>
   );
 };
 
-export default page;
+export default Page;

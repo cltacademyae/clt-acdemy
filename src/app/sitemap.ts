@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/const/seo";
 import { getBlogPosts, slugify } from "@/lib/getBlogPosts";
+import { courseSlugs, serviceSlugs } from "@/lib/catalog";
 
 /** Served at /sitemap.xml. Static routes + dynamic blog posts. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -19,7 +20,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/blogs", priority: 0.6, changeFrequency: "weekly" },
     { path: "/disclaimer", priority: 0.3, changeFrequency: "yearly" },
     { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" },
-    { path: "/termsandcondition", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/terms-and-conditions", priority: 0.3, changeFrequency: "yearly" },
+    ...courseSlugs.map((slug) => ({
+      path: `/courses/${slug}`,
+      priority: 0.9,
+      changeFrequency: "monthly" as const,
+    })),
+    ...serviceSlugs.map((slug) => ({
+      path: `/services/${slug}`,
+      priority: 0.6,
+      changeFrequency: "monthly" as const,
+    })),
   ];
 
   const lastModified = new Date();

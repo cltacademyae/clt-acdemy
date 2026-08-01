@@ -7,6 +7,8 @@ import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import Link from "next/link";
 import { phoneNumber } from "@/const/data";
+import RiskDisclosure from "@/components/global/riskDisclosure";
+import { trackEvent } from "@/lib/analytics";
 
 const Footer = () => {
   return (
@@ -15,7 +17,13 @@ const Footer = () => {
         <div className=" max-w-7xl  mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 py-16 px-6 md:px-16">
           {/* Left Section */}
           <div>
-            <img src="/logo.png" alt="logo" width={470} height={380} className="w-20 mb-6" />
+            <img
+              src="/logo.png"
+              alt="CLT Academy"
+              width={470}
+              height={380}
+              className="w-20 mb-6"
+            />
 
             <p className="text-lg font-semibold mb-3">
               BUILT BY TRADERS. DRIVEN BY PURPOSE.
@@ -96,17 +104,44 @@ const Footer = () => {
                 Hor&nbsp;Al&nbsp;Anz&nbsp;East, Dubai, United Arab Emirates.
               </p>
               <p className="flex items-center gap-3">
-                <FiPhoneCall className="text-xl" /> +971 557454939
+                <FiPhoneCall className="text-xl" />
+                <a
+                  href={`tel:${phoneNumber}`}
+                  onClick={() =>
+                    trackEvent("phone_click", { link_position: "footer" })
+                  }
+                  className="hover:text-white"
+                >
+                  +971 55 745 4939
+                </a>
               </p>
               <p className="flex items-center gap-3">
-                <MdEmail className="text-xl" /> info@clt-academy.com
+                <MdEmail className="text-xl" />
+                <a
+                  href="mailto:info@clt-academy.com"
+                  onClick={() =>
+                    trackEvent("email_click", { link_position: "footer" })
+                  }
+                  className="hover:text-white"
+                >
+                  info@clt-academy.com
+                </a>
               </p>
+            </div>
+
+            {/* TODO(DEV-008): add the KHDA permit and trade licence numbers. */}
+            <div className="mt-6 text-sm text-gray-400">
+              <h3 className="text-base font-semibold text-gray-200 mb-1">
+                Accreditation
+              </h3>
+              <p>KHDA-approved training institute, Dubai, UAE.</p>
             </div>
           </div>
 
           {/* Gallery */}
         </div>
       </div>
+      <RiskDisclosure />
       <div className="w-full bg-black  ">
         <div className="max-w-7xl mx-auto flex items-center md:flex-row flex-col md:gap-0 gap-1 py-2 justify-between md:px-32 md:py-6 md:h-3">
           <p className="text-xs">© 2026 CLT Academy. All rights reserved.</p>
@@ -126,7 +161,7 @@ const Footer = () => {
             </Link>{" "}
             |{" "}
             <Link
-              href="/termsandcondition"
+              href="/terms-and-conditions"
               className="hover:text-white cursor-pointer"
             >
               Terms of Service

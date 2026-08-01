@@ -5,10 +5,31 @@ import { BLOG_POSTS, CATEGORIES, RECENT_NEWS } from "@/const/data";
 import { Post } from "@/types";
 import { useRouter } from "next/navigation";
 import { slugify } from "@/lib/getBlogPosts";
+import { formatDate } from "@/lib/formatDate";
+
+/**
+ * Seeds the sidebar from server-rendered posts so it is populated in the
+ * initial HTML; /api/blogs/tags was returning nothing and left it empty.
+ *
+ * TODO(DEV-023): still free-text author values. Controlled taxonomy and
+ * /blogs/category/[slug] hubs belong in the blog CMS.
+ */
+function deriveCategories(posts?: Post[]): Record<string, number> {
+  if (!posts?.length) return {};
+  return posts.reduce<Record<string, number>>((acc, post) => {
+    (post.tags || []).forEach((tag) => {
+      const label = tag.trim();
+      if (label) acc[label] = (acc[label] || 0) + 1;
+    });
+    return acc;
+  }, {});
+}
 
 export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
   const router = useRouter();
-  const [tags, setTags] = useState<Record<string, number>>({});
+  const [tags, setTags] = useState<Record<string, number>>(() =>
+    deriveCategories(posts)
+  );
   const [recentPosts, setRecentPosts] = useState<Post[]>(
     posts ? posts.slice(0, 3) : [],
   );
@@ -52,15 +73,16 @@ export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
       );
       if (response.ok) {
         const data = await response.json();
-        setTags(data);
-        console.log("TAGS", data);
+        // Never overwrite a populated sidebar with an empty response.
+        if (data && Object.keys(data).length) setTags(data);
       } else {
-        setTags(CATEGORIES);
-        console.log("TAGS from local", CATEGORIES);
+        setTags((current) =>
+          Object.keys(current).length ? current : CATEGORIES
+        );
       }
     } catch (error) {
       console.error("Fetch Error:", error);
-      setTags(CATEGORIES);
+      setTags((current) => (Object.keys(current).length ? current : CATEGORIES));
     } finally {
       setIsLoading(false);
     }
@@ -147,7 +169,7 @@ export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
                 <div className="flex items-center gap-1.5 text-xs font-medium text-gray-600 mb-1.5">
                   <Calendar size={12} className="text-red-500" />
                   <span>
-                    {new Date(news.createdAt).toLocaleDateString()}
+                    {formatDate(news.createdAt)}
                   </span>
                 </div>
                 <h4 className="text-sm font-semibold text-gray-800 leading-snug group-hover:text-red-600 transition-colors line-clamp-2">

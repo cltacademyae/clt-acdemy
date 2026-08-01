@@ -90,9 +90,13 @@ const Testimonials = () => {
                   <div className="flex w-full items-start justify-start px-4 flex-col gap-4">
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-10 h-10 fit-image rounded-full overflow-hidden">
+                        {/* Stock avatar, not the named person — decorative. */}
                         <Image
                           src={card.image}
-                          alt="testimonial"
+                          alt=""
+                          aria-hidden="true"
+                          loading="lazy"
+                          sizes="40px"
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -124,7 +128,9 @@ const Testimonials = () => {
       <div className="absolute z-0 top-0 left-0 w-full h-full flex items-center justify-center">
         <img
           src="/awward.png"
-          alt="CLT Academy background"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
           width={1200}
           height={800}
           className="w-full opacity-5 object-cover  h-full "

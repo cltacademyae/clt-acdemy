@@ -10,6 +10,7 @@ import { IoCalculator } from "react-icons/io5";
 import { LuNotebookPen } from "react-icons/lu";
 import { TbTargetArrow } from "react-icons/tb";
 import HeroVideo, { AboutHeroVideo } from "./heroVideo";
+import TickerTape from "./tickerTape";
 import { cn } from "@/lib/utils";
 
 const PageTitleContainer = ({
@@ -38,10 +39,12 @@ const PageTitleContainer = ({
         {!isVideo && (
           <Image
             src={imgSrc}
-            alt={title}
-            width={500}
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            priority
             placeholder="blur"
-            height={500}
             className={cn("object-cover w-full h-full ",
               imgSrc === awward ? "opacity-10" : "opacity-20"
             )}
@@ -50,20 +53,7 @@ const PageTitleContainer = ({
         {isVideo && <AboutHeroVideo />}
       </div>
       <div className="absolute bottom-0 left-0 w-full h-10 bg-black">
-        <iframe
-          allowTransparency={true}
-          frameBorder={0}
-          src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22FOREXCOM%3ASPXUSD%22%2C%22title%22%3A%22S%26P%20500%20Index%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3ANSXUSD%22%2C%22title%22%3A%22US%20100%20Cash%20CFD%22%7D%2C%7B%22proName%22%3A%22FX_IDC%3AEURUSD%22%2C%22title%22%3A%22EUR%20to%20USD%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22title%22%3A%22Bitcoin%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3AETHUSD%22%2C%22title%22%3A%22Ethereum%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22colorTheme%22%3A%22dark%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A44%2C%22utm_source%22%3A%22clt-academy.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22clt-academy.com%2F%22%7D"
-          title="ticker tape TradingView widget"
-          lang="en"
-          style={{
-            userSelect: "none",
-            boxSizing: "border-box",
-            display: "block",
-            height: "44px",
-            width: "100%",
-          }}
-        ></iframe>
+        <TickerTape />
       </div>
     </div>
   );
