@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Outfit, Poppins } from "next/font/google";
 import "./globals.css";
 import IndexLayout from "@/components/layout";
+import FooterLinks from "@/components/layout/footerLinks";
 import { SITE } from "@/const/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import Script from "next/script";
@@ -136,7 +137,7 @@ export default function RootLayout({
         {/* End Google Tag Manager (noscript) */}
 
         <JsonLd />
-        <IndexLayout>{children}</IndexLayout>
+        <IndexLayout footerLinks={<FooterLinks />}>{children}</IndexLayout>
       </body>
     </html>
   );

@@ -17,6 +17,7 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { whatsappLink } from "../global/whatsapp";
+import { COMMERCIAL_PAGES } from "@/const/commercial";
 
 const navItems = [
   {
@@ -31,6 +32,11 @@ const navItems = [
     name: "Our Courses",
     href: "/courses",
   },
+  // Appear once marketing signs off the copy; noindex pages stay unlinked.
+  ...COMMERCIAL_PAGES.filter((p) => p.indexable).map((p) => ({
+    name: p.h1,
+    href: `/${p.slug}`,
+  })),
   {
     name: "Our team",
     href: "/team",

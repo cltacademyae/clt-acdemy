@@ -10,7 +10,7 @@ import { phoneNumber } from "@/const/data";
 import RiskDisclosure from "@/components/global/riskDisclosure";
 import { trackEvent } from "@/lib/analytics";
 
-const Footer = () => {
+const Footer = ({ footerLinks }: { footerLinks?: React.ReactNode }) => {
   return (
     <footer className="w-full bg-[#1f1f1f] rounded-t-3xl -mt-6 relative z-10 text-white ">
       <div className="w-full flex items-center justify-center">
@@ -141,6 +141,7 @@ const Footer = () => {
           {/* Gallery */}
         </div>
       </div>
+      {footerLinks}
       <RiskDisclosure />
       <div className="w-full bg-black  ">
         <div className="max-w-7xl mx-auto flex items-center md:flex-row flex-col md:gap-0 gap-1 py-2 justify-between md:px-32 md:py-6 md:h-3">

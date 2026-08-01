@@ -3,6 +3,7 @@ import { SITE } from "@/const/seo";
 import { getBlogPosts, postPath } from "@/lib/getBlogPosts";
 import { courseSlugs, serviceSlugs } from "@/lib/catalog";
 import { activeCategories } from "@/lib/categories";
+import { COMMERCIAL_PAGES } from "@/const/commercial";
 
 /** Served at /sitemap.xml. Static routes + dynamic blog posts. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -46,6 +47,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Never advertise a URL we have told Google to ignore.
   const posts = (await getBlogPosts()).filter((p) => !p.seo?.noindex);
 
+  // Only pages marketing has signed off; the rest are noindex meanwhile.
+  const commercialEntries: MetadataRoute.Sitemap = COMMERCIAL_PAGES.filter(
+    (p) => p.indexable
+  ).map((p) => ({
+    url: `${SITE.url}/${p.slug}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.9,
+  }));
+
   const categoryEntries: MetadataRoute.Sitemap = activeCategories(posts).map((c) => ({
     url: `${SITE.url}/blogs/category/${c.slug}`,
     lastModified,
@@ -59,5 +70,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...categoryEntries, ...postEntries];
+  return [
+    ...staticEntries,
+    ...commercialEntries,
+    ...categoryEntries,
+    ...postEntries,
+  ];
 }

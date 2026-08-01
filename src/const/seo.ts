@@ -62,7 +62,8 @@ export function withBrand(title: string) {
 }
 
 type PageMetaInput = {
-  title?: string;
+  /** Use `{ absolute }` on segments where the root title template still applies. */
+  title?: Metadata["title"];
   description?: string;
   /** Path with leading slash, e.g. "/courses". Used for canonical + og:url. */
   path?: string;

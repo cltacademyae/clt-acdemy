@@ -8,7 +8,13 @@ import { Toaster } from "sonner";
 import Loader from "@/components/global/prelodaer";
 import { useUIStore } from "@/store/uiStore";
 
-const IndexLayout = ({ children }: { children: React.ReactNode }) => {
+const IndexLayout = ({
+  children,
+  footerLinks,
+}: {
+  children: React.ReactNode;
+  footerLinks?: React.ReactNode;
+}) => {
   const { isLoading, setIsLoading } = useUIStore();
 
   const handleLoadingComplete = () => {
@@ -36,7 +42,7 @@ const IndexLayout = ({ children }: { children: React.ReactNode }) => {
       <Nav />
       <WhatsappButton />
       <Suspense fallback={<div></div>}>{children}</Suspense>
-      <Footer />
+      <Footer footerLinks={footerLinks} />
     </>
   );
 };
