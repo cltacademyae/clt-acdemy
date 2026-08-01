@@ -1,22 +1,48 @@
+"use client";
 import React from "react";
-import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaRegClock } from "react-icons/fa";
 import { phoneNumber } from "@/const/data";
+import { SITE } from "@/const/seo";
+import { trackEvent } from "@/lib/analytics";
 const contactInfo = [
   {
     type: "Contact",
     icon: <FaPhoneAlt className="w-6 h-6 text-white" />,
-    content: <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>,
+    content: (
+      <a
+        href={`tel:${phoneNumber}`}
+        onClick={() => trackEvent("phone_click", { link_position: "contact" })}
+      >
+        {phoneNumber}
+      </a>
+    ),
   },
   {
     type: "Email",
     icon: <FaEnvelope className="w-6 h-6 text-white" />,
-    content: <a href="mailto:info@clt-academy.com">info@clt-academy.com</a>,
+    content: (
+      <a
+        href="mailto:info@clt-academy.com"
+        onClick={() => trackEvent("email_click", { link_position: "contact" })}
+      >
+        info@clt-academy.com
+      </a>
+    ),
   },
   {
     type: "Address",
     icon: <FaMapMarkerAlt className="w-6 h-6 text-white" />,
     content:
       "CLT Academy | Head Office M09, Al Shaibani Building, Hor Al Anz East, Dubai, United Arab Emirates.",
+  },
+  {
+    // Visible text, not only schema — LocalBusiness hours have to be
+    // verifiable against the page they are claimed on.
+    type: "Opening Hours",
+    icon: <FaRegClock className="w-6 h-6 text-white" />,
+    content: `${SITE.openingHours.days[0]} to ${
+      SITE.openingHours.days[SITE.openingHours.days.length - 1]
+    }, ${SITE.openingHours.opens} to ${SITE.openingHours.closes} (GST)`,
   },
 ];
 

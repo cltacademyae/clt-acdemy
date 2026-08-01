@@ -24,11 +24,12 @@ export default function LocalBusinessSchema() {
       addressLocality: SITE.address.addressLocality,
       addressCountry: SITE.address.addressCountry,
     },
-    // TODO: approximate. Replace with the exact Google Business Profile pin.
+    // Taken from the Google Maps embed on /contact, which is pinned on the
+    // "CLT trading academy" place entry.
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 25.2854,
-      longitude: 55.3271,
+      latitude: 25.279983,
+      longitude: 55.351095,
     },
     openingHoursSpecification: [
       {
