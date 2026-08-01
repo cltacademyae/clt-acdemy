@@ -1,5 +1,7 @@
 export interface Post {
   _id: string;
+  /** Stored slug. Absent on older records until the CMS backfill runs. */
+  slug?: string;
   title: string;
   description: string;
   content: string;

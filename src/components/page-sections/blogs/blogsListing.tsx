@@ -7,7 +7,7 @@ import { Post, User } from "@/types";
 import PostModal from "./PostModal";
 import { useRouter } from "next/navigation";
 import { useUIStore } from "@/store/uiStore";
-import { slugify } from "@/lib/getBlogPosts";
+import { postPath } from "@/lib/getBlogPosts";
 
 const BlogsListing = ({ initialPosts }: { initialPosts?: Post[] }) => {
   // Seed with server-fetched posts so they render in the SSR HTML (SEO).
@@ -58,7 +58,7 @@ const BlogsListing = ({ initialPosts }: { initialPosts?: Post[] }) => {
               <BlogPostCard
                 onClick={() => {
                   setPost(post);
-                  router.push(`/blogs/${slugify(post.title)}`);
+                  router.push(postPath(post));
                 }}
                 key={post._id}
                 post={post}

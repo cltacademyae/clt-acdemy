@@ -4,7 +4,7 @@ import { Search, ChevronRight, Calendar } from "lucide-react";
 import { BLOG_POSTS, CATEGORIES, RECENT_NEWS } from "@/const/data";
 import { Post } from "@/types";
 import { useRouter } from "next/navigation";
-import { slugify } from "@/lib/getBlogPosts";
+import { postPath } from "@/lib/getBlogPosts";
 import { formatDate } from "@/lib/formatDate";
 
 /**
@@ -152,7 +152,7 @@ export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
             <div
               key={news._id}
               onClick={() =>
-                router.push(`/blogs/${slugify(news.title)}`)
+                router.push(postPath(news))
               }
               className="flex gap-4 group cursor-pointer"
             >

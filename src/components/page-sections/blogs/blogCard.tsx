@@ -4,7 +4,7 @@ import { Calendar, User, Folder, Clock, ArrowRight } from "lucide-react";
 import { Post } from "@/types";
 import { getReadTime } from "@/lib/readTime";
 import { formatDate } from "@/lib/formatDate";
-import { slugify } from "@/lib/getBlogPosts";
+import { postPath } from "@/lib/getBlogPosts";
 import { useWhatsapp } from "@/hooks/useWhatsapp";
 
 
@@ -19,7 +19,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => 
     <article onClick={onClick} className="bg-white mb-12 flex flex-col group">
       {/* Image Container — linked for crawlability + larger click target */}
       <Link
-        href={`/blogs/${slugify(post.title)}`}
+        href={postPath(post)}
         className="relative overflow-hidden rounded-lg mb-6 block"
       >
         <img
@@ -56,7 +56,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => 
       {/* Title — real crawlable link; native nav also enables open-in-new-tab */}
       <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
         <Link
-          href={`/blogs/${slugify(post.title)}`}
+          href={postPath(post)}
           className="hover:text-red-600 transition-colors cursor-pointer"
         >
           {post.title}

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/const/seo";
-import { getBlogPosts, slugify } from "@/lib/getBlogPosts";
+import { getBlogPosts, postPath } from "@/lib/getBlogPosts";
 import { courseSlugs, serviceSlugs } from "@/lib/catalog";
 
 /** Served at /sitemap.xml. Static routes + dynamic blog posts. */
@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const posts = await getBlogPosts();
   const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
-    url: `${SITE.url}/blogs/${slugify(p.title)}`,
+    url: `${SITE.url}${postPath(p)}`,
     lastModified: p.updatedAt || p.createdAt || lastModified,
     changeFrequency: "monthly",
     priority: 0.7,

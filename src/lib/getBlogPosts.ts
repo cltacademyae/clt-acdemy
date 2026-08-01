@@ -42,12 +42,18 @@ export async function getBlogPosts(): Promise<Post[]> {
   return sanitizePosts(BLOG_POSTS);
 }
 
+/** Stored slug wins; title-derived and exact-title lookups keep old links alive. */
 export async function getBlogPostBySlug(slug: string): Promise<Post | undefined> {
   const target = decodeURIComponent(slug);
   const posts = await getBlogPosts();
-  // Primary: match by slug. Fallback: exact title (covers older links).
   return (
+    posts.find((p) => p.slug === target) ||
     posts.find((p) => slugify(p.title) === target) ||
     posts.find((p) => p.title === target)
   );
+}
+
+/** Canonical URL path for a post. */
+export function postPath(post: Pick<Post, "slug" | "title">): string {
+  return `/blogs/${post.slug || slugify(post.title)}`;
 }
