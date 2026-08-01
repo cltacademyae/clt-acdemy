@@ -11,6 +11,7 @@ interface PostModalProps {
   post: Post | null;
   onClose: () => void;
   breadcrumbs?: React.ReactNode;
+  related?: React.ReactNode;
 }
 
 // SEO note: title/description/OG/Twitter meta are set server-side in
@@ -20,6 +21,7 @@ const PostModal: React.FC<PostModalProps> = ({
   post,
   onClose,
   breadcrumbs,
+  related,
 }) => {
   if (!post) return null;
   return (
@@ -173,6 +175,8 @@ const PostModal: React.FC<PostModalProps> = ({
             </div>
           </div>
         </div>
+
+        {related}
       </div>
     </div>
   );

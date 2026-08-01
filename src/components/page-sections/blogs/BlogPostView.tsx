@@ -9,15 +9,18 @@ import PostModal from "./PostModal";
 export default function BlogPostView({
   post,
   breadcrumbs,
+  related,
 }: {
   post: Post;
   breadcrumbs?: React.ReactNode;
+  related?: React.ReactNode;
 }) {
   const router = useRouter();
   return (
     <PostModal
       post={post}
       breadcrumbs={breadcrumbs}
+      related={related}
       onClose={() => router.back()}
     />
   );

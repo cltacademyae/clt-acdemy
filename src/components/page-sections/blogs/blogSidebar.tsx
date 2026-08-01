@@ -1,35 +1,25 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Search, ChevronRight, Calendar } from "lucide-react";
-import { BLOG_POSTS, CATEGORIES, RECENT_NEWS } from "@/const/data";
+import { BLOG_POSTS } from "@/const/data";
+import Link from "next/link";
+import { activeCategories, categoryCounts } from "@/lib/categories";
 import { Post } from "@/types";
 import { useRouter } from "next/navigation";
 import { postPath } from "@/lib/getBlogPosts";
 import { formatDate } from "@/lib/formatDate";
 
-/**
- * Seeds the sidebar from server-rendered posts so it is populated in the
- * initial HTML; /api/blogs/tags was returning nothing and left it empty.
- *
- * TODO(DEV-023): still free-text author values. Controlled taxonomy and
- * /blogs/category/[slug] hubs belong in the blog CMS.
- */
-function deriveCategories(posts?: Post[]): Record<string, number> {
-  if (!posts?.length) return {};
-  return posts.reduce<Record<string, number>>((acc, post) => {
-    (post.tags || []).forEach((tag) => {
-      const label = tag.trim();
-      if (label) acc[label] = (acc[label] || 0) + 1;
-    });
-    return acc;
-  }, {});
-}
-
 export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
   const router = useRouter();
-  const [tags, setTags] = useState<Record<string, number>>(() =>
-    deriveCategories(posts)
-  );
+  // Controlled taxonomy, not the CMS free-text tags: those had drifted to 30
+  // mostly-single-use values, which is 30 thin hub pages.
+  const categories = useMemo(() => {
+    const counts = categoryCounts(posts || []);
+    return activeCategories(posts || []).map((c) => ({
+      ...c,
+      count: counts.get(c.slug) || 0,
+    }));
+  }, [posts]);
   const [recentPosts, setRecentPosts] = useState<Post[]>(
     posts ? posts.slice(0, 3) : [],
   );
@@ -64,34 +54,9 @@ export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
       setIsLoading(false);
     }
   };
-  const fetchTags = async () => {
-    console.log("FETCH TAGS ", process.env.NEXT_PUBLIC_BACKEND_URL);
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blogs/tags`,
-      );
-      if (response.ok) {
-        const data = await response.json();
-        // Never overwrite a populated sidebar with an empty response.
-        if (data && Object.keys(data).length) setTags(data);
-      } else {
-        setTags((current) =>
-          Object.keys(current).length ? current : CATEGORIES
-        );
-      }
-    } catch (error) {
-      console.error("Fetch Error:", error);
-      setTags((current) => (Object.keys(current).length ? current : CATEGORIES));
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
     // Use server-provided posts when available; only client-fetch as fallback.
     if (!posts || posts.length === 0) fetchPosts();
-    fetchTags();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -120,10 +85,10 @@ export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
           <div className="w-8 h-1 bg-red-600 rounded-full"></div>
         </div>
         <ul className="space-y-4">
-          {Object.keys(tags).map((cat, index) => (
-            <li key={index} className="group">
-              <a
-                href={`?category=${cat}`}
+          {categories.map((cat) => (
+            <li key={cat.slug} className="group">
+              <Link
+                href={`/blogs/category/${cat.slug}`}
                 className="flex items-center justify-between font-medium text-gray-700 group-hover:text-red-600 transition-colors"
               >
                 <span className="flex items-center gap-2">
@@ -131,10 +96,10 @@ export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
                     size={16}
                     className="text-gray-400 group-hover:text-red-600 transition-colors"
                   />
-                  {cat}
+                  {cat.name}
                 </span>
-                <span className="text-sm text-gray-500">({tags[cat]})</span>
-              </a>
+                <span className="text-sm text-gray-500">({cat.count})</span>
+              </Link>
               <div className="h-px bg-gray-100 mt-3 w-full group-last:hidden"></div>
             </li>
           ))}

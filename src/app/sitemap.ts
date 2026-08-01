@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/const/seo";
 import { getBlogPosts, postPath } from "@/lib/getBlogPosts";
 import { courseSlugs, serviceSlugs } from "@/lib/catalog";
+import { activeCategories } from "@/lib/categories";
 
 /** Served at /sitemap.xml. Static routes + dynamic blog posts. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -43,6 +44,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const posts = await getBlogPosts();
+
+  const categoryEntries: MetadataRoute.Sitemap = activeCategories(posts).map((c) => ({
+    url: `${SITE.url}/blogs/category/${c.slug}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
   const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
     url: `${SITE.url}${postPath(p)}`,
     lastModified: p.updatedAt || p.createdAt || lastModified,
@@ -50,5 +58,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...postEntries];
+  return [...staticEntries, ...categoryEntries, ...postEntries];
 }
