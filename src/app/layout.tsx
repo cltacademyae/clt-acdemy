@@ -101,6 +101,8 @@ export default function RootLayout({
           name="google-site-verification"
           content="DaVM4iUS9uUd1fAHt13kalio5mwEJB73Q4ZieWKJavQ"
         />
+        {/* Blog imagery is served from our own R2-backed CDN subdomain. */}
+        <link rel="preconnect" href="https://cdn.clt-academy.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.tradingview-widget.com" />
         <link rel="preconnect" href="https://unpkg.com" />

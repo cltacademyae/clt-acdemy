@@ -18,13 +18,24 @@ export const SITE = {
   locale: "en_AE",
   phone: "+971557454939",
   email: "info@clt-academy.com",
+  // Registered trade name on the DED professional licence. "CLT" is the
+  // trading name; both are published so the entity resolves either way.
+  legalName: "Career and Life Transformation Management Development Training",
   address: {
     streetAddress: "M09, Al Shaibani Building, Hor Al Anz East",
     addressLocality: "Dubai",
     addressCountry: "AE",
   },
+  // Coordinates read off the Google Business Profile listing, not estimated.
+  geo: { latitude: 25.2812375, longitude: 55.3541152 },
   foundingDate: "2020",
-  // Must match the Google Business Profile exactly.
+  // Verifiable registrations. Both are public-register numbers — publishing
+  // them is what turns "KHDA-approved" from a claim into a checkable fact.
+  credentials: {
+    khdaPermit: "633004",
+    tradeLicence: "1483845",
+    licensingAuthority: "Dubai Department of Economy and Tourism",
+  },
   openingHours: {
     days: [
       "Monday",
@@ -33,16 +44,19 @@ export const SITE = {
       "Thursday",
       "Friday",
       "Saturday",
+      "Sunday",
     ],
     opens: "10:00",
-    closes: "19:00",
+    closes: "22:00",
   },
-  // TODO(DEV-040): LinkedIn is a personal-profile URL. Personal profiles do
-  // not accumulate organisational authority and are unreliable in `sameAs`.
+  googleBusinessProfile:
+    "https://maps.app.goo.gl/ttc5Bzdjbuk1zguq5",
   socials: [
-    "https://www.linkedin.com/in/clt-academy/",
-    "https://www.youtube.com/@CLTACADEMY-p8s",
+    "https://www.linkedin.com/company/clt-academy/",
+    "https://www.youtube.com/@CLTAcademyDxB",
     "https://www.instagram.com/clt_academy.ae/",
+    "https://www.trustpilot.com/review/clttradingacademy.com",
+    "https://maps.app.goo.gl/ttc5Bzdjbuk1zguq5",
   ],
 } as const;
 

@@ -6,8 +6,6 @@ import { cleanCourseName } from "@/lib/catalog";
 /**
  * Plain-text org summary for AI crawlers. Generated rather than static so the
  * course list cannot drift from what the pages render.
- *
- * TODO(DEV-008): add the KHDA permit number once supplied.
  */
 export const dynamic = "force-static";
 
@@ -29,6 +27,12 @@ export function GET() {
 > Structured forex, stock, crypto and Indian markets education.
 > Education and training only — not investment advice, not a brokerage.
 
+## Verifiable registrations
+- Legal name: ${SITE.legalName}
+- KHDA Educational Services Permit: ${SITE.credentials.khdaPermit}
+- Dubai Professional Licence: ${SITE.credentials.tradeLicence}
+- Licensing authority: ${SITE.credentials.licensingAuthority}
+
 ## Courses
 ${courses}
 
@@ -36,12 +40,14 @@ ${courses}
 - [About](${SITE.url}/about)
 - [Courses](${SITE.url}/courses)
 - [Team](${SITE.url}/team)
+- [Press & facts](${SITE.url}/press)
 - [Blog](${SITE.url}/blogs)
 - [Contact](${SITE.url}/contact)
 
 ## Contact
 ${SITE.address.streetAddress}, ${SITE.address.addressLocality}, United Arab Emirates
 ${SITE.phone} | ${SITE.email}
+Open ${SITE.openingHours.opens}–${SITE.openingHours.closes} daily.
 
 ## Risk notice
 Trading carries a high level of risk and can result in the loss of capital.

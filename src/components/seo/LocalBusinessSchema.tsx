@@ -12,11 +12,13 @@ export default function LocalBusinessSchema() {
     "@type": "LocalBusiness",
     "@id": `${SITE.url}/contact#localbusiness`,
     name: SITE.name,
+    legalName: SITE.legalName,
     url: `${SITE.url}/contact`,
     image: `${SITE.url}/logo.png`,
     telephone: SITE.phone,
     email: SITE.email,
     priceRange: "$$",
+    hasMap: SITE.googleBusinessProfile,
     parentOrganization: { "@id": `${SITE.url}/#organization` },
     address: {
       "@type": "PostalAddress",
@@ -24,12 +26,12 @@ export default function LocalBusinessSchema() {
       addressLocality: SITE.address.addressLocality,
       addressCountry: SITE.address.addressCountry,
     },
-    // Taken from the Google Maps embed on /contact, which is pinned on the
-    // "CLT trading academy" place entry.
+    // Read off the Google Business Profile listing so the pin, the NAP data
+    // here and the GBP entry all agree.
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 25.279983,
-      longitude: 55.351095,
+      latitude: SITE.geo.latitude,
+      longitude: SITE.geo.longitude,
     },
     openingHoursSpecification: [
       {

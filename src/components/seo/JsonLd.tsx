@@ -11,7 +11,8 @@ export default function JsonLd() {
     "@type": "EducationalOrganization",
     "@id": `${SITE.url}/#organization`,
     name: SITE.name,
-    alternateName: "CLT Trading Academy",
+    legalName: SITE.legalName,
+    alternateName: ["CLT Trading Academy", SITE.legalName],
     url: SITE.url,
     logo: `${SITE.url}/logo.png`,
     image: `${SITE.url}/logo.png`,
@@ -25,17 +26,36 @@ export default function JsonLd() {
       addressLocality: SITE.address.addressLocality,
       addressCountry: SITE.address.addressCountry,
     },
-    // KHDA accreditation as machine-readable data rather than a marketing
-    // phrase. `identifier` stays out until stakeholders supply the permit
-    // number (DEV-008) — an empty or invented identifier is worse than none.
-    hasCredential: {
-      "@type": "EducationalOccupationalCredential",
-      credentialCategory: "Accreditation",
-      recognizedBy: {
-        "@type": "Organization",
-        name: "Knowledge and Human Development Authority (KHDA)",
-      },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: SITE.geo.latitude,
+      longitude: SITE.geo.longitude,
     },
+    // Accreditation as machine-readable, checkable data rather than a marketing
+    // phrase — both numbers sit on public government registers.
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "Accreditation",
+        identifier: SITE.credentials.khdaPermit,
+        name: `KHDA Educational Services Permit ${SITE.credentials.khdaPermit}`,
+        recognizedBy: {
+          "@type": "GovernmentOrganization",
+          name: "Knowledge and Human Development Authority (KHDA)",
+          url: "https://www.khda.gov.ae/",
+        },
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "Professional Licence",
+        identifier: SITE.credentials.tradeLicence,
+        name: `Dubai Professional Licence ${SITE.credentials.tradeLicence}`,
+        recognizedBy: {
+          "@type": "GovernmentOrganization",
+          name: SITE.credentials.licensingAuthority,
+        },
+      },
+    ],
     areaServed: [
       { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "City", name: "Dubai" },

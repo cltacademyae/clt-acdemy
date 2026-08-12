@@ -7,6 +7,7 @@ import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import Link from "next/link";
 import { phoneNumber } from "@/const/data";
+import { SITE } from "@/const/seo";
 import RiskDisclosure from "@/components/global/riskDisclosure";
 import { trackEvent } from "@/lib/analytics";
 
@@ -35,13 +36,13 @@ const Footer = ({ footerLinks }: { footerLinks?: React.ReactNode }) => {
 
             <div className="flex items-center gap-4 mt-6">
               <a
-                href="https://www.linkedin.com/in/clt-academy/"
+                href="https://www.linkedin.com/company/clt-academy/"
                 className="w-10 h-10 flex items-center justify-center rounded-md bg-white text-black hover:bg-primary transition"
               >
                 <FaLinkedinIn />
               </a>
               <a
-                href="https://www.youtube.com/@CLTACADEMY-p8s"
+                href="https://www.youtube.com/@CLTAcademyDxB"
                 className="w-10 h-10 flex items-center justify-center rounded-md bg-white text-black hover:bg-primary transition"
               >
                 <FaYoutube />
@@ -129,12 +130,18 @@ const Footer = ({ footerLinks }: { footerLinks?: React.ReactNode }) => {
               </p>
             </div>
 
-            {/* TODO(DEV-008): add the KHDA permit and trade licence numbers. */}
+            {/*
+              Registration numbers as crawlable text on every page. Both sit on
+              public government registers, which is what makes the
+              "KHDA-approved" claim verifiable rather than marketing copy.
+            */}
             <div className="mt-6 text-sm text-gray-400">
               <h3 className="text-base font-semibold text-gray-200 mb-1">
                 Accreditation
               </h3>
-              <p>KHDA-approved training institute, Dubai, UAE.</p>
+              <p>{SITE.legalName}</p>
+              <p>KHDA Educational Services Permit No. {SITE.credentials.khdaPermit}</p>
+              <p>Dubai Professional Licence No. {SITE.credentials.tradeLicence}</p>
             </div>
           </div>
 
