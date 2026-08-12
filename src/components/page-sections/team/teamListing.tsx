@@ -55,7 +55,6 @@ import t9 from "@/../public/team/t9.jpeg";
 import t19 from "@/../public/team/t19.png";
 
 
-import t24 from "@/../public/team/t24.jpeg";
 import t50 from "@/../public/team/t50.jpeg";
 import t56 from "@/../public/team/t56.png";
 import t57 from "@/../public/team/t57.png";
@@ -172,9 +171,9 @@ const TeamListing = () => {
     {
       id: 5,
       name: "Farsana Sirajudheen",
-      type: "Advisors",
-      role: "Business Development Manager",
-      bio: "Business Development Manager",
+      type: "Customer Service",
+      role: "Customer Service",
+      bio: "Customer Service",
       imageUrl: t5,
     },
     {
@@ -260,15 +259,6 @@ const TeamListing = () => {
       bio: "Academic Counsellor",
       imageUrl: t14,
     },
-    {
-      id: 24,
-      name: "Della Mariyam",
-      type: "Customer Service",
-      role: "Customer Relationship Manager",
-      bio: "Customer Relationship Manager",
-      imageUrl: t24,
-    },
-
     {
       id: 29,
       name: "Ifa Fathima",
