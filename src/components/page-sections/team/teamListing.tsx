@@ -60,7 +60,7 @@ import t56 from "@/../public/team/t56.png";
 import t57 from "@/../public/team/t57.png";
 import t58 from "@/../public/team/t58.jpeg";
 
-import simsarul_haq from "@/../public/team/Simsarul-Haq.jpeg";
+import simsarul_haq from "@/../public/team/simsarul-haq.jpeg";
 import adhil from "@/../public/team/Adhil.jpeg";
 import amal from "@/../public/team/Amal.jpeg";
 import kiran from "@/../public/team/Kiran-V-R.jpeg";
