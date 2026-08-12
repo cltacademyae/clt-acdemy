@@ -4,6 +4,7 @@ import { getBlogPosts, postPath } from "@/lib/getBlogPosts";
 import { courseSlugs, serviceSlugs } from "@/lib/catalog";
 import { activeCategories } from "@/lib/categories";
 import { COMMERCIAL_PAGES } from "@/const/commercial";
+import { pageCount } from "@/lib/pagination";
 
 /** Served at /sitemap.xml. Static routes + dynamic blog posts. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -58,6 +59,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }));
 
+  // Paginated listing pages, 2..n. Page 1 is /blogs, already in `routes`.
+  const paginationEntries: MetadataRoute.Sitemap = Array.from(
+    { length: Math.max(0, pageCount(posts.length) - 1) },
+    (_, i) => ({
+      url: `${SITE.url}/blogs/page/${i + 2}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.4,
+    })
+  );
+
   const categoryEntries: MetadataRoute.Sitemap = activeCategories(posts).map((c) => ({
     url: `${SITE.url}/blogs/category/${c.slug}`,
     lastModified,
@@ -74,6 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticEntries,
     ...commercialEntries,
+    ...paginationEntries,
     ...categoryEntries,
     ...postEntries,
   ];

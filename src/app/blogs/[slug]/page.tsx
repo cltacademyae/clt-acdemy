@@ -4,6 +4,7 @@ import Schema from "@/components/seo/Schema";
 import { SITE, PRIMARY_INSTRUCTOR, withBrand } from "@/const/seo";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/getBlogPosts";
 import RelatedPosts from "@/components/page-sections/blogs/relatedPosts";
+import RelatedCourses from "@/components/page-sections/blogs/relatedCourses";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -88,7 +89,12 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       {/* Overlay covers the viewport, so the trail renders inside it. */}
       <BlogPostView
         post={post}
-        related={<RelatedPosts post={post} posts={await getBlogPosts()} />}
+        related={
+          <>
+            <RelatedPosts post={post} posts={await getBlogPosts()} />
+            <RelatedCourses post={post} />
+          </>
+        }
         breadcrumbs={
           <Breadcrumbs
             trail={[

@@ -9,7 +9,17 @@ import { useRouter } from "next/navigation";
 import { useUIStore } from "@/store/uiStore";
 import { postPath } from "@/lib/getBlogPosts";
 
-const BlogsListing = ({ initialPosts }: { initialPosts?: Post[] }) => {
+const BlogsListing = ({
+  initialPosts,
+  pagination,
+  sidebarPosts,
+}: {
+  initialPosts?: Post[];
+  /** Rendered under the post list. Server component, so it stays crawlable. */
+  pagination?: React.ReactNode;
+  /** Full post set for the sidebar; the list itself shows one page. */
+  sidebarPosts?: Post[];
+}) => {
   // Seed with server-fetched posts so they render in the SSR HTML (SEO).
   const [posts, setPosts] = useState<Post[]>(initialPosts ?? []);
 
@@ -64,11 +74,12 @@ const BlogsListing = ({ initialPosts }: { initialPosts?: Post[] }) => {
                 post={post}
               />
             ))}
+            {pagination}
           </div>
 
           <div className="lg:w-1/3">
             <div className="sticky top-28">
-              <BlogSidebar posts={posts} />
+              <BlogSidebar posts={sidebarPosts ?? posts} />
             </div>
           </div>
         </div>

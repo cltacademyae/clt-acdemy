@@ -14,6 +14,11 @@ export interface Post {
   readTime?: string;
   /** Controlled taxonomy slug set in the CMS. Absent on legacy posts. */
   category?: string | null;
+  /**
+   * Course ids an editor attached to this post. When absent, the related-course
+   * block falls back to a mapping by category.
+   */
+  relatedCourses?: number[];
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
