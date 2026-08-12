@@ -169,14 +169,6 @@ const TeamListing = () => {
       imageUrl: t6,
     },
     {
-      id: 5,
-      name: "Farsana Sirajudheen",
-      type: "Customer Service",
-      role: "Customer Service",
-      bio: "Customer Service",
-      imageUrl: t5,
-    },
-    {
       id: 32,
       name: "Ansa Abdul Offur",
       type: "Operations",
@@ -370,6 +362,14 @@ const TeamListing = () => {
       role: "Department of Customer Service",
       bio: "Department of Customer Service",
       imageUrl: t42,
+    },
+    {
+      id: 5,
+      name: "Farsana Sirajudheen",
+      type: "Customer Service",
+      role: "Department of Customer Service",
+      bio: "Department of Customer Service",
+      imageUrl: t5,
     },
     {
       id: 43,
