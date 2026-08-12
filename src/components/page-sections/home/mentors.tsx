@@ -213,21 +213,21 @@ export default function OurTeam() {
           {teamMembers.map((member, index) => (
             <SwiperSlide key={index}>
               <Sheet>
-                <SheetTrigger>
+                <SheetTrigger className="block w-full text-left">
                   <div className="relative image-anime bg-transparent rounded-xl overflow-hidden group">
-                    {/* Image Wrapper */}
-                    <div className="relative overflow-hidden rounded-2xl bg-[#DBE0E3]">
+                    {/* Image Wrapper — aspect ratio here so the card keeps its
+                        size before the lazy image loads */}
+                    <div className="relative w-full aspect-[1/1.35] overflow-hidden rounded-2xl bg-[#DBE0E3]">
                       {/* Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10"></div>
 
                       <Image
                         src={member.imageUrl}
                         alt={`${member.name}, ${member.role} at CLT Academy`}
-                        width={500}
-                        height={675}
+                        fill
                         loading="lazy"
                         sizes="(max-width: 768px) 90vw, (max-width: 1280px) 33vw, 400px"
-                        className="w-full aspect-[1/1.35] object-cover rounded-2xl transform transition duration-500 group-hover:scale-110"
+                        className="object-cover rounded-2xl transform transition duration-500 group-hover:scale-110"
                       />
                     </div>
 
