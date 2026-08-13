@@ -8,6 +8,13 @@ export function generateStaticParams() {
   return serviceSlugs.map((id) => ({ id }));
 }
 
+// Required for a real 404 on unknown slugs. Removing it makes the route answer
+// 200 with a 404 body — a soft 404, which Google treats as a thin duplicate.
+//
+// The cost is an internal `NoFallbackError` logged on every miss. That is noise,
+// not a failure: the visitor still gets a 404 status and the custom not-found
+// page. Verified by removing the line — the errors stopped and the soft 404 came
+// straight back, so do not "fix" the log by deleting this.
 export const dynamicParams = false;
 
 export async function generateMetadata({
