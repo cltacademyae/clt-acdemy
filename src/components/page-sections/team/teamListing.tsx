@@ -108,8 +108,8 @@ const TeamListing = () => {
       id: 26,
       name: "Nubin Nuhais",
       type: "Information Technology",
-      role: "Information Technology Manager",
-      bio: "Information Technology Manager",
+      role: "Head of Information Technology",
+      bio: "Head of Information Technology",
       imageUrl: nubin,
     },
      {
