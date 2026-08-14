@@ -21,7 +21,7 @@ import t20 from "@/../public/team/t20.png";
 import t20_1 from "@/../public/team/t20-1.png";
 import t23 from "@/../public/team/t23.png";
 import t25 from "@/../public/team/t25.jpeg";
-import t26 from "@/../public/team/t26.jpg";
+import nubin from "@/../public/team/nubin-nuhais.jpeg";
 import t29 from "@/../public/team/t29.jpg";
 import t30 from "@/../public/team/t30.jpeg";
 import t31 from "@/../public/team/t31.webp";
@@ -110,7 +110,7 @@ const TeamListing = () => {
       type: "Information Technology",
       role: "Information Technology Manager",
       bio: "Information Technology Manager",
-      imageUrl: t26,
+      imageUrl: nubin,
     },
      {
       id: 25,
