@@ -5,7 +5,7 @@ import React from "react";
 export const metadata: Metadata = pageMetadata({
   title: "Press & Company Facts",
   description:
-    "Canonical company facts for CLT Academy — legal name, KHDA permit number, trade licence, address, leadership, courses and media contact.",
+    "Canonical company facts for CLT Academy — legal name, address, leadership, courses and media contact.",
   path: "/press",
 });
 

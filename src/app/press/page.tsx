@@ -42,18 +42,6 @@ const Page = () => (
             <Fact label="Registered legal name" value={SITE.legalName} />
             <Fact label="Founded" value={SITE.foundingDate} />
             <Fact
-              label="KHDA Educational Services Permit"
-              value={SITE.credentials.khdaPermit}
-            />
-            <Fact
-              label="Dubai Professional Licence"
-              value={SITE.credentials.tradeLicence}
-            />
-            <Fact
-              label="Licensing authority"
-              value={SITE.credentials.licensingAuthority}
-            />
-            <Fact
               label="Registered address"
               value={`${SITE.address.streetAddress}, ${SITE.address.addressLocality}, United Arab Emirates`}
             />

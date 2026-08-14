@@ -2,7 +2,6 @@
 import React from "react";
 import {
   FaEnvelope,
-  FaIdCard,
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaRegClock,
@@ -47,13 +46,6 @@ const contactInfo = [
     type: "Opening Hours",
     icon: <FaRegClock className="w-6 h-6 text-white" />,
     content: `Open daily, ${SITE.openingHours.opens} to ${SITE.openingHours.closes} (GST)`,
-  },
-  {
-    // Registration numbers on the contact page as well as the footer: this is
-    // the page a journalist or regulator lands on to verify the business.
-    type: "Registration",
-    icon: <FaIdCard className="w-6 h-6 text-white" />,
-    content: `${SITE.legalName} — KHDA Permit No. ${SITE.credentials.khdaPermit}, Dubai Professional Licence No. ${SITE.credentials.tradeLicence}`,
   },
 ];
 
