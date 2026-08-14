@@ -60,6 +60,7 @@ import t57 from "@/../public/team/t57.png";
 import t58 from "@/../public/team/t58.jpeg";
 
 import simsarul_haq from "@/../public/team/simsarul-haq.jpeg";
+import shiyas from "@/../public/team/shiyas-m.jpeg";
 import adhil from "@/../public/team/Adhil.jpeg";
 import amal from "@/../public/team/Amal.jpeg";
 import kiran from "@/../public/team/Kiran-V-R.jpeg";
@@ -273,6 +274,14 @@ const TeamListing = () => {
       role: "Full Stack Developer",
       bio: "Full Stack Developer",
       imageUrl: t58,
+    },
+    {
+      id: 62,
+      name: "SHIYAS M",
+      type: "Information Technology",
+      role: "Full Stack Developer",
+      bio: "Full Stack Developer",
+      imageUrl: shiyas,
     },
     {
       id: 8,
