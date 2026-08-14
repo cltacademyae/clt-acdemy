@@ -50,7 +50,6 @@ import t52 from "@/../public/team/t52.jpeg";
 import t53 from "@/../public/team/t53.jpeg";
 import t3 from "@/../public/team/t3.png";
 
-import t9 from "@/../public/team/t9.jpeg";
 
 import t19 from "@/../public/team/t19.png";
 
@@ -314,14 +313,6 @@ const TeamListing = () => {
       role: "Academic Counsellor",
       bio: "Academic Counsellor",
       imageUrl: t49,
-    },
-    {
-      id: 9,
-      name: "Nidha Noushal",
-      type: "Advisors",
-      role: "Academic Counsellor",
-      bio: "Academic Counsellor",
-      imageUrl: t9,
     },
     // {
     //   id: 10,
