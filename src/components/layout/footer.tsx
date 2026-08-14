@@ -14,7 +14,11 @@ const Footer = ({ footerLinks }: { footerLinks?: React.ReactNode }) => {
   return (
     <footer className="w-full bg-[#1f1f1f] rounded-t-3xl -mt-6 relative z-10 text-white ">
       <div className="w-full flex items-center justify-center">
-        <div className=" max-w-7xl  mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 py-16 px-6 md:px-16">
+        {/*
+          Three columns, three tracks. The grid used to declare four while only
+          ever holding three, which left a dead track on the right.
+        */}
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 py-16 px-6 md:px-16">
           {/* Left Section */}
           <div>
             <img
@@ -60,35 +64,22 @@ const Footer = ({ footerLinks }: { footerLinks?: React.ReactNode }) => {
             <h3 className="text-2xl font-semibold mb-3">Quick Links</h3>
             <div className="w-10 h-[3px] bg-red-500 mb-4"></div>
 
-            <ul className="space-y-3 flex flex-col gap-2 text-gray-300">
-              <Link href="/" className="hover:text-white cursor-pointer">
-                Home
-              </Link>
-              <Link href="/about" className="hover:text-white cursor-pointer">
-                About
-              </Link>
-
-              <Link href="/courses" className="hover:text-white cursor-pointer">
-                Our Courses
-              </Link>
-              <Link href="/team" className="hover:text-white cursor-pointer">
-                Our Team
-              </Link>
-              <Link
-                href={`/contact`}
-                className="hover:text-white cursor-pointer"
-              >
-                Contact Us
-              </Link>
-              <Link
-                href={`/gallery`}
-                className="hover:text-white cursor-pointer"
-              >
-                Gallery
-              </Link>
-              <Link href={`/blogs`} className="hover:text-white cursor-pointer">
-                Blogs
-              </Link>
+            <ul className="flex flex-col gap-3 text-gray-300">
+              {[
+                { href: "/", name: "Home" },
+                { href: "/about", name: "About" },
+                { href: "/courses", name: "Our Courses" },
+                { href: "/team", name: "Our Team" },
+                { href: "/contact", name: "Contact Us" },
+                { href: "/gallery", name: "Gallery" },
+                { href: "/blogs", name: "Blogs" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-white">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -130,7 +121,6 @@ const Footer = ({ footerLinks }: { footerLinks?: React.ReactNode }) => {
             </div>
           </div>
 
-          {/* Gallery */}
         </div>
       </div>
       {footerLinks}

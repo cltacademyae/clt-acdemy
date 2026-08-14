@@ -46,7 +46,12 @@ export default async function FooterLinks() {
       aria-label="Footer"
       className="w-full bg-[#1f1f1f] text-white border-t border-white/10"
     >
-      <div className="max-w-7xl mx-auto grid gap-10 sm:grid-cols-2 md:grid-cols-3 px-6 md:px-16 py-12">
+      {/*
+        Same three tracks as the block above so these headings line up with the
+        columns there, however many of them there are — the commercial column
+        only appears once marketing signs off its copy.
+      */}
+      <div className="max-w-7xl mx-auto grid gap-10 md:gap-12 sm:grid-cols-2 lg:grid-cols-3 px-6 md:px-16 py-12">
         {columns.map((col) => (
           <div key={col.heading}>
             <h3 className="text-sm font-bold uppercase tracking-widest text-white/60 mb-4">
