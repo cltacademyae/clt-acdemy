@@ -664,6 +664,15 @@ h1,h2,h3,h4,h5,h6{
   margin-bottom: 1rem;
 }
 
+/* A blank line the author left between paragraphs is often saved as a fully
+   empty <p></p> (no <br>). An empty block has no line box, so its margins
+   collapse through it and adjacent paragraphs' margins merge into one -
+   the blank line silently disappears. min-height gives it a line box so the
+   gap actually renders. */
+.ql-editor p:empty {
+  min-height: 1.8em;
+}
+
 .ql-editor ul,
 .ql-editor ol {
   padding-left: 1.5rem;

@@ -49,7 +49,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => 
         </div>
         <div className="flex items-center gap-1.5">
           <Clock size={16} className="text-red-500" />
-          <span>{getReadTime(post.content)}</span>
+          <span>{getReadTime(post.content, post.readTime)}</span>
         </div>
       </div>
 

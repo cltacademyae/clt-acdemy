@@ -134,7 +134,7 @@ const PostModal: React.FC<PostModalProps> = ({
                   {post.authorDetails?.profession || "Trading Mentor"}
                 </span>{" "}
                 • Published: {formatDate(post.createdAt)} •{" "}
-                {getReadTime(post.content)}
+                {getReadTime(post.content, post.readTime)}
               </p>
               {post.updatedAt && post.updatedAt !== post.createdAt && (
                 <p className="text-zinc-500 text-[10px] sm:text-xs font-black uppercase tracking-widest mt-1">

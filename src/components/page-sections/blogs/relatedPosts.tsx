@@ -63,7 +63,7 @@ export default function RelatedPosts({
                 {item.title}
               </h3>
               <p className="text-zinc-500 text-[11px] uppercase tracking-widest font-bold">
-                {formatDate(item.createdAt)} • {getReadTime(item.content)}
+                {formatDate(item.createdAt)} • {getReadTime(item.content, item.readTime)}
               </p>
             </Link>
           </li>

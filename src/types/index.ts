@@ -11,7 +11,8 @@ export interface Post {
   updatedAt: string;
   author: string;
   __v?: number;
-  readTime?: string;
+  /** Whole minutes, set manually by the author. Absent on posts created before this field existed. */
+  readTime?: number;
   /** Controlled taxonomy slug set in the CMS. Absent on legacy posts. */
   category?: string | null;
   /**

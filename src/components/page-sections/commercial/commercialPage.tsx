@@ -157,7 +157,7 @@ export default function CommercialPageView({
                     {post.title}
                   </span>
                   <span className="text-xs uppercase tracking-widest text-black/45 font-bold">
-                    {getReadTime(post.content)}
+                    {getReadTime(post.content, post.readTime)}
                   </span>
                 </Link>
               </li>
