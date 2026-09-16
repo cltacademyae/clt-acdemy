@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
 import { Search, ChevronRight, Calendar } from "lucide-react";
 import { BLOG_POSTS } from "@/const/data";
@@ -122,11 +123,12 @@ export const BlogSidebar: React.FC<{ posts?: Post[] }> = ({ posts }) => {
               className="flex gap-4 group cursor-pointer"
             >
               <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg">
-                <img
+                <Image
                   src={news.photo}
                   alt={news.title}
                   width={96}
                   height={96}
+                  sizes="96px"
                   className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
                 />
               </div>

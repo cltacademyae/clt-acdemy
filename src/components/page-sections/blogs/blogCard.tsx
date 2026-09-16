@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { Calendar, User, Folder, Clock, ArrowRight } from "lucide-react";
@@ -22,11 +23,12 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => 
         href={postPath(post)}
         className="relative overflow-hidden rounded-lg mb-6 block"
       >
-        <img
+        <Image
           src={post.photo}
           alt={post.title}
           width={1200}
           height={630}
+          sizes="(max-width: 768px) 100vw, 50vw"
           className="w-full h-64 md:h-96 object-cover transform transition-transform duration-500 group-hover:scale-105"
         />
       </Link>

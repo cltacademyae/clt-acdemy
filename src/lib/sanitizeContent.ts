@@ -52,13 +52,30 @@ function labelFor(pathname: string): string {
   return last.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+/**
+ * The editor lets an author drop an <h1> into the body, and 32 of the 36 live
+ * posts have one. The page already has an <h1> — the post title — so each of
+ * those renders two or more, which a crawl flags as "H1: Multiple" and which
+ * leaves assistive technology without a single unambiguous page heading.
+ *
+ * Demoting at render time fixes the whole archive at once and leaves the CMS
+ * as the source of truth, the same approach the anchor rewriting above takes.
+ * Only h1 moves; existing h2s stay where they are.
+ */
+function demoteContentHeadings(html: string): string {
+  return html.replace(
+    /<(\/?)h1\b([^>]*)>/gi,
+    (_full, slash: string, attrs: string) => `<${slash}h2${attrs}>`
+  );
+}
+
 const stripAttr = (attrs: string, name: string) =>
   attrs.replace(new RegExp(`\\s*${name}="[^"]*"`, "gi"), "");
 
 export function sanitizeContent(html: string): string {
   if (!html) return html;
 
-  return html.replace(
+  return demoteContentHeadings(html).replace(
     /<a\b([^>]*?)href="([^"]*)"([^>]*)>([\s\S]*?)<\/a>/gi,
     (full, pre: string, rawHref: string, post: string, inner: string) => {
       const href = rawHref.trim();
