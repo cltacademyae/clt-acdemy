@@ -159,9 +159,11 @@ export default function Faq() {
               <h3 className="md:text-md text-xs uppercase">
                 CLARITY STARTS HERE
               </h3>
-              <h2 className="md:text-2xl text-xl text-nowrap font-bold">
+              {/* Contact detail, not a section heading — it carried no
+                  document structure and repeated as an <h2> on ten pages. */}
+              <p className="md:text-2xl text-xl text-nowrap font-bold">
                 {phoneNumber}
-              </h2>
+              </p>
             </div>
           </div>
           <div className="bg-primary z-0 w-[30rem] h-[20rem] absolute md:right-[-10%] right-[-5%] md:top-[-20%] top-[70%] rounded-full px-4 py-2"></div>

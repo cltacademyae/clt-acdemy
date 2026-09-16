@@ -12,7 +12,7 @@ export const SITE = {
   defaultTitle: "KHDA-Approved Trading Academy in Dubai | CLT Academy",
   titleTemplate: "%s | CLT Academy",
   description:
-    "CLT Academy is a KHDA-approved trading academy in Dubai — structured forex, stock & crypto trading courses with mentorship, live sessions and certification.",
+    "CLT Academy is a KHDA-approved trading academy in Dubai — structured forex, stock and crypto courses with mentorship and certification.",
   // Fallback only; routes generate their own card via opengraph-image.
   ogImage: "/logo-black.png",
   locale: "en_AE",
@@ -66,6 +66,20 @@ export const PRIMARY_INSTRUCTOR = {
   jobTitle: "Forex Trading Mentor",
   sameAs: "https://www.linkedin.com/in/mathson-mathew-30474226a/",
 } as const;
+
+/**
+ * Google truncates a snippet around 155 characters, so descriptions built from
+ * prose elsewhere on the site get cut to fit. Cutting on a word boundary rather
+ * than mid-word, because a description ending "mentorship, live sessi" reads as
+ * broken rather than as truncated.
+ */
+export function clampDescription(text: string, max = 155): string {
+  const clean = text.trim().replace(/\s+/g, " ");
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return (lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut).replace(/[,;:\s]+$/, "");
+}
 
 /**
  * The root `title.template` only reaches one segment down. Use this on nested

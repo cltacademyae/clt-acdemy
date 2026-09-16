@@ -101,9 +101,9 @@ const Testimonials = () => {
                         />
                       </div>
                       <div className="flex flex-col">
-                        <h2 className="text-black text-xl font-bold">
+                        <p className="text-black text-xl font-bold">
                           {card.name}
-                        </h2>
+                        </p>
                         <div className="flex items-center gap-1">
                           {[1, 2, 3, 4, 5].map((item, index) => (
                             <FaStar

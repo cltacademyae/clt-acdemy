@@ -1,4 +1,4 @@
-import { pageMetadata } from "@/const/seo";
+import { clampDescription, pageMetadata } from "@/const/seo";
 import { getServiceBySlug, serviceSlugs } from "@/lib/catalog";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -32,7 +32,7 @@ export async function generateMetadata({
     // /services has no intermediate layout title, so the root title template
     // still reaches this segment. Do not append the brand twice.
     title: resolved.service.name,
-    description: resolved.service.desc.slice(0, 158),
+    description: clampDescription(resolved.service.desc),
     path: `/services/${id}`,
   });
 }

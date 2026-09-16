@@ -1,4 +1,4 @@
-import { pageMetadata, withBrand } from "@/const/seo";
+import { clampDescription, pageMetadata, withBrand } from "@/const/seo";
 import { cleanCourseName, courseSlugs, getCourseBySlug } from "@/lib/catalog";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -32,10 +32,12 @@ export async function generateMetadata({
 
   const name = cleanCourseName(course.detail.name);
   return pageMetadata({
+    // "... Trading Course in Dubai" ran past 60 characters on the longer
+    // course names, so Google truncated the brand off the end.
     title: withBrand(
-      `${name} — ${course.detail.duration} Trading Course in Dubai`
+      `${name} — ${course.detail.duration} Trading Course, Dubai`
     ),
-    description: course.detail.description.slice(0, 158),
+    description: clampDescription(course.detail.description),
     path: `/courses/${id}`,
   });
 }

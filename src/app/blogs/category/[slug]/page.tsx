@@ -2,7 +2,7 @@ import Breadcrumbs from "@/components/global/breadcrumbs";
 import PageTitleContainer from "@/components/global/pageTitleContainer";
 import BlogsListing from "@/components/page-sections/blogs/blogsListing";
 import Schema from "@/components/seo/Schema";
-import { SITE, pageMetadata, withBrand } from "@/const/seo";
+import { SITE, clampDescription, pageMetadata, withBrand } from "@/const/seo";
 import { activeCategories, categoryBySlug, postsByCategory } from "@/lib/categories";
 import { getBlogPosts, postPath } from "@/lib/getBlogPosts";
 import type { Metadata } from "next";
@@ -35,7 +35,7 @@ export async function generateMetadata({
 
   return pageMetadata({
     title: withBrand(`${category.name} — Trading Articles`),
-    description: category.description.slice(0, 158),
+    description: clampDescription(category.description),
     path: `/blogs/category/${slug}`,
   });
 }
