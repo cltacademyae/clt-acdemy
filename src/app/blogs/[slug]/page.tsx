@@ -2,11 +2,12 @@ import BlogPostView from "@/components/page-sections/blogs/BlogPostView";
 import Breadcrumbs from "@/components/global/breadcrumbs";
 import Schema from "@/components/seo/Schema";
 import { SITE, PRIMARY_INSTRUCTOR, withBrand } from "@/const/seo";
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/getBlogPosts";
+import { getArticles, getBlogPostBySlug } from "@/lib/getBlogPosts";
+import { guidePath } from "@/lib/getGuides";
 import RelatedPosts from "@/components/page-sections/blogs/relatedPosts";
 import RelatedCourses from "@/components/page-sections/blogs/relatedCourses";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import React from "react";
 
 export async function generateMetadata({
@@ -51,6 +52,15 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
+  // A guide lives at /learn. Anything still pointing here follows one hop
+  // rather than rendering the same content at a second URL.
+  //
+  // This emits a 308, not the literal 301 the SEO acceptance criteria ask for
+  // — Next's App Router has no 301 helper. The four pillar URLs therefore get
+  // explicit 301s in next.config.ts instead; this is the safety net for guides
+  // created in the CMS later, where the slug is not known at build time.
+  if (post.type === "guide") permanentRedirect(guidePath(post.slug || slug));
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -91,7 +101,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         post={post}
         related={
           <>
-            <RelatedPosts post={post} posts={await getBlogPosts()} />
+            <RelatedPosts post={post} posts={await getArticles()} />
             <RelatedCourses post={post} />
           </>
         }

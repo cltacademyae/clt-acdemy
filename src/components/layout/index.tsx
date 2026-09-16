@@ -11,9 +11,12 @@ import { useUIStore } from "@/store/uiStore";
 const IndexLayout = ({
   children,
   footerLinks,
+  learnEnabled,
 }: {
   children: React.ReactNode;
   footerLinks?: React.ReactNode;
+  /** Resolved on the server; gates the /learn nav entry. */
+  learnEnabled?: boolean;
 }) => {
   const { isLoading, setIsLoading } = useUIStore();
 
@@ -39,7 +42,7 @@ const IndexLayout = ({
         showSpinner={false}
       />
       {isLoading && <Loader onComplete={handleLoadingComplete} />}
-      <Nav />
+      <Nav learnEnabled={learnEnabled} />
       <WhatsappButton />
       <Suspense fallback={<div></div>}>{children}</Suspense>
       <Footer footerLinks={footerLinks} />

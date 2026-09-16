@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/const/seo";
-import { getBlogPosts, postPath } from "@/lib/getBlogPosts";
+import { getArticles, postPath } from "@/lib/getBlogPosts";
+import { guidePath, indexableGuides } from "@/lib/getGuides";
 import { courseSlugs, serviceSlugs } from "@/lib/catalog";
 import { activeCategories } from "@/lib/categories";
 import { COMMERCIAL_PAGES } from "@/const/commercial";
@@ -46,8 +47,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: r.priority,
   }));
 
-  // Never advertise a URL we have told Google to ignore.
-  const posts = (await getBlogPosts()).filter((p) => !p.seo?.noindex);
+  // Never advertise a URL we have told Google to ignore. Guides are excluded
+  // here and listed separately below — they are served from /learn, not /blogs.
+  const posts = (await getArticles()).filter((p) => !p.seo?.noindex);
+
+  // Placeholder scaffolding is filtered out by indexableGuides(), so /learn and
+  // its children only appear once real content exists.
+  const guides = await indexableGuides();
+  const guideEntries: MetadataRoute.Sitemap = guides.map((g) => ({
+    url: `${SITE.url}${guidePath(g.slug)}`,
+    lastModified: g.updatedAt || g.createdAt || lastModified,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+  const learnEntries: MetadataRoute.Sitemap = guides.length
+    ? [
+        {
+          url: `${SITE.url}/learn`,
+          lastModified,
+          changeFrequency: "monthly" as const,
+          priority: 0.8,
+        },
+      ]
+    : [];
 
   // Only pages marketing has signed off; the rest are noindex meanwhile.
   const commercialEntries: MetadataRoute.Sitemap = COMMERCIAL_PAGES.filter(
@@ -85,6 +107,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...staticEntries,
+    ...learnEntries,
+    ...guideEntries,
     ...commercialEntries,
     ...paginationEntries,
     ...categoryEntries,

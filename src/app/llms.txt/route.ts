@@ -2,6 +2,7 @@ import { SITE } from "@/const/seo";
 import { COURSE_SLUGS } from "@/lib/catalog.slugs";
 import { courseData } from "@/const/data";
 import { cleanCourseName } from "@/lib/catalog";
+import { guidePath, indexableGuides } from "@/lib/getGuides";
 
 /**
  * Plain-text org summary for AI crawlers. Generated rather than static so the
@@ -9,7 +10,7 @@ import { cleanCourseName } from "@/lib/catalog";
  */
 export const dynamic = "force-static";
 
-export function GET() {
+export async function GET() {
   const courses = courseData
     .map((course) => {
       const slug = COURSE_SLUGS[String(course.id)];
@@ -20,6 +21,15 @@ export function GET() {
       }`;
     })
     .join("\n");
+
+  const guides = await indexableGuides();
+  // Reference guides are the pages most worth citing, so they are listed
+  // explicitly rather than left for a crawler to find via the blog.
+  const guideSection = guides.length
+    ? `\n## Reference guides\n${guides
+        .map((g) => `- [${g.title}](${SITE.url}${guidePath(g.slug)}): ${g.metaDescription}`)
+        .join("\n")}\n`
+    : "";
 
   const body = `# ${SITE.name}
 
@@ -36,6 +46,7 @@ export function GET() {
 ## Courses
 ${courses}
 
+${guideSection}
 ## Key pages
 - [About](${SITE.url}/about)
 - [Courses](${SITE.url}/courses)

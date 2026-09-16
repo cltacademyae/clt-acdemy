@@ -5,6 +5,7 @@ import IndexLayout from "@/components/layout";
 import FooterLinks from "@/components/layout/footerLinks";
 import { SITE } from "@/const/seo";
 import JsonLd from "@/components/seo/JsonLd";
+import { indexableGuides } from "@/lib/getGuides";
 import Script from "next/script";
 
 import "react-quill-new/dist/quill.snow.css";
@@ -89,11 +90,15 @@ export const metadata: Metadata = {
   category: "education",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Placeholder guides are excluded, so /learn stays unlinked until the real
+  // content is published in the CMS.
+  const learnEnabled = (await indexableGuides()).length > 0;
+
   return (
     <html lang="en">
       <head>
@@ -139,7 +144,9 @@ export default function RootLayout({
         {/* End Google Tag Manager (noscript) */}
 
         <JsonLd />
-        <IndexLayout footerLinks={<FooterLinks />}>{children}</IndexLayout>
+        <IndexLayout footerLinks={<FooterLinks />} learnEnabled={learnEnabled}>
+          {children}
+        </IndexLayout>
       </body>
     </html>
   );
