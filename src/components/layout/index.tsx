@@ -41,7 +41,7 @@ const IndexLayout = ({
       {isLoading && <Loader onComplete={handleLoadingComplete} />}
       <Nav />
       <WhatsappButton />
-      <Suspense fallback={<div></div>}>{children}</Suspense>
+      {children}
       <Footer footerLinks={footerLinks} />
     </>
   );
