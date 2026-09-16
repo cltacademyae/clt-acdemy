@@ -2,7 +2,6 @@
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import WhatsappButton from "@/components/global/whatsapp";
-import { Suspense, useState } from "react";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 import Loader from "@/components/global/prelodaer";

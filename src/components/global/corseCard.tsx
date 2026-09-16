@@ -11,6 +11,7 @@ import { Users, Calendar, BookOpen, Globe } from "lucide-react";
 
 import { Button } from "../ui/button";
 import Link from "next/link";
+import Image from "next/image";
 import { COURSE_SLUGS } from "@/lib/catalog";
 
 interface CourseCardProps {
@@ -44,12 +45,23 @@ const CourseCard = ({ course, index }: CourseCardProps) => {
     >
       <Card className="h-full md:gap-2 gap-2 pb-6 pt-[4px] px-[4px]  overflow-hidden group hover:shadow-xl transition-all duration-300 border-input  border bg-gray-100 backdrop-blur-sm">
         <div className="relative  overflow-hidden">
-          <motion.img
-            src={`${course.image}`}
-            alt={course.name}
-            className="w-full md:h-58 h-44 object-cover rounded-lg transition-transform duration-500 "
-            whileHover={{ scale: 1.05 }}
-          />
+          {/* next/image rather than a raw <img>: the source artwork is a
+              1280x853 JPEG served at roughly a third of that width, so this
+              serves a WebP scaled to the slot instead of the full-size file.
+              The intrinsic size also lets the browser reserve space before the
+              image arrives, which is what stops the card shifting as it loads.
+              The hover scale moves to the wrapper, since next/image manages
+              the <img> itself. */}
+          <motion.div whileHover={{ scale: 1.05 }} className="w-full">
+            <Image
+              src={course.image}
+              alt={course.name}
+              width={1280}
+              height={853}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="w-full md:h-58 h-44 object-cover rounded-lg transition-transform duration-500"
+            />
+          </motion.div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 rounded-lg to-transparent" />
          
         </div>
