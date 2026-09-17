@@ -27,7 +27,7 @@ export default function GuideCourseCta({
   return (
     <section
       aria-labelledby="guide-cta"
-      className="w-full md:px-20 px-5 py-12 border-t border-gray-200"
+      className="container mx-auto px-4 max-w-7xl py-12 border-t border-gray-200"
     >
       <h2
         id="guide-cta"
@@ -35,7 +35,7 @@ export default function GuideCourseCta({
       >
         {heading}
       </h2>
-      <div className="grid gap-4 sm:grid-cols-2 max-w-4xl">
+      <div className="grid gap-4 sm:grid-cols-2">
         {courses.map((course) => {
           const slug = COURSE_SLUGS[String(course.id)];
           const weeks = course.name.match(/\((\d+\s*weeks?)\)/i)?.[1];

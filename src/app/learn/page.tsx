@@ -54,8 +54,9 @@ const Page = async () => {
 
       <Breadcrumbs trail={[{ name: "Learn", href: "/learn" }]} />
 
-      <section className="w-full md:px-20 px-5 py-12">
-        <ul className="grid gap-6 md:grid-cols-2 max-w-5xl">
+      {/* Same container as the blog listing: /learn is its sibling. */}
+      <section className="container mx-auto px-4 max-w-7xl py-12">
+        <ul className="grid gap-6 md:grid-cols-2">
           {guides.map((guide) => (
             <li key={guide.slug}>
               <Link
@@ -69,7 +70,7 @@ const Page = async () => {
                   {guide.description}
                 </p>
                 {guide.placeholder && (
-                  <span className="mt-4 inline-block w-fit rounded-md bg-amber-100 px-2 py-1 text-[10px] font-black uppercase tracking-widest text-amber-900">
+                  <span className="mt-4 inline-block w-fit rounded-full border border-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-primary">
                     Placeholder
                   </span>
                 )}

@@ -54,13 +54,13 @@ export default function RelatedArticles({
   return (
     <section
       aria-labelledby="supporting-articles"
-      className="w-full md:px-20 px-5 py-12 border-t border-gray-200"
+      className="container mx-auto px-4 max-w-7xl py-12 border-t border-gray-200"
     >
       <h2 id="supporting-articles" className="text-2xl font-bold text-black/90 mb-6">
         {categoryName ? `More on ${categoryName}` : "Supporting articles"}
       </h2>
 
-      <ul className="grid gap-6 sm:grid-cols-3 max-w-5xl">
+      <ul className="grid gap-6 sm:grid-cols-3">
         {related.map((post) => (
           <li key={post._id}>
             <Link href={postPath(post)} className="group flex h-full flex-col gap-2">
