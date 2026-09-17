@@ -11,7 +11,7 @@ const Cta = () => {
       <div className="w-full min-h-[30vh] py-10 md:flex-row flex-col bg-primary rounded-lg md:px-25 flex items-center justify-between">
         <h2 className="text-white md:w-1/2 w-[90%] text-4xl font-bold">
           We build traders, not just strategies. Clarity, Confidence and
-          Constant support whereever you need.
+          Constant support wherever you need.
         </h2>
         <Button
           size={"lg"}
