@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Post } from "@/types";
 import { categoryOf, postsByCategory } from "@/lib/categories";
@@ -50,12 +51,13 @@ export default function RelatedPosts({
               className="group flex flex-col gap-3 h-full"
             >
               <div className="aspect-[16/9] overflow-hidden rounded-xl bg-zinc-800">
-                <img
+                <Image
                   src={item.photo}
                   alt={item.title}
                   loading="lazy"
                   width={480}
                   height={270}
+                  sizes="(max-width: 640px) 100vw, 33vw"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>

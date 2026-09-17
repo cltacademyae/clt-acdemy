@@ -52,13 +52,51 @@ function labelFor(pathname: string): string {
   return last.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+/**
+ * The editor lets an author drop an <h1> into the body, and 32 of the 36 live
+ * posts have one. The page already has an <h1> — the post title — so each of
+ * those renders two or more, which a crawl flags as "H1: Multiple" and which
+ * leaves assistive technology without a single unambiguous page heading.
+ *
+ * Demoting at render time fixes the whole archive at once and leaves the CMS
+ * as the source of truth, the same approach the anchor rewriting above takes.
+ * Only h1 moves; existing h2s stay where they are.
+ */
+function demoteContentHeadings(html: string): string {
+  return html.replace(
+    /<(\/?)h1\b([^>]*)>/gi,
+    (_full, slash: string, attrs: string) => `<${slash}h2${attrs}>`
+  );
+}
+
+/**
+ * Query parameters that turn an internal link into a duplicate of a page we
+ * already have, and that overwrite analytics attribution when followed.
+ *
+ * One post links to "/?t=00586739689508&utm_source=chatgpt.com", pasted in
+ * from a chat assistant. That single link gives the homepage a second
+ * crawlable URL which then has to canonical back, and the utm_ pair restarts
+ * the visitor's session with a source they never came from. `t` carries no
+ * meaning on this site; no internal route reads a query string.
+ */
+const TRACKING_PARAMS = /^(utm_|_ga$|_gl$|gclid$|fbclid$|msclkid$|t$)/i;
+
+function stripTracking(url: URL): string {
+  const params = new URLSearchParams(url.search);
+  for (const key of Array.from(params.keys())) {
+    if (TRACKING_PARAMS.test(key)) params.delete(key);
+  }
+  const query = params.toString();
+  return query ? `?${query}` : "";
+}
+
 const stripAttr = (attrs: string, name: string) =>
   attrs.replace(new RegExp(`\\s*${name}="[^"]*"`, "gi"), "");
 
 export function sanitizeContent(html: string): string {
   if (!html) return html;
 
-  return html.replace(
+  return demoteContentHeadings(html).replace(
     /<a\b([^>]*?)href="([^"]*)"([^>]*)>([\s\S]*?)<\/a>/gi,
     (full, pre: string, rawHref: string, post: string, inner: string) => {
       const href = rawHref.trim();
@@ -87,7 +125,7 @@ export function sanitizeContent(html: string): string {
         // is a usability cost with no upside.
         attrs = stripAttr(attrs, "target").trim();
         const label = !text || isBareUrlText(text) ? labelFor(path) : inner;
-        return `<a href="${path || "/"}${url.search}${url.hash}"${
+        return `<a href="${path || "/"}${stripTracking(url)}${url.hash}"${
           attrs ? ` ${attrs}` : ""
         }>${label}</a>`;
       }

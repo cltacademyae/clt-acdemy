@@ -3,9 +3,9 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Trading Courses in Dubai — Forex, Stock & Crypto",
+  title: "Trading Courses in Dubai — Forex & Crypto",
   description:
-    "Explore CLT Academy's expert-led trading courses in Dubai & the UAE — forex, stock and crypto, from beginner to advanced, with live mentorship and certification.",
+    "Explore CLT Academy's trading courses in Dubai and the UAE — forex, stock and crypto, from beginner to advanced, with mentorship included.",
   path: "/courses",
 });
 

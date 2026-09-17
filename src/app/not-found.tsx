@@ -14,6 +14,10 @@ import type { Metadata } from "next";
  */
 export const metadata: Metadata = {
   title: "Page Not Found | CLT Academy",
+  // Without its own, this page inherited the site description and became a
+  // duplicate of the homepage's.
+  description:
+    "That page could not be found. Browse CLT Academy's trading courses, mentors and blog, or get in touch with the team in Dubai.",
   robots: { index: false, follow: true },
 };
 

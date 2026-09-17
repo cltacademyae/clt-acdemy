@@ -90,6 +90,12 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    // Blog and guide artwork lives on the R2-backed CDN subdomain. Every live
+    // post serves its photo from here, so next/image can resize and convert
+    // them instead of the browser fetching the full-size original.
+    remotePatterns: [{ protocol: "https", hostname: "cdn.clt-academy.com" }],
+  },
   // Force blocking metadata for every request so <title>, description,
   // canonical and robots always render inside <head> in the initial HTML.
   // Without this, Next 15+ streams async generateMetadata (blog posts) into

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { SERVICE_SLUGS } from "@/lib/catalog.slugs";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -17,7 +18,7 @@ const Gallery = () => {
         "☆ See Your Growth: Monitor progress and evolve as a trader",
       ],
       image: "/l1.png",
-      link: "/services/0",
+      link: `/services/${SERVICE_SLUGS["1"]}`,
     },
     {
       title: "Discord Trading Channel",
@@ -30,7 +31,7 @@ const Gallery = () => {
         "☆ Confident Execution: Trade with a clear mind",
       ],
       image: "/l2.png",
-      link: "/services/1",
+      link: `/services/${SERVICE_SLUGS["2"]}`,
     },
     {
       title: "CLT Precision Indicator",
@@ -43,7 +44,7 @@ const Gallery = () => {
         "☆ Trade Smarter: Use real data, not guesswork",
       ],
       image: "/l3.png",
-      link: "/services/2",
+      link: `/services/${SERVICE_SLUGS["3"]}`,
     },
     {
       title: "Life Time Mentorship",
@@ -56,7 +57,7 @@ const Gallery = () => {
         "☆ All-In Access: Tools, updates, and community for life",
       ],
       image: "/l4.png",
-      link: "/services/3",
+      link: `/services/${SERVICE_SLUGS["4"]}`,
     },
   ];
 

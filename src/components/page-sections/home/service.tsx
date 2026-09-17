@@ -99,7 +99,13 @@ const Service = () => {
                     asChild
                     className="bg-white mt-3 md:px-6 md:py-1 rounded-full text-primary hover:bg-white/80"
                   >
-                    <Link href={card.href}>Learn More</Link>
+                    {/* "Learn More" on its own tells a crawler and a screen
+                        reader nothing about the destination. The visible label
+                        is unchanged; the suffix names the target. */}
+                    <Link href={card.href}>
+                      Learn More
+                      <span className="sr-only"> about {card.title}</span>
+                    </Link>
                   </Button>
                 </div>
               </SwiperSlide>

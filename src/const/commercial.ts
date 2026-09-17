@@ -65,7 +65,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
     h1: "Choosing a Forex Trading Academy in Dubai",
     metaTitle: "Forex Trading Academy in Dubai — How to Choose | CLT Academy",
     metaDescription:
-      "What to check before enrolling at a forex trading academy in Dubai: KHDA approval, course structure, mentor access and class format. CLT Academy is KHDA-approved.",
+      "What to check before enrolling at a forex trading academy in Dubai: KHDA approval, course structure, mentor access and class format.",
     quickAnswer:
       "A forex trading academy in Dubai should be KHDA-approved, teach a structured syllabus rather than signals, and give you direct mentor access. CLT Academy is KHDA-approved and runs four structured programmes from beginner to mentorship level, in-person in Hor Al Anz East or online.",
     sections: [
@@ -105,9 +105,9 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
   {
     slug: "forex-trading-course-dubai",
     h1: "Forex Trading Courses in Dubai",
-    metaTitle: "Forex Trading Course in Dubai — Beginner to Advanced | CLT Academy",
+    metaTitle: "Forex Trading Course in Dubai — All Levels | CLT Academy",
     metaDescription:
-      "Structured forex trading courses in Dubai, from a four-week beginner programme to a 28-week mentorship. KHDA-approved, in-person or online, with live mentor sessions.",
+      "Structured forex trading courses in Dubai, from a four-week beginner programme to a 28-week mentorship. KHDA-approved, in-person or online.",
     quickAnswer:
       "CLT Academy runs four forex trading courses in Dubai: Trade Craft (4 weeks, beginner), Profit Matrix (8 weeks, intermediate), Market Code (14 weeks, advanced) and CLT Vantage (28 weeks, mentorship). All are KHDA-approved and available in-person in Hor Al Anz East or online.",
     sections: [
@@ -183,7 +183,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
     h1: "Forex Trading Course for Beginners in Dubai",
     metaTitle: "Forex Trading Course for Beginners in Dubai | CLT Academy",
     metaDescription:
-      "A four-week beginner forex course in Dubai covering platform basics, price action, risk control and trading mindset. No prior experience needed. KHDA-approved.",
+      "A four-week beginner forex course in Dubai covering platform basics, price action, risk control and trading mindset. No experience needed.",
     quickAnswer:
       "Trade Craft is CLT Academy's beginner forex course in Dubai. It runs four weeks, assumes no prior trading experience, and covers platform basics, price patterns, support and resistance, risk control and trading mindset. Available in-person in Hor Al Anz East or online.",
     sections: [

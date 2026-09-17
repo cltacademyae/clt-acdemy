@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 import React from "react";
 import { Post } from "@/types";
 import "react-quill-new/dist/quill.snow.css";
@@ -74,11 +75,13 @@ const PostModal: React.FC<PostModalProps> = ({
             overflow-hidden border-b border-zinc-800
           "
         >
-          <img
+          <Image
             src={post.photo}
             alt={post.title}
             width={1200}
             height={630}
+            sizes="(max-width: 1024px) 100vw, 1152px"
+            priority
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[10s] ease-out"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent" />

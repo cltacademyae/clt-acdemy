@@ -101,9 +101,9 @@ const Testimonials = () => {
                         />
                       </div>
                       <div className="flex flex-col">
-                        <h2 className="text-black text-xl font-bold">
+                        <p className="text-black text-xl font-bold">
                           {card.name}
-                        </h2>
+                        </p>
                         <div className="flex items-center gap-1">
                           {[1, 2, 3, 4, 5].map((item, index) => (
                             <FaStar
@@ -126,13 +126,16 @@ const Testimonials = () => {
         </div>
       </div>
       <div className="absolute z-0 top-0 left-0 w-full h-full flex items-center justify-center">
-        <img
+        {/* Decorative backdrop. Raw, this shipped the full 355 kB PNG on
+            every homepage visit for an image rendered at 5% opacity. */}
+        <Image
           src="/awward.png"
           alt=""
           aria-hidden="true"
           loading="lazy"
           width={1200}
           height={800}
+          sizes="100vw"
           className="w-full opacity-5 object-cover  h-full "
         />
       </div>
