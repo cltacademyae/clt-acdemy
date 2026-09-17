@@ -125,7 +125,7 @@ export default function GuideView({
 
           <article className="lg:col-span-3 max-w-3xl">
             <div
-              className="ql-editor rich-content max-w-none text-black/80 leading-[1.8] [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-black/90 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black/90 [&_h3]:mt-8 [&_h3]:mb-3 [&_a]:text-primary [&_a]:underline"
+              className="learn-article ql-editor rich-content max-w-none text-black/80 leading-[1.8] [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-black/90 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black/90 [&_h3]:mt-8 [&_h3]:mb-3 [&_a]:text-primary [&_a]:underline"
               dangerouslySetInnerHTML={{ __html: html }}
             />
           </article>
