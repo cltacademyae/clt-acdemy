@@ -1,4 +1,5 @@
 import { COURSE_SLUGS, SERVICE_SLUGS } from "@/lib/catalog.slugs";
+import { LEARN_REDIRECTS } from "@/lib/learn.slugs";
 
 /**
  * Normaliser for editor-authored blog HTML coming from the CMS.
@@ -41,6 +42,13 @@ function canonicalPath(pathname: string): string {
   if (course && COURSE_SLUGS[course[1]]) return `/courses/${COURSE_SLUGS[course[1]]}`;
   const service = trimmed.match(/^\/services\/(\d+)$/);
   if (service && SERVICE_SLUGS[service[1]]) return `/services/${SERVICE_SLUGS[service[1]]}`;
+  // A post promoted to a pillar guide keeps its old address in the body text of
+  // every article that linked to it — 18 links for the first guide alone. Those
+  // resolve through the 301 in next.config.ts, which is a redirect hop the audit
+  // explicitly counts against us. Rewriting here points them straight at /learn
+  // and fixes the whole archive without editing a single post in the CMS.
+  const guide = trimmed.match(/^\/blogs\/(.+)$/);
+  if (guide && LEARN_REDIRECTS[guide[1]]) return `/learn/${LEARN_REDIRECTS[guide[1]]}`;
   if (trimmed === "/termsandcondition") return "/terms-and-conditions";
   return trimmed;
 }
