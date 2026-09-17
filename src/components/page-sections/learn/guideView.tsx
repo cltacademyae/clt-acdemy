@@ -4,6 +4,7 @@ import PageTitleContainer from "@/components/global/pageTitleContainer";
 import TableOfContents from "./tableOfContents";
 import GuideCourseCta from "./guideCourseCta";
 import { withHeadingIds } from "@/lib/headingIds";
+import { stripThemeColors } from "@/lib/guideHtml";
 import { formatDate } from "@/lib/formatDate";
 import { getReadTime } from "@/lib/readTime";
 import { guidePath } from "@/lib/getGuides";
@@ -90,7 +91,7 @@ export default function GuideView({
   guide: Guide;
   related?: React.ReactNode;
 }) {
-  const { html, toc } = withHeadingIds(guide.content);
+  const { html, toc } = withHeadingIds(stripThemeColors(guide.content));
 
   return (
     <>
