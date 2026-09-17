@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SERVICE_SLUGS } from "@/lib/catalog.slugs";
 import React from "react";
 import { FaChalkboardTeacher, FaChartPie, FaWhatsapp } from "react-icons/fa";
 import { FaMoneyBillTransfer, FaSackDollar } from "react-icons/fa6";
@@ -8,37 +9,37 @@ import { RiStockFill } from "react-icons/ri";
 const addons = [
   {
     title: "Digital Trading Journal",
-    link:"/services/0",
+    link: `/services/${SERVICE_SLUGS["1"]}`,
     desc: "Track what works. Our Digital Trading Journal gives data-driven clarity to improve every trading decision.",
     icon: <FaChartPie className="size-20  text-primary" />
   },
   {
     title: "The Profit Block eBook",
-    link:"/services/4",
+    link: `/services/${SERVICE_SLUGS["5"]}`,
     desc: "Trading is psychological. The Profit Block reveals common mindset mistakes and how to overcome them effectively.",
     icon: <FaSackDollar className="size-20  text-primary" />
   },
   {
     title: "Discord Trade Channel",
-    link:"/services/1",
+    link: `/services/${SERVICE_SLUGS["2"]}`,
     desc: "CLT’s Discord gives trade calls with clear logic, risk, entry, exit, and real-time learning support.",
     icon: <IoLogoDiscord className="size-20  text-primary" />
   },
   {     
     title: "WhatsApp Community",
-    link:"/services/5",
+    link: `/services/${SERVICE_SLUGS["6"]}`,
     desc: "Get instant feedback, motivation, and support from mentors in the CLT WhatsApp group—anytime, anywhere.",
     icon: <FaWhatsapp className="size-20  text-primary" />
   },
   {
     title: "CLT Precision Indicator",
-    link:"/services/2",
+    link: `/services/${SERVICE_SLUGS["3"]}`,
     desc: "Cut through market noise. The CLT Precision Indicator reveals liquidity zones, imbalances, and institutional moves clearly.",
     icon: <RiStockFill className="size-20  text-primary" />
   },
   {
     title: "Lifetime Mentorship",
-    link:"/services/3",
+    link: `/services/${SERVICE_SLUGS["4"]}`,
     desc: "Short courses fade. Our lifetime mentorship gives ongoing calls, reviews, strategies, and full access—forever.",
     icon: <FaChalkboardTeacher className="size-20  text-primary" />
   },

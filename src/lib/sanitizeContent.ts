@@ -69,6 +69,27 @@ function demoteContentHeadings(html: string): string {
   );
 }
 
+/**
+ * Query parameters that turn an internal link into a duplicate of a page we
+ * already have, and that overwrite analytics attribution when followed.
+ *
+ * One post links to "/?t=00586739689508&utm_source=chatgpt.com", pasted in
+ * from a chat assistant. That single link gives the homepage a second
+ * crawlable URL which then has to canonical back, and the utm_ pair restarts
+ * the visitor's session with a source they never came from. `t` carries no
+ * meaning on this site; no internal route reads a query string.
+ */
+const TRACKING_PARAMS = /^(utm_|_ga$|_gl$|gclid$|fbclid$|msclkid$|t$)/i;
+
+function stripTracking(url: URL): string {
+  const params = new URLSearchParams(url.search);
+  for (const key of Array.from(params.keys())) {
+    if (TRACKING_PARAMS.test(key)) params.delete(key);
+  }
+  const query = params.toString();
+  return query ? `?${query}` : "";
+}
+
 const stripAttr = (attrs: string, name: string) =>
   attrs.replace(new RegExp(`\\s*${name}="[^"]*"`, "gi"), "");
 
@@ -104,7 +125,7 @@ export function sanitizeContent(html: string): string {
         // is a usability cost with no upside.
         attrs = stripAttr(attrs, "target").trim();
         const label = !text || isBareUrlText(text) ? labelFor(path) : inner;
-        return `<a href="${path || "/"}${url.search}${url.hash}"${
+        return `<a href="${path || "/"}${stripTracking(url)}${url.hash}"${
           attrs ? ` ${attrs}` : ""
         }>${label}</a>`;
       }
