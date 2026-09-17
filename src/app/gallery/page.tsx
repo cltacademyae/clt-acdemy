@@ -21,7 +21,12 @@ const page = () => {
       />
       <Breadcrumbs trail={[{ name: "Gallery", href: "/gallery" }]} />
 
-      <Gallery />
+      <section aria-labelledby="gallery-heading">
+        <h2 id="gallery-heading" className="sr-only">
+          Photos from CLT Academy classes and events
+        </h2>
+        <Gallery />
+      </section>
       <div className="mb-20"></div>
     </>
   );
