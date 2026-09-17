@@ -53,8 +53,9 @@ export async function generateMetadata({
   const { n } = await resolvePage(params);
   return pageMetadata({
     title: withBrand(`Trading Blog — Page ${n}`),
-    description:
-      "More forex, stock and crypto trading insights from the CLT Academy mentors in Dubai.",
+    // Naming the page keeps each one distinct. A shared description made
+    // every listing page a duplicate of the others.
+    description: `More forex, stock and crypto trading insights from the CLT Academy mentors in Dubai — page ${n} of the archive.`,
     path: `/blogs/page/${n}`,
   });
 }
