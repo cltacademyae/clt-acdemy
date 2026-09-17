@@ -37,6 +37,13 @@ const navItems = [
     name: p.h1,
     href: `/${p.slug}`,
   })),
+  // Same rule as the commercial pages above: linked only once real content
+  // exists, so placeholder scaffolding is never put in front of a reader.
+  {
+    name: "Learn",
+    href: "/learn",
+    requiresGuides: true,
+  },
   {
     name: "Our team",
     href: "/team",
@@ -80,6 +87,11 @@ const mobileNavItems = [
     href: "/addons",
   },
   {
+    name: "Learn",
+    href: "/learn",
+    requiresGuides: true,
+  },
+  {
     name: "Gallery",
     href: "/gallery",
   },
@@ -111,8 +123,13 @@ const navButtons = [
   },
 ];
 
-const Nav = () => {
+type NavItem = { name: string; href: string; requiresGuides?: boolean };
+
+/** `learnEnabled` is resolved server-side in the root layout. */
+const Nav = ({ learnEnabled = false }: { learnEnabled?: boolean }) => {
   const pathname = usePathname();
+  const visible = (items: NavItem[]) =>
+    items.filter((item) => !item.requiresGuides || learnEnabled);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const router = useRouter();
   React.useEffect(() => {
@@ -146,7 +163,7 @@ const Nav = () => {
           </div>
         </div>
         <div className="md:flex hidden ml-4 items-center  gap-8 ">
-          {navItems.map((item) => (
+          {visible(navItems).map((item) => (
             <Link href={item.href} key={item.name}>
               <p
                 className={`uppercase  text-nowrap font-semibold text-sm ${
@@ -198,7 +215,7 @@ const Nav = () => {
                 </div>
               </SheetHeader>
               <div className="flex px-4 flex-col gap-4">
-                {mobileNavItems.map((item) => (
+                {visible(mobileNavItems).map((item) => (
                   <Link href={item.href} key={item.name}>
                     <p className="text-white py-3 border-b border-white/20 broder-dashed  ">
                       {item.name}

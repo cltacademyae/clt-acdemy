@@ -53,6 +53,17 @@ export async function getBlogPostBySlug(slug: string): Promise<Post | undefined>
   );
 }
 
+/**
+ * Blog posts only. Guides carry `type: "guide"` and are served from /learn —
+ * listing them here as well would put one piece of content on two indexable
+ * URLs, which is the duplication the /learn section exists to avoid.
+ *
+ * Legacy records predate the field, so "missing" means "post".
+ */
+export async function getArticles(): Promise<Post[]> {
+  return (await getBlogPosts()).filter((p) => p.type !== "guide");
+}
+
 /** Canonical URL path for a post. */
 export function postPath(post: Pick<Post, "slug" | "title">): string {
   return `/blogs/${post.slug || slugify(post.title)}`;

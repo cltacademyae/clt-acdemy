@@ -698,6 +698,22 @@ h1,h2,h3,h4,h5,h6{
   text-decoration: underline;
 }
 
+/* /learn guides render on a light page, but the .ql-editor rules above are
+   tuned for the dark blog modal and sit outside Tailwind's layers, so they
+   beat any text-* utility on the wrapper. Two classes outrank one, and this
+   stays unlayered for the same reason. Tables keep the dark header, which
+   reads fine on white. */
+.learn-article.ql-editor {
+  color: rgb(0 0 0 / 0.8);
+}
+.learn-article.ql-editor a {
+  color: var(--color-primary);
+}
+.learn-article.ql-editor blockquote {
+  color: rgb(0 0 0 / 0.6);
+  border-left-color: var(--color-primary);
+}
+
 /* Tables authored in the blog editor (Quill outputs plain <table> markup). */
 .ql-editor table {
   border-collapse: collapse;

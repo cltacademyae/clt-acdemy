@@ -11,6 +11,12 @@ export interface Post {
   updatedAt: string;
   author: string;
   __v?: number;
+  /**
+   * Separates the pillar guides served from /learn from ordinary blog posts.
+   * Absent on every record created before the field existed, which is why the
+   * blog treats "missing" as "post".
+   */
+  type?: "post" | "guide";
   /** Whole minutes, set manually by the author. Absent on posts created before this field existed. */
   readTime?: number;
   /** Controlled taxonomy slug set in the CMS. Absent on legacy posts. */
@@ -20,6 +26,8 @@ export interface Post {
    * block falls back to a mapping by category.
    */
   relatedCourses?: number[];
+  /** Supporting blog posts an editor mapped to a pillar guide. */
+  relatedPosts?: string[];
   seo?: {
     metaTitle?: string;
     metaDescription?: string;
@@ -30,6 +38,12 @@ export interface Post {
     schemaOverride?: string;
   } | null;
   authorDetails?: AuthorProfile | null;
+  /**
+   * Second byline for guides — who checked the content, as distinct from who
+   * wrote it. Reviewers and authors are the same kind of entity, so both
+   * resolve against the CMS Author collection.
+   */
+  reviewerDetails?: AuthorProfile | null;
 }
 
 export interface AuthorProfile {

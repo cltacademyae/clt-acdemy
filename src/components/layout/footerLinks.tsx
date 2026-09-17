@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { activeCategories } from "@/lib/categories";
-import { getBlogPosts } from "@/lib/getBlogPosts";
+import { getArticles } from "@/lib/getBlogPosts";
+import { guidePath, indexableGuides } from "@/lib/getGuides";
 import { COMMERCIAL_PAGES } from "@/const/commercial";
 
 /**
@@ -11,8 +12,11 @@ import { COMMERCIAL_PAGES } from "@/const/commercial";
  * signed off their copy — until then they are noindex and unlinked.
  */
 export default async function FooterLinks() {
-  const posts = await getBlogPosts();
+  // Articles only: a guide lives at /learn and should not be what makes a
+  // blog category hub look populated.
+  const posts = await getArticles();
   const categories = activeCategories(posts);
+  const guides = await indexableGuides();
   const commercial = COMMERCIAL_PAGES.filter((p) => p.indexable);
 
   const columns = [
@@ -23,6 +27,17 @@ export default async function FooterLinks() {
         href: `/blogs/category/${c.slug}`,
       })),
     },
+    ...(guides.length
+      ? [
+          {
+            heading: "Trading Guides",
+            links: guides.map((g) => ({
+              name: g.title,
+              href: guidePath(g.slug),
+            })),
+          },
+        ]
+      : []),
     ...(commercial.length
       ? [
           {

@@ -4,7 +4,7 @@ import BlogsListing from "@/components/page-sections/blogs/blogsListing";
 import Schema from "@/components/seo/Schema";
 import { SITE, pageMetadata, withBrand } from "@/const/seo";
 import { activeCategories, categoryBySlug, postsByCategory } from "@/lib/categories";
-import { getBlogPosts, postPath } from "@/lib/getBlogPosts";
+import { getArticles, postPath } from "@/lib/getBlogPosts";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -20,7 +20,7 @@ export const revalidate = 300;
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts();
+  const posts = await getArticles();
   return activeCategories(posts).map((c) => ({ slug: c.slug }));
 }
 
@@ -45,7 +45,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const category = categoryBySlug(slug);
   if (!category) notFound();
 
-  const posts = await getBlogPosts();
+  const posts = await getArticles();
   const inCategory = postsByCategory(posts, slug);
   if (!inCategory.length) notFound();
 

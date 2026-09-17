@@ -2,7 +2,7 @@ import PageTitleContainer from "@/components/global/pageTitleContainer";
 import Breadcrumbs from "@/components/global/breadcrumbs";
 import BlogsListing from "@/components/page-sections/blogs/blogsListing";
 import BlogPagination from "@/components/page-sections/blogs/pagination";
-import { getBlogPosts } from "@/lib/getBlogPosts";
+import { getArticles } from "@/lib/getBlogPosts";
 import { pageCount, paginate } from "@/lib/pagination";
 import { pageMetadata, withBrand } from "@/const/seo";
 import type { Metadata } from "next";
@@ -38,7 +38,7 @@ async function resolvePage(params: Promise<{ page: string }>) {
   const n = Number(page);
   if (!Number.isInteger(n) || n < 2) redirect("/blogs");
 
-  const posts = await getBlogPosts();
+  const posts = await getArticles();
   const total = pageCount(posts.length);
   if (n > total) redirect("/blogs");
 
