@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Breadcrumbs from "@/components/global/breadcrumbs";
 import PageTitleContainer from "@/components/global/pageTitleContainer";
 import TableOfContents from "./tableOfContents";
@@ -105,6 +106,23 @@ export default function GuideView({
       />
 
       {/* Same container as the blog listing, which this page sits beside. */}
+      {/* The blog shows a post's photo at the top of the page; guides carry the
+          same photo but were not displaying it, so the two looked unrelated. */}
+      {guide.photo && (
+        <div className="container mx-auto px-4 max-w-7xl pt-6">
+          <div className="relative w-full aspect-[21/9] overflow-hidden rounded-2xl bg-gray-100">
+            <Image
+              src={guide.photo}
+              alt={guide.title}
+              fill
+              sizes="(max-width: 1280px) 100vw, 1280px"
+              priority
+              className="object-cover"
+            />
+          </div>
+        </div>
+      )}
+
       <div className="container mx-auto px-4 max-w-7xl py-10">
         {guide.placeholder && (
           <p
@@ -134,7 +152,7 @@ export default function GuideView({
         </div>
       </div>
 
-      <GuideCourseCta courseIds={guide.courseIds} />
+      <GuideCourseCta />
 
       {related}
     </>
