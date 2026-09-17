@@ -6,21 +6,18 @@ import { courseData } from "@/const/data";
 /**
  * The learning-to-enquiry path the brief asks for.
  *
- * Mirrors the blog's RelatedCourses block but takes explicit course ids, since
- * a guide's CTA is an editorial choice rather than something derived from a
- * category. Real anchors, server-rendered — not a JS-driven widget.
+ * Shows the whole catalogue rather than a pair matched to the topic. There are
+ * only four courses and they form a ladder from beginner to mentorship, so a
+ * reader who has just finished a guide is better served seeing where it sits in
+ * the sequence than being shown two of the four. It also removes a per-guide
+ * editorial decision that nobody was making.
  */
 export default function GuideCourseCta({
-  courseIds,
   heading = "Learn this properly",
 }: {
-  courseIds: number[];
   heading?: string;
 }) {
-  const courses = courseIds
-    .map((id) => courseData.find((c) => c.id === id))
-    .filter((c): c is (typeof courseData)[number] => Boolean(c))
-    .slice(0, 2);
+  const courses = [...courseData].sort((a, b) => a.id - b.id);
 
   if (!courses.length) return null;
 
@@ -35,7 +32,7 @@ export default function GuideCourseCta({
       >
         {heading}
       </h2>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {courses.map((course) => {
           const slug = COURSE_SLUGS[String(course.id)];
           const weeks = course.name.match(/\((\d+\s*weeks?)\)/i)?.[1];
@@ -53,7 +50,7 @@ export default function GuideCourseCta({
                   {weeks}
                 </p>
               )}
-              <p className="text-black/60 text-sm mt-2 line-clamp-3">
+              <p className="text-black/60 text-sm mt-2 line-clamp-4">
                 {course.description}
               </p>
             </Link>
