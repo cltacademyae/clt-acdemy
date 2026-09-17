@@ -23,7 +23,17 @@ const addOns = [
 ];
 export default function AddOnsCardListing() {
   return (
-    <div className="w-full flex items-center justify-center">
+    <section
+      aria-labelledby="add-ons-heading"
+      className="w-full flex items-center justify-center"
+    >
+      {/* The cards below are <h3>s. Without an <h2> above them the page jumps
+          from <h1> straight to <h3>, which is what someone navigating by
+          headings hears. Hidden visually because the wording on this page is
+          marketing's to set, not ours. */}
+      <h2 id="add-ons-heading" className="sr-only">
+        Trading tools and add-ons
+      </h2>
       <div className="grid py-10 md:px-20 px-2 grid-cols-1 md:grid-cols-3 gap-1">
         {addOns.map((addOn) => (
           <AddOnCard
@@ -34,6 +44,6 @@ export default function AddOnsCardListing() {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
