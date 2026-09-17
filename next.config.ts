@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { COURSE_SLUGS, SERVICE_SLUGS } from "./src/lib/catalog.slugs";
+import { LEARN_REDIRECTS } from "./src/lib/learn.slugs";
 
 /**
  * Content-Security-Policy, enforced.
@@ -144,6 +145,13 @@ const nextConfig: NextConfig = {
           "/blogs/what-every-new-trader-should-learn-before-placing-their-first-trade",
         statusCode: 301,
       },
+      // Blog posts promoted to pillar guides now live under /learn. Explicit
+      // 301, not the 308 the blog route's safety net emits.
+      ...Object.entries(LEARN_REDIRECTS).map(([oldSlug, guide]) => ({
+        source: `/blogs/${oldSlug}`,
+        destination: `/learn/${guide}`,
+        statusCode: 301 as const,
+      })),
       // Page 1 of the blog listing lives at /blogs. Serving it at both URLs
       // would duplicate the set this pagination exists to split up.
       {
