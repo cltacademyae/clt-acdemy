@@ -9,6 +9,14 @@ import { getBlogPosts } from "@/lib/getBlogPosts";
 
 export const revalidate = 300;
 
+// Without this an unknown slug rendered a 200 shell carrying the homepage
+// title and `index, follow`, then sat in the edge cache for five minutes —
+// the same soft-404 hole closed on /courses. The cost is that a CMS guide on
+// a fifth slug needs a redeploy before its route exists; the four pillar
+// slugs are fixed by the brief, so that is acceptable. The NoFallbackError
+// this logs on every miss is noise, not a failure (see courses/[id]/layout).
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return (await getGuides()).map((guide) => ({ slug: guide.slug }));
 }
