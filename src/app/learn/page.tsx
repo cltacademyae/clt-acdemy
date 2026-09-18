@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/global/breadcrumbs";
 import PageTitleContainer from "@/components/global/pageTitleContainer";
@@ -61,14 +62,32 @@ const Page = async () => {
             <li key={guide.slug}>
               <Link
                 href={guidePath(guide.slug)}
-                className="group flex h-full flex-col rounded-2xl border border-gray-200 p-6 hover:border-primary transition-colors"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 hover:border-primary transition-colors"
               >
-                <h2 className="text-xl font-bold text-black/90 group-hover:text-primary transition-colors">
-                  {guide.title}
-                </h2>
-                <p className="mt-3 text-sm text-black/60 leading-relaxed">
-                  {guide.description}
-                </p>
+                {/* The editor uploads a photo with every guide. Showing it here
+                    gives the card the same shape as a blog card, and gives a
+                    reader something to recognise the guide by. Guarded because
+                    photo is optional on the type, even though the CMS requires
+                    one today. */}
+                {guide.photo && (
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-100">
+                    <Image
+                      src={guide.photo}
+                      alt={guide.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-1 flex-col p-6">
+                  <h2 className="text-xl font-bold text-black/90 group-hover:text-primary transition-colors">
+                    {guide.title}
+                  </h2>
+                  <p className="mt-3 text-sm text-black/60 leading-relaxed">
+                    {guide.description}
+                  </p>
+                </div>
               </Link>
             </li>
           ))}
