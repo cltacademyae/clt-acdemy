@@ -124,18 +124,6 @@ export default function GuideView({
       )}
 
       <div className="container mx-auto px-4 max-w-7xl py-10">
-        {guide.placeholder && (
-          <p
-            role="status"
-            className="mb-10 rounded-lg border border-primary/30 bg-primary/5 px-5 py-4 text-sm text-black/80"
-          >
-            <strong className="font-bold text-primary">Placeholder content.</strong> This
-            guide is layout scaffolding, not published copy. It is set to
-            noindex and excluded from the sitemap until the final content is
-            supplied.
-          </p>
-        )}
-
         <Byline guide={guide} />
 
         <div className="grid gap-10 lg:grid-cols-4">

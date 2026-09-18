@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import GuideView from "@/components/page-sections/learn/guideView";
 import RelatedArticles from "@/components/page-sections/learn/relatedArticles";
 import Schema from "@/components/seo/Schema";
 import { SITE, PRIMARY_INSTRUCTOR } from "@/const/seo";
 import { getGuides, getGuideBySlug, guidePath } from "@/lib/getGuides";
+import { PILLAR_SLUGS } from "@/const/learn";
 import { getBlogPosts } from "@/lib/getBlogPosts";
 
 export const revalidate = 300;
@@ -37,9 +38,7 @@ export async function generateMetadata({
     description: guide.metaDescription,
     alternates: { canonical: guide.canonicalOverride || url },
     // Scaffolding must never reach the index on its own.
-    ...(guide.noindex || guide.placeholder
-      ? { robots: { index: false, follow: true } }
-      : {}),
+    ...(guide.noindex ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title: guide.metaTitle,
       description: guide.metaDescription,
@@ -59,7 +58,14 @@ export async function generateMetadata({
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const guide = await getGuideBySlug(slug);
-  if (!guide) notFound();
+  if (!guide) {
+    // Blog posts merged into a pillar guide 301 to that pillar's URL. Until the
+    // guide itself is published, those readers would land on a 404 — send them
+    // to the hub instead. Temporary by nature: it stops applying the moment the
+    // guide exists.
+    if ((PILLAR_SLUGS as readonly string[]).includes(slug)) redirect("/learn");
+    notFound();
+  }
 
   const url = `${SITE.url}${guidePath(guide.slug)}`;
 
@@ -105,7 +111,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   return (
     <>
       {/* Draft scaffolding is noindex; no point advertising it as an Article. */}
-      {!guide.placeholder && <Schema data={schema} />}
+      <Schema data={schema} />
 
       <GuideView
         guide={guide}

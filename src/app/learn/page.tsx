@@ -10,8 +10,8 @@ export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   const guides = await getGuides();
-  // A hub whose every entry is placeholder scaffolding has nothing to index.
-  const allPlaceholder = guides.every((g) => g.placeholder);
+  // A hub with nothing on it has nothing to index.
+  const empty = guides.length === 0;
 
   return {
     ...pageMetadata({
@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "In-depth reference guides on forex trading, risk management, smart money concepts and prop firm trading, written by CLT Academy's Dubai-based mentors.",
       path: "/learn",
     }),
-    ...(allPlaceholder ? { robots: { index: false, follow: true } } : {}),
+    ...(empty ? { robots: { index: false, follow: true } } : {}),
   };
 }
 
@@ -34,7 +34,7 @@ const Page = async () => {
     "@type": "ItemList",
     name: "CLT Academy trading guides",
     itemListElement: guides
-      .filter((g) => !g.noindex && !g.placeholder)
+      .filter((g) => !g.noindex)
       .map((guide, index) => ({
         "@type": "ListItem",
         position: index + 1,
@@ -69,11 +69,6 @@ const Page = async () => {
                 <p className="mt-3 text-sm text-black/60 leading-relaxed">
                   {guide.description}
                 </p>
-                {guide.placeholder && (
-                  <span className="mt-4 inline-block w-fit rounded-full border border-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-primary">
-                    Placeholder
-                  </span>
-                )}
               </Link>
             </li>
           ))}
