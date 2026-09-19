@@ -204,7 +204,7 @@ const TeamListing = () => {
     },
     {
       id: 3,
-      name: "Rashida Pudhuveettil",
+      name: "Rashida Azeez",
       type: "Mentors",
       role: "Trading mentor",
       bio: "Trading mentor",
