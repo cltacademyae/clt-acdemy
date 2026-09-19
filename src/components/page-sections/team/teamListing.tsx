@@ -43,7 +43,6 @@ import t45 from "@/../public/team/t45.jpeg";
 import t46 from "@/../public/team/t46.jpeg";
 import t47 from "@/../public/team/t47.jpeg";
 import t48 from "@/../public/team/t48.jpeg";
-import t49 from "@/../public/team/t49.jpeg";
 import t54 from "@/../public/team/t54.jpeg";
 import t51 from "@/../public/team/t51.jpeg";
 import t52 from "@/../public/team/t52.jpeg";
@@ -314,14 +313,6 @@ const TeamListing = () => {
       role: "Academic Counsellor",
       bio: "Academic Counsellor",
       imageUrl: t48,
-    },
-    {
-      id: 49,
-      name: "Febina ",
-      type: "Advisors",
-      role: "Academic Counsellor",
-      bio: "Academic Counsellor",
-      imageUrl: t49,
     },
     // {
     //   id: 10,
