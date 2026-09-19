@@ -152,7 +152,7 @@ export default function OurTeam() {
         },
     {
       id: 3,
-      name: "Rashida Pudhuveettil",
+      name: "Rashida Azeez",
       type: "Mentors",
       role: "Trading Mentor",
       imageUrl: t3,
