@@ -25,6 +25,7 @@ export default function JsonLd() {
       streetAddress: SITE.address.streetAddress,
       addressLocality: SITE.address.addressLocality,
       addressCountry: SITE.address.addressCountry,
+      postOfficeBoxNumber: SITE.address.postOfficeBoxNumber,
     },
     geo: {
       "@type": "GeoCoordinates",

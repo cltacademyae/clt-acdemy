@@ -167,7 +167,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
       {
         question: "Where is CLT Academy located?",
         answer:
-          "Near Abu Hail Metro, Etihad Road, Dubai, United Arab Emirates.",
+          "Near Abu Hail Metro, Etihad Road, P.O. Box 21555, Dubai, United Arab Emirates.",
       },
       {
         question: "Is trading education regulated in the UAE?",

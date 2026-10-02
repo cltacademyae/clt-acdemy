@@ -25,6 +25,7 @@ export const SITE = {
     streetAddress: "Near Abu Hail Metro, Etihad Road",
     addressLocality: "Dubai",
     addressCountry: "AE",
+    postOfficeBoxNumber: "21555",
   },
   // Coordinates read off the Google Business Profile listing, not estimated.
   geo: { latitude: 25.2812375, longitude: 55.3541152 },

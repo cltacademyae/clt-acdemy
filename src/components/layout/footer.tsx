@@ -92,7 +92,7 @@ const Footer = ({ footerLinks }: { footerLinks?: React.ReactNode }) => {
               <p className="flex items-start gap-3">
                 <IoLocationSharp className="text-xl text-nowrap   mt-1" />
                 CLT Academy | Head Office <br />Near Abu&nbsp;Hail Metro,
-                Etihad&nbsp;Road, Dubai, United Arab Emirates.
+                Etihad&nbsp;Road, P.O.&nbsp;Box&nbsp;21555, Dubai, United Arab Emirates.
               </p>
               <p className="flex items-center gap-3">
                 <FiPhoneCall className="text-xl" />

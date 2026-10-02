@@ -56,7 +56,7 @@ ${guideSection}
 - [Contact](${SITE.url}/contact)
 
 ## Contact
-${SITE.address.streetAddress}, ${SITE.address.addressLocality}, United Arab Emirates
+${SITE.address.streetAddress}, P.O. Box ${SITE.address.postOfficeBoxNumber}, ${SITE.address.addressLocality}, United Arab Emirates
 ${SITE.phone} | ${SITE.email}
 Open ${SITE.openingHours.opens}–${SITE.openingHours.closes} daily.
 

@@ -38,7 +38,7 @@ const contactInfo = [
     type: "Address",
     icon: <FaMapMarkerAlt className="w-6 h-6 text-white" />,
     content:
-      "CLT Academy | Head Office Near Abu Hail Metro, Etihad Road, Dubai, United Arab Emirates.",
+      "CLT Academy | Head Office Near Abu Hail Metro, Etihad Road, P.O. Box 21555, Dubai, United Arab Emirates.",
   },
   {
     // Visible text, not only schema — LocalBusiness hours have to be

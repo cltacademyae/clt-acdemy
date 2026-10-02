@@ -43,7 +43,7 @@ const Page = () => (
             <Fact label="Founded" value={SITE.foundingDate} />
             <Fact
               label="Registered address"
-              value={`${SITE.address.streetAddress}, ${SITE.address.addressLocality}, United Arab Emirates`}
+              value={`${SITE.address.streetAddress}, P.O. Box ${SITE.address.postOfficeBoxNumber}, ${SITE.address.addressLocality}, United Arab Emirates`}
             />
             <Fact
               label="Opening hours"

@@ -25,6 +25,7 @@ export default function LocalBusinessSchema() {
       streetAddress: SITE.address.streetAddress,
       addressLocality: SITE.address.addressLocality,
       addressCountry: SITE.address.addressCountry,
+      postOfficeBoxNumber: SITE.address.postOfficeBoxNumber,
     },
     // Read off the Google Business Profile listing so the pin, the NAP data
     // here and the GBP entry all agree.
