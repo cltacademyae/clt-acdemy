@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { phoneNumber } from "@/const/data";
+import { landlineDisplay, landlineNumber } from "@/const/data";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import React, { useLayoutEffect, useRef } from "react";
@@ -248,13 +248,13 @@ const Hero = () => {
                 CLARITY STARTS HERE
               </h3>
               <a
-                href={`tel:${phoneNumber.replace(/[\s+]/g, "")}`}
+                href={`tel:${landlineNumber}`}
                 onClick={() =>
                   trackEvent("phone_click", { link_position: "hero" })
                 }
                 className="md:text-2xl cursor-pointer text-xl text-nowrap font-bold"
               >
-                {phoneNumber}
+                {landlineDisplay}
               </a>
             </div>
           </div>

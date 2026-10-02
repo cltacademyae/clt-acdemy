@@ -6,7 +6,7 @@ import {
   FaPhoneAlt,
   FaRegClock,
 } from "react-icons/fa";
-import { phoneNumber } from "@/const/data";
+import { landlineDisplay, landlineNumber } from "@/const/data";
 import { SITE } from "@/const/seo";
 import { trackEvent } from "@/lib/analytics";
 const contactInfo = [
@@ -15,10 +15,10 @@ const contactInfo = [
     icon: <FaPhoneAlt className="w-6 h-6 text-white" />,
     content: (
       <a
-        href={`tel:${phoneNumber}`}
+        href={`tel:${landlineNumber}`}
         onClick={() => trackEvent("phone_click", { link_position: "contact" })}
       >
-        {phoneNumber}
+        {landlineDisplay}
       </a>
     ),
   },
@@ -38,7 +38,7 @@ const contactInfo = [
     type: "Address",
     icon: <FaMapMarkerAlt className="w-6 h-6 text-white" />,
     content:
-      "CLT Academy | Head Office M09, Al Shaibani Building, Hor Al Anz East, Dubai, United Arab Emirates.",
+      "CLT Academy | Head Office Near Abu Hail Metro, Etihad Road, Dubai, United Arab Emirates.",
   },
   {
     // Visible text, not only schema — LocalBusiness hours have to be

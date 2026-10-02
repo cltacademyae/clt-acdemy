@@ -8,7 +8,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { FaPhoneAlt } from "react-icons/fa";
-import { phoneNumber } from "@/const/data";
+import { landlineDisplay, landlineNumber, phoneNumber } from "@/const/data";
 
 export default function Faq() {
   const faqItems = [
@@ -147,10 +147,7 @@ export default function Faq() {
           </div>
           <div
             onClick={() => {
-              window.open(
-                `https://wa.me/${phoneNumber}?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20this.%20Could%20you%20please%20provide%20details?`,
-                "_blank"
-              );
+              window.open(`tel:${landlineNumber}`, "_self");
             }}
             className="flex relative md:px-10 cursor-pointer px-2 pt-4 z-10 mb-6 items-center gap-5"
           >
@@ -162,7 +159,7 @@ export default function Faq() {
               {/* Contact detail, not a section heading — it carried no
                   document structure and repeated as an <h2> on ten pages. */}
               <p className="md:text-2xl text-xl text-nowrap font-bold">
-                {phoneNumber}
+                {landlineDisplay}
               </p>
             </div>
           </div>

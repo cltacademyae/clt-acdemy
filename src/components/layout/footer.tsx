@@ -6,7 +6,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import Link from "next/link";
-import { phoneNumber } from "@/const/data";
+import { landlineDisplay, landlineNumber } from "@/const/data";
 import RiskDisclosure from "@/components/global/riskDisclosure";
 import { trackEvent } from "@/lib/analytics";
 
@@ -91,19 +91,19 @@ const Footer = ({ footerLinks }: { footerLinks?: React.ReactNode }) => {
             <div className="space-y-4 text-gray-300">
               <p className="flex items-start gap-3">
                 <IoLocationSharp className="text-xl text-nowrap   mt-1" />
-                CLT Academy | Head Office <br />M09, Al&nbsp;Shaibani Building,
-                Hor&nbsp;Al&nbsp;Anz&nbsp;East, Dubai, United Arab Emirates.
+                CLT Academy | Head Office <br />Near Abu&nbsp;Hail Metro,
+                Etihad&nbsp;Road, Dubai, United Arab Emirates.
               </p>
               <p className="flex items-center gap-3">
                 <FiPhoneCall className="text-xl" />
                 <a
-                  href={`tel:${phoneNumber}`}
+                  href={`tel:${landlineNumber}`}
                   onClick={() =>
                     trackEvent("phone_click", { link_position: "footer" })
                   }
                   className="hover:text-white"
                 >
-                  +971 55 745 4939
+                  {landlineDisplay}
                 </a>
               </p>
               <p className="flex items-center gap-3">

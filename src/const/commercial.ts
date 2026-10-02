@@ -4,7 +4,7 @@ import { COURSE_SLUGS } from "@/lib/catalog.slugs";
  * Content for the commercial landing pages (DEV-035).
  *
  * Copy is assembled from facts already published elsewhere on the site —
- * course names, durations, KHDA approval, the Hor Al Anz address. It contains
+ * course names, durations, KHDA approval, the Abu Hail address. It contains
  * no prices, no performance claims and no superlatives, because none of those
  * are substantiated (see DEV-006, DEV-020).
  *
@@ -67,7 +67,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
     metaDescription:
       "What to check before enrolling at a forex trading academy in Dubai: KHDA approval, course structure, mentor access and class format.",
     quickAnswer:
-      "A forex trading academy in Dubai should be KHDA-approved, teach a structured syllabus rather than signals, and give you direct mentor access. CLT Academy is KHDA-approved and runs four structured programmes from beginner to mentorship level, in-person in Hor Al Anz East or online.",
+      "A forex trading academy in Dubai should be KHDA-approved, teach a structured syllabus rather than signals, and give you direct mentor access. CLT Academy is KHDA-approved and runs four structured programmes from beginner to mentorship level, in-person near Abu Hail Metro or online.",
     sections: [
       {
         h2: "What does KHDA approval actually mean?",
@@ -83,7 +83,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
       },
       {
         h2: "In-person or online?",
-        body: "Both work, but they suit different people. In-person suits traders who want direct desk time and accountability. Online suits those outside Dubai or working around a job. CLT runs every programme in both formats from its Hor Al Anz East premises.",
+        body: "Both work, but they suit different people. In-person suits traders who want direct desk time and accountability. Online suits those outside Dubai or working around a job. CLT runs every programme in both formats from its premises near Abu Hail Metro.",
       },
     ],
     comparison: COURSE_TABLE,
@@ -91,7 +91,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
       {
         question: "Is CLT Academy KHDA approved?",
         answer:
-          "Yes. CLT Academy is a KHDA-approved training institute operating from M09, Al Shaibani Building, Hor Al Anz East, Dubai.",
+          "Yes. CLT Academy is a KHDA-approved training institute operating from Etihad Road, near Abu Hail Metro, Dubai.",
       },
       {
         question: "Do I need any experience to start?",
@@ -109,7 +109,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
     metaDescription:
       "Structured forex trading courses in Dubai, from a four-week beginner programme to a 28-week mentorship. KHDA-approved, in-person or online.",
     quickAnswer:
-      "CLT Academy runs four forex trading courses in Dubai: Trade Craft (4 weeks, beginner), Profit Matrix (8 weeks, intermediate), Market Code (14 weeks, advanced) and CLT Vantage (28 weeks, mentorship). All are KHDA-approved and available in-person in Hor Al Anz East or online.",
+      "CLT Academy runs four forex trading courses in Dubai: Trade Craft (4 weeks, beginner), Profit Matrix (8 weeks, intermediate), Market Code (14 weeks, advanced) and CLT Vantage (28 weeks, mentorship). All are KHDA-approved and available in-person near Abu Hail Metro or online.",
     sections: [
       {
         h2: "Which course should you start with?",
@@ -121,7 +121,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
       },
       {
         h2: "How are the courses delivered?",
-        body: "Every programme runs in-person at the Hor Al Anz East premises or online, with live sessions rather than recordings alone. Class sizes are kept small enough that mentors review individual trades.",
+        body: "Every programme runs in-person at the Dubai premises near Abu Hail Metro or online, with live sessions rather than recordings alone. Class sizes are kept small enough that mentors review individual trades.",
       },
     ],
     comparison: COURSE_TABLE,
@@ -147,7 +147,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
     metaDescription:
       "CLT Academy is a KHDA-approved trading institute in Dubai offering structured forex, stock and crypto education with live mentorship, in-person or online.",
     quickAnswer:
-      "CLT Academy is a KHDA-approved trading institute in Dubai, operating from Hor Al Anz East. KHDA approval means the Knowledge and Human Development Authority has reviewed and permitted the training operation — a verifiable regulatory status rather than a self-awarded claim.",
+      "CLT Academy is a KHDA-approved trading institute in Dubai, operating from Etihad Road, near Abu Hail Metro. KHDA approval means the Knowledge and Human Development Authority has reviewed and permitted the training operation — a verifiable regulatory status rather than a self-awarded claim.",
     sections: [
       {
         h2: "Why does KHDA approval matter for a trading course?",
@@ -167,7 +167,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
       {
         question: "Where is CLT Academy located?",
         answer:
-          "M09, Al Shaibani Building, Hor Al Anz East, Dubai, United Arab Emirates.",
+          "Near Abu Hail Metro, Etihad Road, Dubai, United Arab Emirates.",
       },
       {
         question: "Is trading education regulated in the UAE?",
@@ -185,7 +185,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
     metaDescription:
       "A four-week beginner forex course in Dubai covering platform basics, price action, risk control and trading mindset. No experience needed.",
     quickAnswer:
-      "Trade Craft is CLT Academy's beginner forex course in Dubai. It runs four weeks, assumes no prior trading experience, and covers platform basics, price patterns, support and resistance, risk control and trading mindset. Available in-person in Hor Al Anz East or online.",
+      "Trade Craft is CLT Academy's beginner forex course in Dubai. It runs four weeks, assumes no prior trading experience, and covers platform basics, price patterns, support and resistance, risk control and trading mindset. Available in-person near Abu Hail Metro or online.",
     sections: [
       {
         h2: "Do you need any experience to start?",
@@ -300,7 +300,7 @@ export const COMMERCIAL_PAGES: CommercialPage[] = [
       },
       {
         h2: "How it is delivered",
-        body: "In-person at the Hor Al Anz East premises or online, with live mentor sessions rather than recordings alone.",
+        body: "In-person at the Dubai premises near Abu Hail Metro or online, with live mentor sessions rather than recordings alone.",
       },
     ],
     comparison: COURSE_TABLE,
