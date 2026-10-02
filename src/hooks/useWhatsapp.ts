@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { whatsappLinkFor } from "@/components/global/whatsapp";
+import { WHATSAPP_ENABLED, whatsappLinkFor } from "@/components/global/whatsapp";
 import { trackEvent } from "@/lib/analytics";
 
 /**
@@ -20,7 +20,8 @@ export function useWhatsapp(linkPosition: string) {
     onClick: () => track(),
     open: (extra?: Record<string, string>) => {
       track(extra);
-      window.open(href, "_blank", "noopener");
+      if (WHATSAPP_ENABLED) window.open(href, "_blank", "noopener");
+      else window.location.href = href;
     },
   };
 }

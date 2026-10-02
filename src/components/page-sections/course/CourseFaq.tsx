@@ -1,5 +1,6 @@
 "use client";
 
+import { whatsappLink } from "@/components/global/whatsapp";
 import React from "react";
 import {
   Accordion,
@@ -8,7 +9,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { FaPhoneAlt } from "react-icons/fa";
-import { phoneNumber, TCourseDetails } from "@/const/data";
+import { TCourseDetails } from "@/const/data";
 
 export default function CourseFaq({
   faqItems,
@@ -45,7 +46,7 @@ export default function CourseFaq({
             </p>
 
             <a
-              href={`https://wa.me/${phoneNumber}?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20this.%20Could%20you%20please%20provide%20details?`}
+              href={whatsappLink}
               className="inline-block bg-primary text-white px-6 py-3 rounded-lg font-medium shadow wow fadeInUp"
               data-wow-delay="0.4s"
             >

@@ -1,14 +1,20 @@
 "use client";
-import { phoneNumber } from "@/const/data";
+import { landlineNumber, phoneNumber } from "@/const/data";
 import { trackEvent } from "@/lib/analytics";
 import React from "react";
 
 
 
-export const whatsappLink = `https://wa.me/${phoneNumber.replace("+", "").replace(" ", "")}?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20this.%20Could%20you%20please%20provide%20details?`;
+// WhatsApp is switched off for now: the site lists only the landline, so
+// every WhatsApp CTA dials it instead and the floating button is hidden.
+export const WHATSAPP_ENABLED = false;
+const landlineHref = `tel:${landlineNumber}`;
+
+export const whatsappLink = !WHATSAPP_ENABLED ? landlineHref : `https://wa.me/${phoneNumber.replace("+", "").replace(" ", "")}?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20this.%20Could%20you%20please%20provide%20details?`;
 
 /** Page reference travels in the message body; outbound clicks are untrackable. */
 export function whatsappLinkFor(pathname?: string) {
+  if (!WHATSAPP_ENABLED) return landlineHref;
   const ref = pathname && pathname !== "/" ? pathname.replace(/^\//, "") : "home";
   const text = `Hello, I would like to know more about this. Could you please provide details? (ref: ${ref})`;
   return `https://wa.me/${phoneNumber
@@ -17,6 +23,7 @@ export function whatsappLinkFor(pathname?: string) {
 }
 
 const WhatsappButton = () => {
+  if (!WHATSAPP_ENABLED) return null;
   return (
     <>
       <a

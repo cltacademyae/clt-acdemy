@@ -1,4 +1,4 @@
-import { phoneNumber } from "@/const/data";
+import { whatsappLink } from "@/components/global/whatsapp";
 import { FaArrowRight } from "react-icons/fa";
 import { RiStockFill } from "react-icons/ri";
 
@@ -33,7 +33,7 @@ export function MainPortion({
         </p>
         <div className="flex w-full items-center justify-center">
           <a
-            href={`https://wa.me/${phoneNumber}?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20this.%20Could%20you%20please%20provide%20details?`}
+            href={whatsappLink}
             className=" mt-3 cursor-pointer flex items-center justify-center gap-2 bg-primary text-white px-6 md:text-lg py-3 rounded-lg font-medium shadow wow fadeInUp w-fit"
             data-wow-delay="0.4s"
           >

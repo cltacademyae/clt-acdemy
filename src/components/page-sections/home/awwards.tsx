@@ -1,3 +1,4 @@
+import { WHATSAPP_ENABLED, whatsappLink } from "@/components/global/whatsapp";
 import Image from "next/image";
 import React from "react";
 import grImage from "@/../public/images/my/gr.webp";
@@ -125,7 +126,11 @@ const Awards = () => {
             </span>
             Your Financial Freedom Journey –{" "}
             <a
-              href="https://wa.me/+971507528009?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20this.%20Could%20you%20please%20provide%20details?"
+              href={
+                WHATSAPP_ENABLED
+                  ? "https://wa.me/+971507528009?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20this.%20Could%20you%20please%20provide%20details?"
+                  : whatsappLink
+              }
               className="font-semibold text-[var(--primary-color)] underline hover:text-white transition"
             >
               Start here!

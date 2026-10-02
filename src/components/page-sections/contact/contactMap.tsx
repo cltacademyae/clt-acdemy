@@ -1,4 +1,5 @@
 "use client";
+import { WHATSAPP_ENABLED } from "@/components/global/whatsapp";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -67,7 +68,7 @@ const ContactFormMap: React.FC = () => {
         message: "",
       });
 
-      router.push(
+      if (WHATSAPP_ENABLED) router.push(
         `https://wa.me/${phoneNumber.replace("+", "").replace(" ", "")}?text=${formData.fname} ${formData.lname} \n ${formData.email} \n${formData.phone} \n${formData.message}`
       );
     } catch (error) {
