@@ -1,6 +1,10 @@
 import { Post } from "@/types";
 
+// Mobile — used for WhatsApp links only, never shown on the site.
 export const phoneNumber = "+971557454939";
+// Landline shown on the site and used for tel: links.
+export const landlineNumber = "+97145470990";
+export const landlineDisplay = "(04) 547 0990";
 
 export const courseData = [
   {

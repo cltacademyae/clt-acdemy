@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { TiThMenu } from "react-icons/ti";
 import { RiMenu2Line } from "react-icons/ri";
 import { FaPhoneAlt } from "react-icons/fa";
-import { phoneNumber } from "@/const/data";
+import { landlineDisplay, landlineNumber } from "@/const/data";
 import {
   Sheet,
   SheetTitle,
@@ -229,7 +229,7 @@ const Nav = ({ learnEnabled = false }: { learnEnabled?: boolean }) => {
       </div>
       <div
         onClick={() =>
-          window.open(`tel:${phoneNumber.replace("+", "")}`, "_blank")
+          window.open(`tel:${landlineNumber}`, "_blank")
         }
         className=" px-3 group cursor-pointer h-full flex-1  md:flex hidden items-center justify-end gap-4"
       >
@@ -241,7 +241,7 @@ const Nav = ({ learnEnabled = false }: { learnEnabled?: boolean }) => {
           <p className="font-semibold text-sm text-white uppercase">
             Hotline Number
           </p>
-          <p className="text-xl  font-semibold  text-white">{phoneNumber}</p>
+          <p className="text-xl  font-semibold  text-white">{landlineDisplay}</p>
         </div>
       </div>
     </div>

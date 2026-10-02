@@ -165,7 +165,7 @@ const ContactFormMap: React.FC = () => {
 
           <div className="w-full md:w-1/2 md:h-[36rem] h-[20rem]">
             <iframe
-              title="CLT Academy location, Hor Al Anz East, Dubai"
+              title="CLT Academy location, near Abu Hail Metro, Dubai"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7205914479314!2d55.35109507523786!3d25.279982977657774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x853cb6b56b479e9b%3A0xac07e0b704f49f84!2sCLT%20trading%20academy!5e0!3m2!1sen!2sin!4v1763796652593!5m2!1sen!2sin"
               loading="lazy"
               className="w-full h-full border-0"

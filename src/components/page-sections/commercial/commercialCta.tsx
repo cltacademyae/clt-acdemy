@@ -1,5 +1,5 @@
 "use client";
-import { phoneNumber } from "@/const/data";
+import { landlineNumber } from "@/const/data";
 import { useWhatsapp } from "@/hooks/useWhatsapp";
 import { trackEvent } from "@/lib/analytics";
 
@@ -15,7 +15,7 @@ export default function CommercialCta({ pageSlug }: { pageSlug: string }) {
         </p>
         <div className="flex items-center gap-3">
           <a
-            href={`tel:${phoneNumber.replace(/[\s+]/g, "")}`}
+            href={`tel:${landlineNumber}`}
             onClick={() =>
               trackEvent("phone_click", {
                 link_position: "commercial_page",

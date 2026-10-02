@@ -16,13 +16,13 @@ export const SITE = {
   // Fallback only; routes generate their own card via opengraph-image.
   ogImage: "/logo-black.png",
   locale: "en_AE",
-  phone: "+971557454939",
+  phone: "+97145470990",
   email: "info@clt-academy.com",
   // Registered trade name on the DED professional licence. "CLT" is the
   // trading name; both are published so the entity resolves either way.
   legalName: "Career and Life Transformation Management Development Training",
   address: {
-    streetAddress: "M09, Al Shaibani Building, Hor Al Anz East",
+    streetAddress: "Near Abu Hail Metro, Etihad Road",
     addressLocality: "Dubai",
     addressCountry: "AE",
   },
