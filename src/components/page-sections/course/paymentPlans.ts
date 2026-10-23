@@ -68,7 +68,7 @@ export const METHOD_LABELS: Record<MethodId, string> = {
 };
 
 /** Dedicated enrolment number — separate from the site-wide WhatsApp switch. */
-export const ENROLL_WHATSAPP = "971557454939";
+export const ENROLL_WHATSAPP = "971564464420";
 
 export type AppliedCoupon = { code: string; finalPrice: number; percent: number };
 
