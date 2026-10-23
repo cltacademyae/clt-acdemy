@@ -741,3 +741,9 @@ h1,h2,h3,h4,h5,h6{
 .ql-editor table tr:nth-child(even) td {
   background-color: rgba(63, 63, 70, 0.25);
 }
+
+/* No 300ms tap delay or grey flash on touch: taps feel instant. */
+button, [role="button"], [role="radio"], a, label, summary {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}

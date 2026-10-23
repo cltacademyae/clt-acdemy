@@ -40,7 +40,13 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       name: SITE.name,
       url: SITE.url,
     },
-    // TODO(DEV-020): no `offers` until prices are confirmed.
+    offers: {
+      "@type": "Offer",
+      price: course.price,
+      priceCurrency: "AED",
+      availability: "https://schema.org/InStock",
+      url,
+    },
     ...(weeks
       ? {
           hasCourseInstance: {
@@ -101,6 +107,10 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         subtitle={course.detSubtitle || ""}
         title={course.detTitle || ""}
         description={course.detDesc || ""}
+        price={course.price}
+        courseName={name}
+        courseId={id}
+        duration={course.duration || ""}
       />
       <TabListing
         duration={course.duration || ""}
@@ -108,7 +118,6 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         tabs={(course.tabs as never) || []}
       />
       <CourseNav
-        courseName={name}
         previous={index > 0 ? orderedCourseSlugs[index - 1] : null}
         next={
           index < orderedCourseSlugs.length - 1

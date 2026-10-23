@@ -46,6 +46,7 @@ export const courseData = [
 export const courseDetails = {
   "1": {
     name: "Trade Craft (4 weeks)",
+    price: 3604,
     duration: "4 weeks",
     description:
       "Learn the essentials of trading — from platform basics and price patterns to risk control and market mindset — all in one high-impact, beginner-friendly course..",
@@ -136,6 +137,7 @@ export const courseDetails = {
   },
   "2": {
     name: "Profit Matrix (8 weeks)",
+    price: 5504,
     duration: "8 weeks",
     description:
       "Designed for traders who know the basics but lack execution clarity, this 8-week program dives into advanced trade planning, market psychology, and strategic precision. Take the leap from potential to profitability — and build habits that last a lifetime.",
@@ -240,6 +242,7 @@ export const courseDetails = {
   },
   "3": {
     name: "Market Code (14 weeks)",
+    price: 9999,
     duration: "14 weeks",
     description:
       "Designed for experienced traders seeking structured mastery, this 14-weeks program unpacks high-level chart analysis, risk-to-reward systems, and real-time strategy execution. Elevate from scattered results to strategic consistency",
@@ -341,6 +344,7 @@ export const courseDetails = {
   },
   "4": {
     name: "CLT Vantage (28 weeks)",
+    price: 39549,
     duration: "28 weeks",
     description:
       "This 6-month program doesn’t just teach trading. It builds leaders capable of thinking like fund managers, mentoring others, and navigating market chaos with clarity.",

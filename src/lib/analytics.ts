@@ -6,7 +6,8 @@ type EventName =
   | "email_click"
   | "form_submit"
   | "course_view"
-  | "scroll_depth";
+  | "scroll_depth"
+  | "coupon_applied";
 
 type EventParams = Record<string, string | number | undefined>;
 
