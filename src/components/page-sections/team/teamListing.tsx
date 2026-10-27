@@ -102,8 +102,8 @@ const TeamListing = () => {
       id: 2,
       name: "Mohammed Sanjeed",
       type: "Advisors",
-      role: "Head of Sales",
-      bio: "Head of Sales",
+      role: "Sales Manager",
+      bio: "Sales Manager",
       imageUrl: t2,
     },
       {
@@ -485,21 +485,21 @@ const TeamListing = () => {
   // Same people as the hidden Management cards, white-background photos.
   const salesManagerData = [
     {
-      id: 200,
-      name: "MOHAMMED AQIB LAPIA",
-      type: "Sales Manager",
-      role: "Sales Manager",
-      bio: "Sales Manager",
-      imageUrl: sm1,
-      lightBg: true,
-    },
-    {
       id: 201,
       name: "MOHAMMED FAIZEEN",
       type: "Sales Manager",
       role: "Sales Manager",
       bio: "Sales Manager",
       imageUrl: sm2,
+      lightBg: true,
+    },
+    {
+      id: 200,
+      name: "MOHAMMED AQIB LAPIA",
+      type: "Sales Manager",
+      role: "Head of Sales",
+      bio: "Head of Sales",
+      imageUrl: sm1,
       lightBg: true,
     },
   ];
