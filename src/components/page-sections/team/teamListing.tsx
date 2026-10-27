@@ -67,6 +67,8 @@ import amal from "@/../public/team/Amal.jpeg";
 import kiran from "@/../public/team/Kiran-V-R.jpeg";
 
 
+const SHOW_TABS = false;
+
 const TeamListing = () => {
   const teamData = [
     // {
@@ -552,7 +554,9 @@ const TeamListing = () => {
             Our team is a group of experts who are dedicated to helping you
             learn trading and investing.
           </p>
-          <Tabs value={currentTab} onValueChange={setCurrentTab}>
+          {/* Category tabs hidden for now: set SHOW_TABS to true to bring them back. */}
+          {SHOW_TABS && (
+            <Tabs value={currentTab} onValueChange={setCurrentTab}>
             <TabsList className="flex flex-wrap">
               {tabs.map((tab, index) => (
                 <TabsTrigger
@@ -565,6 +569,7 @@ const TeamListing = () => {
               ))}
             </TabsList>
           </Tabs>
+          )}
         </div>
       </div>
       <div className="grid mb-10 justify-center justify-self-center items-center w-full grid-cols-2 md:px-2 px-1 md:grid-cols-2 lg:grid-cols-4 md:gap-4 gap-2">
@@ -574,17 +579,7 @@ const TeamListing = () => {
           )
           .map((team, index) => (
             <React.Fragment key={index}>
-              {team.type == "Sales Manager" ? (
-                <div
-                  className={`lg:col-span-2 flex items-center ${
-                    index % 2 == 0 ? "justify-end" : "justify-start"
-                  } col-span-1`}
-                >
-                  <TeamCard member={team} />
-                </div>
-              ) : (
-                <TeamCard member={team} />
-              )}
+              <TeamCard member={team} />
             </React.Fragment>
           ))}
       </div>
