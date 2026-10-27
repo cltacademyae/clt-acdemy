@@ -35,6 +35,8 @@ import t38 from "@/../public/team/t38.png";
 import t40 from "@/../public/team/t40.jpeg";
 import tc1 from "@/../public/team/tc1.png";
 import tc2 from "@/../public/team/tc2.png";
+import sm1 from "@/../public/team/sm1.png";
+import sm2 from "@/../public/team/sm2.png";
 import t41 from "@/../public/team/t41.jpeg";
 import t42 from "@/../public/team/t42.jpeg";
 import t43 from "@/../public/team/t43.jpeg";
@@ -451,7 +453,9 @@ const TeamListing = () => {
     //   imageUrl: t38,
     // },
   ]; 
-  const mansgementData = [
+  // Hidden for now (Management tab + cards). Kept so it can be restored:
+  // add it back to `tabs` and to the arrays spread in the grid below.
+  const hiddenManagementData = [
     {
       id: 100,
       name: "MOHAMMED AQIB LAPIA",
@@ -469,9 +473,30 @@ const TeamListing = () => {
       imageUrl: tc2,
     },
   ];
+  // Same people as the hidden Management cards, white-background photos.
+  const salesManagerData = [
+    {
+      id: 200,
+      name: "MOHAMMED AQIB LAPIA",
+      type: "Sales Manager",
+      role: "Sales Manager",
+      bio: "Sales Manager",
+      imageUrl: sm1,
+      lightBg: true,
+    },
+    {
+      id: 201,
+      name: "MOHAMMED FAIZEEN",
+      type: "Sales Manager",
+      role: "Sales Manager",
+      bio: "Sales Manager",
+      imageUrl: sm2,
+      lightBg: true,
+    },
+  ];
   const tabs = [
     "All",
-    "Management",
+    "Sales Manager",
     "Mentors",
     "Customer Service",
     "Advisors",
@@ -486,7 +511,7 @@ const TeamListing = () => {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "@id": `${SITE.url}/team/#members`,
-    itemListElement: [...mansgementData, ...teamData].map((member, index) => ({
+    itemListElement: teamData.map((member, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {
@@ -543,13 +568,13 @@ const TeamListing = () => {
         </div>
       </div>
       <div className="grid mb-10 justify-center justify-self-center items-center w-full grid-cols-2 md:px-2 px-1 md:grid-cols-2 lg:grid-cols-4 md:gap-4 gap-2">
-        {[...mansgementData, ...teamData]
+        {[...salesManagerData, ...teamData]
           .filter((team) =>
             currentTab === "All" ? true : team.type === currentTab
           )
           .map((team, index) => (
             <React.Fragment key={index}>
-              {team.type == "Management" ? (
+              {team.type == "Sales Manager" ? (
                 <div
                   className={`lg:col-span-2 flex items-center ${
                     index % 2 == 0 ? "justify-end" : "justify-start"
