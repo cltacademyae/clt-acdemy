@@ -714,6 +714,27 @@ h1,h2,h3,h4,h5,h6{
   border-left-color: var(--color-primary);
 }
 
+/* Guide tables are pasted with their own inline border and no colgroup. The
+   shared rule below makes <table> display:block, so the outer border stretched
+   to full width while the cells shrank to content (empty box on the right) and
+   the cells' overflow:hidden clipped long text. A real table fills the width
+   and lets cells wrap; the article scrolls sideways if it still can't fit. */
+.learn-article.ql-editor {
+  overflow-x: auto;
+}
+.learn-article.ql-editor table {
+  display: table;
+  table-layout: auto;
+}
+.learn-article.ql-editor table td,
+.learn-article.ql-editor table th {
+  overflow: visible !important;
+}
+.learn-article.ql-editor table td p,
+.learn-article.ql-editor table th p {
+  margin-bottom: 0;
+}
+
 /* Tables authored in the blog editor (Quill outputs plain <table> markup). */
 .ql-editor table {
   border-collapse: collapse;

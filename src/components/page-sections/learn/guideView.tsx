@@ -110,14 +110,18 @@ export default function GuideView({
           same photo but were not displaying it, so the two looked unrelated. */}
       {guide.photo && (
         <div className="container mx-auto px-4 max-w-7xl pt-6">
-          <div className="relative w-full aspect-[21/9] overflow-hidden rounded-2xl bg-gray-100">
+          {/* Photos are branded 1200x630 banners with the logo in a corner, so
+              a fixed 21:9 box with object-cover cropped it off. Let the image
+              keep its own aspect ratio instead. */}
+          <div className="w-full overflow-hidden rounded-2xl bg-gray-100">
             <Image
               src={guide.photo}
               alt={guide.title}
-              fill
+              width={1200}
+              height={630}
               sizes="(max-width: 1280px) 100vw, 1280px"
               priority
-              className="object-cover"
+              className="w-full h-auto"
             />
           </div>
         </div>
